@@ -1,4 +1,6 @@
 node_modules/
+input/
+output/
 .vscode/
 .git/
 /package-lock.json
