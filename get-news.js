@@ -12,7 +12,7 @@ let brands = [
   "españa",
 ];
 
-let getNewsPerBrandMarketCategory = (news) => {
+let getNewsByBrandMarketCategory = (news) => {
   let newsByBrandByCountry = d3
     .nest()
     .key(function (doc) {
@@ -63,10 +63,12 @@ MongoClient.connect(
           console.log(err);
           res.status(500).send(err);
         } else {
+          // enrich documents/news adding country and category (results of processing their current content)
           let docsWithCountry = addData.addCountry(docs);
           let docsWithCountryAndCategory = addData.addCategory(docsWithCountry);
 
-          getNewsPerBrandMarketCategory(docsWithCountryAndCategory);
+          // get news count grouped by brand, market and category (in this order)
+          getNewsByBrandMarketCategory(docsWithCountryAndCategory);
         }
       });
   }
