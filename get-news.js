@@ -1,6 +1,7 @@
 var MongoClient = require("mongodb").MongoClient;
 var d3 = require("d3");
-var categoriesDict = require("./categories-dictionary.js");
+
+var addData = require("./add-processed-data.js");
 
 let brands = [
   "mallorca",
@@ -62,60 +63,9 @@ MongoClient.connect(
           console.log(err);
           res.status(500).send(err);
         } else {
-          // get country from source_id
-          let docsWithCountry = docs.map((doc) => {
-            if (doc.source_id.includes("AIR")) {
-              doc.country = "ES";
-            } else {
-              doc.country = doc.source_id.split("_")[1];
-            }
-            return doc;
-          });
+          let docsWithCountry = addData.addCountry(docs);
+          let docsWithCountryAndCategory = addData.addCategory(docsWithCountry);
 
-          let docsWithCountryAndCategory = docsWithCountry.map((doc) => {
-            // assign a category for each document after cheking if any term belonging to that category appears in any
-            // content field. Category values are: covid, tourism, both and none.
-            let concatenatedTexts =
-              doc.title +
-              " " +
-              doc.summary +
-              " " +
-              doc.description +
-              " " +
-              doc.content_value +
-              " " +
-              doc.tags;
-
-            const hasCategoryTerm = (text, category_terms) => {
-              for (i = 0; i < category_terms.length; i++) {
-                if (text.toLowerCase().includes(category_terms[i])) {
-                  return true;
-                }
-              }
-              return false;
-            };
-
-            if (
-              hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
-              hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
-            ) {
-              doc.category = "both";
-              return doc;
-            } else if (
-              hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])
-            ) {
-              doc.category = "covid";
-              return doc;
-            } else if (
-              hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
-            ) {
-              doc.category = "tourism";
-              return doc;
-            } else {
-              doc.category = "none";
-              return doc;
-            }
-          });
           getNewsPerBrandMarketCategory(docsWithCountryAndCategory);
         }
       });
