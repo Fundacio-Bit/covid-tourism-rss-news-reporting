@@ -1,6 +1,6 @@
 var MongoClient = require("mongodb").MongoClient;
 var d3 = require("d3");
-var categoriesDict = require("./categories_dictionary.js");
+var categoriesDict = require("./categories-dictionary.js");
 
 let brands = [
   "mallorca",
@@ -47,13 +47,9 @@ MongoClient.connect(
         extraction_date: 0,
         topics: 0,
         link: 0,
-        summary: 0,
-        description: 0,
         section: 0,
-        sourec_name: 0,
+        source_name: 0,
         selected: 0,
-        content_value: 0,
-        tags: 0,
       },
     };
     let collection = db.collection("news");
@@ -79,29 +75,46 @@ MongoClient.connect(
           let docsWithCountryAndCategory = docsWithCountry.map((doc) => {
             // assign a category for each document after cheking if any term belonging to that category appears in any
             // content field. Category values are: covid, tourism, both and none.
+            let concatenatedTexts =
+              doc.title +
+              " " +
+              doc.summary +
+              " " +
+              doc.description +
+              " " +
+              doc.content_value +
+              " " +
+              doc.tags;
 
-            Object.keys(categoriesDict).forEach((key) => {
-              for (i = 0; i < categoriesDict[key].length; i++) {
-                if (doc.title.toLowerCase().includes(categoriesDict[key][i])) {
-                  if ("category" in doc && doc.category !== "none") {
-                    doc.category = "both";
-                    console.log("both");
-                    break;
-                  } else {
-                    doc.category = key;
-                    console.log(key);
-                    break;
-                  }
-                } else {
-                  if ("category" in doc) {
-                    continue;
-                  } else {
-                    doc.category = "none";
-                  }
+            const hasCategoryTerm = (text, category_terms) => {
+              for (i = 0; i < category_terms.length; i++) {
+                if (text.toLowerCase().includes(category_terms[i])) {
+                  return true;
                 }
               }
-            });
-            return doc;
+              return false;
+            };
+
+            if (
+              hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
+              hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
+            ) {
+              doc.category = "both";
+              return doc;
+            } else if (
+              hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])
+            ) {
+              doc.category = "covid";
+              return doc;
+            } else if (
+              hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
+            ) {
+              doc.category = "tourism";
+              return doc;
+            } else {
+              doc.category = "none";
+              return doc;
+            }
           });
           getNewsPerBrandMarketCategory(docsWithCountryAndCategory);
         }
