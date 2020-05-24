@@ -1,5 +1,7 @@
 var MongoClient = require("mongodb").MongoClient;
 
+// TODO: query jut one week
+
 const fetchNewsData = (dbName) => {
   return new Promise((resolve, reject) => {
     MongoClient.connect(
@@ -12,7 +14,12 @@ const fetchNewsData = (dbName) => {
         }
         // continue if connexion was successfull
         let db = client.db(dbName);
-        let mongoQuery = {};
+        let mongoQuery = {
+          published: {
+            $gte: new Date("2020-05-11T00:00:00.000Z"),
+            $lt: new Date("2020-05-18T00:00:00.000Z"),
+          },
+        };
         let mongoProjection = {
           projection: {
             _id: 0,
@@ -32,8 +39,12 @@ const fetchNewsData = (dbName) => {
           .sort({ published: -1 })
           .toArray((err, docs) => {
             if (err) {
+              // Close the connection
+              client.close();
               reject(err);
             } else {
+              // Close the connection
+              client.close();
               resolve(docs);
             }
           });
