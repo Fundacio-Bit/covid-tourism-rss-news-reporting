@@ -3,7 +3,9 @@ var categoriesDict = require("./categories-dictionary.js");
 const addCountry = (newsArray) => {
   // get country from source_id
   newsArray.map((doc) => {
-    if (doc.source_id.includes("AIR")) {
+    if (!("source_id" in doc)) {
+      doc.country = "unknown";
+    } else if (doc.source_id.includes("AIR")) {
       doc.country = "ES";
     } else {
       doc.country = doc.source_id.split("_")[1];
