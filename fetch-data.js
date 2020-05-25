@@ -2,7 +2,7 @@ var MongoClient = require("mongodb").MongoClient;
 
 // TODO: query jut one week
 
-const fetchNewsData = (dbName) => {
+const fetchNewsData = (dbName, fromData, toData) => {
   return new Promise((resolve, reject) => {
     MongoClient.connect(
       "mongodb://localhost:27017/",
@@ -16,8 +16,8 @@ const fetchNewsData = (dbName) => {
         let db = client.db(dbName);
         let mongoQuery = {
           published: {
-            $gte: new Date("2020-05-11T00:00:00.000Z"),
-            $lt: new Date("2020-05-18T00:00:00.000Z"),
+            $gte: new Date(fromData),
+            $lt: new Date(toData),
           },
         };
         let mongoProjection = {
@@ -53,9 +53,17 @@ const fetchNewsData = (dbName) => {
   });
 };
 
-const getNews = async () => {
-  let escoltaActivaDBNews = await fetchNewsData("rss_fbit_db");
-  let covidTourismDBNewsNews = await fetchNewsData("rss_covid_tourism_db");
+const getNews = async (fromDate, toDate) => {
+  let escoltaActivaDBNews = await fetchNewsData(
+    "rss_fbit_db",
+    fromDate,
+    toDate
+  );
+  let covidTourismDBNewsNews = await fetchNewsData(
+    "rss_covid_tourism_db",
+    fromDate,
+    toDate
+  );
   // return all news
   return escoltaActivaDBNews.concat(covidTourismDBNewsNews);
 };
