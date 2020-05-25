@@ -6,8 +6,22 @@ var d3 = require("d3");
 var fetchData = require("./fetch-data.js");
 var addData = require("./add-processed-data.js");
 var csv_manager = require("./create-csv.js");
+var utils = require("./utils/utils.js");
 
-let brands = [
+var currentWeekFrom = "2020-05-18";
+var currentWeekTo = "2020-05-25";
+
+var weekAgoFrom = "2020-05-11";
+var weekAgoTo = "2020-05-18";
+
+var twoWeeksAgoFrom = "2020-05-4";
+var twoWeeksAgoTo = "2020-05-11";
+
+var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);
+var dataWeekAgo = fetchData.getNews(weekAgoFrom, weekAgoTo);
+var dataTwoWeeksAgo = fetchData.getNews(twoWeeksAgoFrom, twoWeeksAgoTo);
+
+var brands = [
   "mallorca",
   "menorca",
   "ibiza",
@@ -35,30 +49,80 @@ let getNewsByBrandMarketCategory = (news) => {
   console.log(JSON.stringify(newsByBrandByCountry));
 };
 
-var spainMention = (doc) => {
-  return doc.brand.includes("españa");
-};
-
-var tourismCategory = (doc) => {
-  return (doc.category == "tourism") | (doc.category == "both");
-};
-
-fetchData
-  .getNews()
-  .then((docs) => {
+// Get data from the las three weeks. Variable names will refer to them using the following codes:
+// CW: current week.
+// WA: week ago.
+// TWA: two weeks ago.
+Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
+  .then((resultsArray) => {
     // enrich documents/news adding country and category (results of processing their current content)
-    let docsWithCountry = addData.addCountry(docs);
-    let docsWithCountryAndCategory = addData.addCategory(docsWithCountry);
+    let docsWithCountryCW = addData.addCountry(resultsArray[0]);
+    let docsWithCountryAndCategoryCW = addData.addCategory(docsWithCountryCW);
 
     // ************* Page 5 KPIs.**************
     // Total Mentions (Balearic Islands + Spain)
-    let totalMentions = docsWithCountryAndCategory.length;
-    let tourismMentions = docsWithCountryAndCategory.filter(tourismCategory)
-      .length;
+    let totalMentionsCountCW = docsWithCountryAndCategoryCW.length;
+    let tourismAndBothMentionsCountCW = docsWithCountryAndCategoryCW.filter(
+      utils.tourismAndBothCategories
+    ).length;
+    let tourismAndBothMentionsPercentCW = utils.getPercent(
+      totalMentionsCountCW,
+      tourismAndBothMentionsCountCW
+    );
+
+    // Balearic Islands KPIs
+    let balearenMentionsCW = docsWithCountryAndCategoryCW.filter(
+      utils.balearenMention
+    ).length;
+    let tourismBalearenMentionsCWPercent = utils.getPercent(
+      balearenMentionsCW,
+      docsWithCountryAndCategoryCW
+        .filter(utils.balearenMention)
+        .filter(utils.tourismCategory).length
+    );
+
+    let covidBalearenMentionsCWPercent = utils.getPercent(
+      balearenMentionsCW,
+      docsWithCountryAndCategoryCW
+        .filter(utils.balearenMention)
+        .filter(utils.covidCategory).length
+    );
+
+    let bothBalearenMentionsCWPercent = utils.getPercent(
+      balearenMentionsCW,
+      docsWithCountryAndCategoryCW
+        .filter(utils.balearenMention)
+        .filter(utils.bothCategory).length
+    );
+
+    let otherBalearenMentionsCWPercent = utils.getPercent(
+      balearenMentionsCW,
+      docsWithCountryAndCategoryCW
+        .filter(utils.balearenMention)
+        .filter(utils.otherCategory).length
+    );
 
     let page5Rows = [];
-    page5Rows.push(["Total Mentions", totalMentions]);
-    page5Rows.push(["Tourism Mentions", tourismMentions]);
+    // Total Mentions and tourism percent
+    page5Rows.push(["Mencions", totalMentionsCountCW]);
+    page5Rows.push([
+      "Percentatge de mencions de turisme (inclou turisme i turisme + covid)",
+      tourismAndBothMentionsPercentCW,
+    ]);
+
+    // SOV by categories
+    page5Rows.push(["\n"]);
+    page5Rows.push(["SOV PER TEMÀTICA (de Balears)"]);
+    page5Rows.push(["Periode", "turisme", "covid", "turisme + covid", "reste"]);
+    page5Rows.push([
+      `De ${currentWeekFrom} a ${currentWeekTo} (${balearenMentionsCW})`,
+      tourismBalearenMentionsCWPercent,
+      covidBalearenMentionsCWPercent,
+      bothBalearenMentionsCWPercent,
+      otherBalearenMentionsCWPercent,
+    ]);
+
+    // create the page 5 CSV
     csv_manager.create_csv("output/page5_news.csv", page5Rows);
     console.log("Finished");
 
