@@ -106,7 +106,7 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   let balearenTimeSeriesDocs = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.relevantCategories);
+    .filter(utils.categoriesOfInterest);
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
@@ -120,7 +120,7 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   let spainTimeSeriesDocs = docsCW
     .filter(utils.spainMention)
-    .filter(utils.relevantCategories);
+    .filter(utils.categoriesOfInterest);
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < spainTimeSeriesDocs.length; i++) {
