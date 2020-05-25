@@ -1,3 +1,5 @@
+var moment = require("moment");
+
 const getPercent = (total, part) => {
   return `${((parseFloat(part) * 100) / total).toFixed(2)}%`;
 };
@@ -55,6 +57,14 @@ const mentionFromAustria = (doc) => {
 
 // mentions belonging to a category
 
+const categoriesOfInterest = (doc) => {
+  return (
+    (doc.category == "tourism") |
+    (doc.category == "both") |
+    (doc.category == "covid")
+  );
+};
+
 const tourismAndBothCategories = (doc) => {
   return (doc.category == "tourism") | (doc.category == "both");
 };
@@ -75,10 +85,29 @@ const otherCategory = (doc) => {
   return doc.category == "none";
 };
 
+// Dates management
+// const addDays = (days) => {
+//   var date = new Date(this.valueOf());
+//   date.setDate(date.getDate() + days);
+//   return date;
+// };
+
+const getWeekDates = (startDate) => {
+  let datesArray = [];
+  moment.locale("ca");
+  let currentDate = moment(startDate);
+  for (i = 0; i < 7; i++) {
+    datesArray.push(currentDate.format("ll"));
+    currentDate = currentDate.add(1, "days");
+  }
+  return datesArray;
+};
+
 module.exports = {
   getPercent,
   spainMention,
   balearenMention,
+  categoriesOfInterest,
   tourismAndBothCategories,
   tourismCategory,
   bothCategory,
@@ -93,4 +122,5 @@ module.exports = {
   mentionFromSwitzerland,
   mentionFromNetherlands,
   mentionFromAustria,
+  getWeekDates,
 };
