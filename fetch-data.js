@@ -23,7 +23,6 @@ const fetchNewsData = (dbName, fromData, toData) => {
         let mongoProjection = {
           projection: {
             _id: 0,
-            published: 0,
             extraction_date: 0,
             topics: 0,
             link: 0,
