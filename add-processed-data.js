@@ -1,4 +1,5 @@
 var categoriesDict = require("./categories-dictionary.js");
+var moment = require("moment");
 
 const addCountry = (newsArray) => {
   // get country from source_id
@@ -60,4 +61,14 @@ const addCategory = (newsArray) => {
   return newsArray;
 };
 
-module.exports = { addCountry, addCategory };
+const addFormattedDate = (newsArray) => {
+  // format date in catalan
+  moment.locale("ca");
+  newsArray.map((doc) => {
+    doc.publishedFormatted = moment(doc.published).format("ll");
+    return doc;
+  });
+  return newsArray;
+};
+
+module.exports = { addCountry, addCategory, addFormattedDate };
