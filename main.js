@@ -10,6 +10,7 @@ var utils = require("./utils/utils.js");
 
 var page6 = require("./page6kpis.js");
 var page8 = require("./page8kpis.js");
+var page10 = require("./page10kpis.js");
 
 var currentWeekFrom = "2020-05-18";
 var currentWeekTo = "2020-05-25";
@@ -102,6 +103,9 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
       docsWithCountryAndCategoryAndFormattedDateCW,
       currentWeekDates
     );
+
+    // ************* Page 10 KPIs.**************
+    page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
 
     // get news count grouped by brand, market and category (in this order)
     // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
