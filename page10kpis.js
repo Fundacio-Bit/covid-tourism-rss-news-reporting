@@ -258,6 +258,399 @@ const getKPIs = (docsCW) => {
       .filter(utils.mentionFromAustria).length
   );
 
+  // ============= SOV CATEGORIES OF INTEREST  by MARKET (country) AND ISLAND ================
+  // Categories of interest = (covid, tourism and covid + tourism)
+
+  // TOTALS (only by island)
+  let categoriesOfInterestBalearenMentions = docsCW
+    .filter(utils.balearenMention)
+    .filter(utils.categoriesOfInterest).length;
+
+  let categoriesOfInterestMallorcaMentions = docsCW
+    .filter(utils.mallorcaIslandMention)
+    .filter(utils.categoriesOfInterest).length;
+
+  let categoriesOfInterestMenorcaMentions = docsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.categoriesOfInterest).length;
+
+  let categoriesOfInterestIbizaMentions = docsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.categoriesOfInterest).length;
+
+  let categoriesOfInterestFormenteraMentions = docsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.categoriesOfInterest).length;
+
+  // Spain mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromSpainPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSpain).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromSpainPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSpain).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromSpainPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSpain).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromSpainPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSpain).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromSpainPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSpain).length
+  );
+
+  // United Kingdom mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromUnitedKingdomPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromUnitedKingdom).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromUnitedKingdomPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromUnitedKingdom).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromUnitedKingdomPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromUnitedKingdom).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromUnitedKingdomPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromUnitedKingdom).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromUnitedKingdomPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromUnitedKingdom).length
+  );
+
+  // Germany mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromGermanyPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromGermany).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromGermanyPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromGermany).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromGermanyPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromGermany).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromGermanyPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromGermany).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromGermanyPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromGermany).length
+  );
+
+  // Italy mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromItalyPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromItaly).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromItalyPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromItaly).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromItalyPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromItaly).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromItalyPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromItaly).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromItalyPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromItaly).length
+  );
+
+  // France mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromFrancePercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromFrance).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromFrancePercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromFrance).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromFrancePercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromFrance).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromFrancePercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromFrance).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromFrancePercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromFrance).length
+  );
+
+  // Sweden mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromSwedenPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSweden).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromSwedenPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSweden).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromSwedenPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSweden).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromSwedenPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSweden).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromSwedenPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSweden).length
+  );
+
+  // Switzerland mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromSwitzerlandPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSwitzerland).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromSwitzerlandPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSwitzerland).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromSwitzerlandPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSwitzerland).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromSwitzerlandPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSwitzerland).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromSwitzerlandPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromSwitzerland).length
+  );
+
+  // Netherlands mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromNetherlandsPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromNetherlands).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromNetherlandsPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromNetherlands).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromNetherlandsPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromNetherlands).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromNetherlandsPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromNetherlands).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromNetherlandsPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromNetherlands).length
+  );
+
+  // Austria mentions to tourism + covid (by market and island)
+  let categoriesOfInterestBalearenMentionsFromAustriaPercent = utils.getPercent(
+    categoriesOfInterestBalearenMentions,
+    docsCW
+      .filter(utils.balearenMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromAustria).length
+  );
+
+  let categoriesOfInterestMallorcaMentionsFromAustriaPercent = utils.getPercent(
+    categoriesOfInterestMallorcaMentions,
+    docsCW
+      .filter(utils.mallorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromAustria).length
+  );
+
+  let categoriesOfInterestMenorcaMentionsFromAustriaPercent = utils.getPercent(
+    categoriesOfInterestMenorcaMentions,
+    docsCW
+      .filter(utils.menorcaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromAustria).length
+  );
+
+  let categoriesOfInterestIbizaMentionsFromAustriaPercent = utils.getPercent(
+    categoriesOfInterestIbizaMentions,
+    docsCW
+      .filter(utils.ibizaIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromAustria).length
+  );
+
+  let categoriesOfInterestFormenteraMentionsFromAustriaPercent = utils.getPercent(
+    categoriesOfInterestFormenteraMentions,
+    docsCW
+      .filter(utils.formenteraIslandMention)
+      .filter(utils.categoriesOfInterest)
+      .filter(utils.mentionFromAustria).length
+  );
+
   // ============= CSV creation ================
   let pageRows = [];
   // TOTAL BALEARIC ISLANDS TOURISM VS COVID
@@ -339,6 +732,94 @@ const getKPIs = (docsCW) => {
     bothMentionsFromSwitzerlandPercent,
     bothMentionsFromNetherlandsPercent,
     bothMentionsFromAustriaPercent,
+  ]);
+
+  // SOV CATEGORIES OF INTEREST  by MARKET (country) AND ISLAND
+  pageRows.push(["\n"]);
+  pageRows.push([
+    "Notícies sobre turisme, covid i covid + turisme per illa i país",
+  ]);
+  pageRows.push([
+    "Illa",
+    "Total mencions",
+    "España",
+    "Regne Unit",
+    "Alemanya",
+    "Itàlia",
+    "França",
+    "Suècia",
+    "Suïssa",
+    "Holanda",
+    "Austria",
+  ]);
+  pageRows.push([
+    "Balears (Balears + Mallorca + Menorca + Ibiza +  Formentera)",
+    categoriesOfInterestBalearenMentions,
+    categoriesOfInterestBalearenMentionsFromSpainPercent,
+    categoriesOfInterestBalearenMentionsFromUnitedKingdomPercent,
+    categoriesOfInterestBalearenMentionsFromGermanyPercent,
+    categoriesOfInterestBalearenMentionsFromItalyPercent,
+    categoriesOfInterestBalearenMentionsFromFrancePercent,
+    categoriesOfInterestBalearenMentionsFromSwedenPercent,
+    categoriesOfInterestBalearenMentionsFromSwitzerlandPercent,
+    categoriesOfInterestBalearenMentionsFromNetherlandsPercent,
+    categoriesOfInterestBalearenMentionsFromAustriaPercent,
+  ]);
+
+  pageRows.push([
+    "Mallorca",
+    categoriesOfInterestMallorcaMentions,
+    categoriesOfInterestMallorcaMentionsFromSpainPercent,
+    categoriesOfInterestMallorcaMentionsFromUnitedKingdomPercent,
+    categoriesOfInterestMallorcaMentionsFromGermanyPercent,
+    categoriesOfInterestMallorcaMentionsFromItalyPercent,
+    categoriesOfInterestMallorcaMentionsFromFrancePercent,
+    categoriesOfInterestMallorcaMentionsFromSwedenPercent,
+    categoriesOfInterestMallorcaMentionsFromSwitzerlandPercent,
+    categoriesOfInterestMallorcaMentionsFromNetherlandsPercent,
+    categoriesOfInterestMallorcaMentionsFromAustriaPercent,
+  ]);
+
+  pageRows.push([
+    "Menorca",
+    categoriesOfInterestMenorcaMentions,
+    categoriesOfInterestMenorcaMentionsFromSpainPercent,
+    categoriesOfInterestMenorcaMentionsFromUnitedKingdomPercent,
+    categoriesOfInterestMenorcaMentionsFromGermanyPercent,
+    categoriesOfInterestMenorcaMentionsFromItalyPercent,
+    categoriesOfInterestMenorcaMentionsFromFrancePercent,
+    categoriesOfInterestMenorcaMentionsFromSwedenPercent,
+    categoriesOfInterestMenorcaMentionsFromSwitzerlandPercent,
+    categoriesOfInterestMenorcaMentionsFromNetherlandsPercent,
+    categoriesOfInterestMenorcaMentionsFromAustriaPercent,
+  ]);
+
+  pageRows.push([
+    "Ibiza",
+    categoriesOfInterestIbizaMentions,
+    categoriesOfInterestIbizaMentionsFromSpainPercent,
+    categoriesOfInterestIbizaMentionsFromUnitedKingdomPercent,
+    categoriesOfInterestIbizaMentionsFromGermanyPercent,
+    categoriesOfInterestIbizaMentionsFromItalyPercent,
+    categoriesOfInterestIbizaMentionsFromFrancePercent,
+    categoriesOfInterestIbizaMentionsFromSwedenPercent,
+    categoriesOfInterestIbizaMentionsFromSwitzerlandPercent,
+    categoriesOfInterestIbizaMentionsFromNetherlandsPercent,
+    categoriesOfInterestIbizaMentionsFromAustriaPercent,
+  ]);
+
+  pageRows.push([
+    "Formentera",
+    categoriesOfInterestFormenteraMentions,
+    categoriesOfInterestFormenteraMentionsFromSpainPercent,
+    categoriesOfInterestFormenteraMentionsFromUnitedKingdomPercent,
+    categoriesOfInterestFormenteraMentionsFromGermanyPercent,
+    categoriesOfInterestFormenteraMentionsFromItalyPercent,
+    categoriesOfInterestFormenteraMentionsFromFrancePercent,
+    categoriesOfInterestFormenteraMentionsFromSwedenPercent,
+    categoriesOfInterestFormenteraMentionsFromSwitzerlandPercent,
+    categoriesOfInterestFormenteraMentionsFromNetherlandsPercent,
+    categoriesOfInterestFormenteraMentionsFromAustriaPercent,
   ]);
 
   // create the page 8 CSV
