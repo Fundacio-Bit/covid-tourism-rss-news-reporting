@@ -4,7 +4,7 @@ const getPercent = (total, part) => {
   return `${((parseFloat(part) * 100) / total).toFixed(2)}%`;
 };
 
-// mention to spain (in text)
+// mention to brands (in text)
 const spainMention = (doc) => {
   return doc.brand.includes("españa");
 };
@@ -17,6 +17,26 @@ const balearenMention = (doc) => {
     doc.brand.includes("ibiza") |
     doc.brand.includes("formentera")
   );
+};
+
+const balearicArchipelagoMention = (doc) => {
+  return doc.brand.includes("balearen");
+};
+
+const mallorcaIslandMention = (doc) => {
+  return doc.brand.includes("mallorca");
+};
+
+const menorcaIslandMention = (doc) => {
+  return doc.brand.includes("menorca");
+};
+
+const ibizaIslandMention = (doc) => {
+  return doc.brand.includes("ibiza");
+};
+
+const formenteraIslandMention = (doc) => {
+  return doc.brand.includes("formentera");
 };
 
 // mentions done from a country source
@@ -107,6 +127,11 @@ module.exports = {
   getPercent,
   spainMention,
   balearenMention,
+  balearicArchipelagoMention,
+  mallorcaIslandMention,
+  menorcaIslandMention,
+  ibizaIslandMention,
+  formenteraIslandMention,
   categoriesOfInterest,
   tourismAndBothCategories,
   tourismCategory,
