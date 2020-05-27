@@ -822,7 +822,7 @@ const getKPIs = (docsCW) => {
     categoriesOfInterestFormenteraMentionsFromAustriaPercent,
   ]);
 
-  // create the page 8 CSV
+  // create the page 10 CSV
   csv_manager.create_csv("output/page10_news.csv", pageRows);
 };
 
