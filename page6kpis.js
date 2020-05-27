@@ -115,6 +115,13 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
     ]++;
   }
 
+  // convert data to string and add row label
+  balearenTimeSeriesArray = balearenTimeSeriesArray.map((val) => {
+    return val.toString();
+  });
+
+  balearenTimeSeriesArray.unshift("Balears");
+
   // calculate Spain time series
   var spainTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
@@ -128,6 +135,13 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
       datesCW.indexOf(spainTimeSeriesDocs[i].publishedFormatted)
     ]++;
   }
+
+  // convert data to string and add row label
+  spainTimeSeriesArray = spainTimeSeriesArray.map((val) => {
+    return val.toString();
+  });
+
+  spainTimeSeriesArray.unshift("Espanya");
 
   // ============= CSV creation ================
 
@@ -168,15 +182,14 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   // Spain and Balearen Time series (mentions to covid, tourism and both)
   pageRows.push(["\n"]);
-  pageRows.push(["Evolutivo Baleares (turismo, covid, turismo + covid)"]);
-  pageRows.push(datesCW);
+  pageRows.push([
+    "Evolutiu Balears vs Espanya (turisme, covid, turisme + covid)",
+  ]);
+  pageRows.push([""].concat(datesCW));
   pageRows.push(balearenTimeSeriesArray);
-  pageRows.push([]);
-  pageRows.push(["Evolutivo España (turismo, covid, turismo + covid)"]);
-  pageRows.push(datesCW);
   pageRows.push(spainTimeSeriesArray);
 
-  // create the page 5 CSV
+  // create the page 6 CSV
   csv_manager.create_csv("output/page6_news.csv", pageRows);
 };
 
