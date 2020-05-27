@@ -9,7 +9,7 @@ var fs = require("fs");
 const create_csv = (csv_name, rows) => {
   csv_data = "";
   rows.forEach((row) => {
-    csv_data = csv_data.concat(row.join(","));
+    csv_data = csv_data.concat(row.join(";"));
     csv_data = csv_data.concat("\n");
   });
 

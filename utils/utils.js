@@ -1,7 +1,10 @@
 var moment = require("moment");
 
 const getPercent = (total, part) => {
-  return `${((parseFloat(part) * 100) / total).toFixed(2)}%`;
+  return ((parseFloat(part) * 100) / total)
+    .toFixed(2)
+    .toString()
+    .replace(".", ",");
 };
 
 // mention to brands (in text)

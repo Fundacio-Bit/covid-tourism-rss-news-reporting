@@ -80,12 +80,6 @@ const getKPIs = (docsCW, datesCW) => {
     ]++;
   }
 
-  mentionsFromSpainTimeSeriesArray = mentionsFromSpainTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
-
   mentionsFromSpainTimeSeriesArray.unshift("Espanya");
 
   // calculate total mentions from Spain time series
@@ -100,12 +94,6 @@ const getKPIs = (docsCW, datesCW) => {
       datesCW.indexOf(mentionsFromUnitedKingdom[i].publishedFormatted)
     ]++;
   }
-
-  mentionsFromUnitedKingdomTimeSeriesArray = mentionsFromUnitedKingdomTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
 
   mentionsFromUnitedKingdomTimeSeriesArray.unshift("Regne Unit");
 
@@ -122,12 +110,6 @@ const getKPIs = (docsCW, datesCW) => {
     ]++;
   }
 
-  mentionsFromGermanyTimeSeriesArray = mentionsFromGermanyTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
-
   mentionsFromGermanyTimeSeriesArray.unshift("Alemanya");
 
   // calculate total mentions from Spain time series
@@ -142,12 +124,6 @@ const getKPIs = (docsCW, datesCW) => {
       datesCW.indexOf(mentionsFromItaly[i].publishedFormatted)
     ]++;
   }
-
-  mentionsFromItalyTimeSeriesArray = mentionsFromItalyTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
 
   mentionsFromItalyTimeSeriesArray.unshift("Itàlia");
 
@@ -164,12 +140,6 @@ const getKPIs = (docsCW, datesCW) => {
     ]++;
   }
 
-  mentionsFromFranceTimeSeriesArray = mentionsFromFranceTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
-
   mentionsFromFranceTimeSeriesArray.unshift("França");
 
   // calculate total mentions from Spain time series
@@ -184,12 +154,6 @@ const getKPIs = (docsCW, datesCW) => {
       datesCW.indexOf(mentionsFromSweden[i].publishedFormatted)
     ]++;
   }
-
-  mentionsFromSwedenTimeSeriesArray = mentionsFromSwedenTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
 
   mentionsFromSwedenTimeSeriesArray.unshift("Suècia");
 
@@ -206,12 +170,6 @@ const getKPIs = (docsCW, datesCW) => {
     ]++;
   }
 
-  mentionsFromSwitzerlandTimeSeriesArray = mentionsFromSwitzerlandTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
-
   mentionsFromSwitzerlandTimeSeriesArray.unshift("Suïssa");
 
   // calculate total mentions from Spain time series
@@ -227,12 +185,6 @@ const getKPIs = (docsCW, datesCW) => {
     ]++;
   }
 
-  mentionsFromNetherlandsTimeSeriesArray = mentionsFromNetherlandsTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
-
   mentionsFromNetherlandsTimeSeriesArray.unshift("Holanda");
 
   // calculate total mentions from Spain time series
@@ -247,12 +199,6 @@ const getKPIs = (docsCW, datesCW) => {
       datesCW.indexOf(mentionsFromAustria[i].publishedFormatted)
     ]++;
   }
-
-  mentionsFromAustriaTimeSeriesArray = mentionsFromAustriaTimeSeriesArray.map(
-    (val) => {
-      return val.toString();
-    }
-  );
 
   mentionsFromAustriaTimeSeriesArray.unshift("Austria");
 

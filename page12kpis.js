@@ -17,11 +17,6 @@ const getKPIs = (docsCW, datesCW) => {
     ]++;
   }
 
-  // convert data to string and add row label
-  balearenTimeSeriesArray = balearenTimeSeriesArray.map((val) => {
-    return val.toString();
-  });
-
   balearenTimeSeriesArray.unshift("Balears");
 
   // calculate Mallorca time series
@@ -37,11 +32,6 @@ const getKPIs = (docsCW, datesCW) => {
       datesCW.indexOf(mallorcaTimeSeriesDocs[i].publishedFormatted)
     ]++;
   }
-
-  // convert data to string and add row label
-  mallorcaTimeSeriesArray = mallorcaTimeSeriesArray.map((val) => {
-    return val.toString();
-  });
 
   mallorcaTimeSeriesArray.unshift("Mallorca");
 

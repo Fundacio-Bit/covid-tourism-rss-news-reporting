@@ -115,11 +115,6 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
     ]++;
   }
 
-  // convert data to string and add row label
-  balearenTimeSeriesArray = balearenTimeSeriesArray.map((val) => {
-    return val.toString();
-  });
-
   balearenTimeSeriesArray.unshift("Balears");
 
   // calculate Spain time series
@@ -135,11 +130,6 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
       datesCW.indexOf(spainTimeSeriesDocs[i].publishedFormatted)
     ]++;
   }
-
-  // convert data to string and add row label
-  spainTimeSeriesArray = spainTimeSeriesArray.map((val) => {
-    return val.toString();
-  });
 
   spainTimeSeriesArray.unshift("Espanya");
 
