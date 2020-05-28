@@ -134,7 +134,7 @@ module.exports = {
   getPercent,
   spainMention,
   balearenMention,
-  balearicArchipelagoMention,
+  // balearicArchipelagoMention,
   mallorcaIslandMention,
   menorcaIslandMention,
   ibizaIslandMention,
