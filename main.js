@@ -12,6 +12,13 @@ var page6 = require("./page6kpis.js");
 var page8 = require("./page8kpis.js");
 var page10 = require("./page10kpis.js");
 var page12 = require("./page12kpis.js");
+var page13 = require("./page13kpis.js");
+var page15 = require("./page15kpis.js");
+var page16 = require("./page16kpis.js");
+var page18 = require("./page18kpis.js");
+var page19 = require("./page19kpis.js");
+var page21 = require("./page21kpis.js");
+var page22 = require("./page22kpis.js");
 
 var currentWeekFrom = "2020-05-18";
 var currentWeekTo = "2020-05-25";
@@ -113,6 +120,36 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
       docsWithCountryAndCategoryAndFormattedDateCW,
       currentWeekDates
     );
+
+    // ************* Page 13 KPIs.**************
+    page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 15 KPIs.**************
+    page15.getKPIs(
+      docsWithCountryAndCategoryAndFormattedDateCW,
+      currentWeekDates
+    );
+
+    // ************* Page 16 KPIs.**************
+    page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 18 KPIs.**************
+    page18.getKPIs(
+      docsWithCountryAndCategoryAndFormattedDateCW,
+      currentWeekDates
+    );
+
+    // ************* Page 19 KPIs.**************
+    page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 21 KPIs.**************
+    page21.getKPIs(
+      docsWithCountryAndCategoryAndFormattedDateCW,
+      currentWeekDates
+    );
+
+    // ************* Page 22 KPIs.**************
+    page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
 
     // get news count grouped by brand, market and category (in this order)
     // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
