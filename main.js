@@ -19,6 +19,15 @@ var page18 = require("./page18kpis.js");
 var page19 = require("./page19kpis.js");
 var page21 = require("./page21kpis.js");
 var page22 = require("./page22kpis.js");
+var page25 = require("./page25kpis.js");
+var page26 = require("./page26kpis.js");
+var page27 = require("./page27kpis.js");
+var page28 = require("./page28kpis.js");
+var page29 = require("./page29kpis.js");
+var page30 = require("./page30kpis.js");
+var page31 = require("./page31kpis.js");
+var page32 = require("./page32kpis.js");
+var page33 = require("./page33kpis.js");
 
 var currentWeekFrom = "2020-05-18";
 var currentWeekTo = "2020-05-25";
@@ -150,6 +159,33 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 22 KPIs.**************
     page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 25 KPIs.**************
+    page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 26 KPIs.**************
+    page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 27 KPIs.**************
+    page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 28 KPIs.**************
+    page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 29 KPIs.**************
+    page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 30 KPIs.**************
+    page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 31 KPIs.**************
+    page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 32 KPIs.**************
+    page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* Page 32 KPIs.**************
+    page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
 
     // get news count grouped by brand, market and category (in this order)
     // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
