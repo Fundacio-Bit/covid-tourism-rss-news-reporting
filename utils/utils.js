@@ -1,10 +1,14 @@
 var moment = require("moment");
 
 const getPercent = (total, part) => {
-  return ((parseFloat(part) * 100) / total)
-    .toFixed(2)
-    .toString()
-    .replace(".", ",");
+  if (total == 0) {
+    return "0";
+  } else {
+    return ((parseFloat(part) * 100) / total)
+      .toFixed(2)
+      .toString()
+      .replace(".", ",");
+  }
 };
 
 // mention to brands (in text)
@@ -22,9 +26,9 @@ const balearenMention = (doc) => {
   );
 };
 
-const balearicArchipelagoMention = (doc) => {
-  return doc.brand.includes("balearen");
-};
+// const balearicArchipelagoMention = (doc) => {
+//   return doc.brand.includes("balearen");
+// };
 
 const mallorcaIslandMention = (doc) => {
   return doc.brand.includes("mallorca");
