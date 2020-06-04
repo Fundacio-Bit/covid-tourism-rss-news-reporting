@@ -3,11 +3,14 @@
   "version": "1.1.0",
   "description": "COVID TOURISM RSS REPORTING",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "jest"
   },
   "author": "omoya@fundaciobit.org",
   "license": "MIT",
-  "devDependencies": {},
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
   "dependencies": {
     "d3": "^5.16.0",
     "moment": "^2.26.0",
