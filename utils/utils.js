@@ -13,17 +13,29 @@ const getPercent = (total, part) => {
 
 // mention to brands (in text)
 const spainMention = (doc) => {
-  return doc.brand.includes("españa");
+  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
+    return doc.brand.includes("españa");
+  } else {
+    return false;
+  }
 };
 
 const balearenMention = (doc) => {
-  return (
-    doc.brand.includes("baleares") |
-    doc.brand.includes("mallorca") |
-    doc.brand.includes("menorca") |
-    doc.brand.includes("ibiza") |
-    doc.brand.includes("formentera")
-  );
+  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
+    if (
+      doc.brand.includes("baleares") |
+      doc.brand.includes("mallorca") |
+      doc.brand.includes("menorca") |
+      doc.brand.includes("ibiza") |
+      doc.brand.includes("formentera")
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
 };
 
 // const balearicArchipelagoMention = (doc) => {
@@ -31,24 +43,44 @@ const balearenMention = (doc) => {
 // };
 
 const mallorcaIslandMention = (doc) => {
-  return doc.brand.includes("mallorca");
+  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
+    return doc.brand.includes("mallorca");
+  } else {
+    return false;
+  }
 };
 
 const menorcaIslandMention = (doc) => {
-  return doc.brand.includes("menorca");
+  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
+    return doc.brand.includes("menorca");
+  } else {
+    return false;
+  }
 };
 
 const ibizaIslandMention = (doc) => {
-  return doc.brand.includes("ibiza");
+  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
+    return doc.brand.includes("ibiza");
+  } else {
+    return false;
+  }
 };
 
 const formenteraIslandMention = (doc) => {
-  return doc.brand.includes("formentera");
+  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
+    return doc.brand.includes("formentera");
+  } else {
+    return false;
+  }
 };
 
 // mentions done from a country source
 const mentionFromSpain = (doc) => {
-  return doc.country == "ES";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.brand === "string") {
+    return doc.country == "ES";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromUnitedKingdom = (doc) => {
