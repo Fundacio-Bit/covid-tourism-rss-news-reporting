@@ -2,18 +2,19 @@ var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
-  // Total Mentions (Balearic Islands + Spain)
-  let totalMentionsCountCW = docsCW.length;
-  let tourismAndBothMentionsCountCW = docsCW.filter(
-    utils.tourismAndBothCategories
-  ).length;
-  let tourismAndBothMentionsPercentCW = utils.getPercent(
-    totalMentionsCountCW,
-    tourismAndBothMentionsCountCW
+  // Total Mentions (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  // let totalMentionsCountCW = docsCW.length;
+  let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  let balearenTourismAndBothMentionsCountCW = docsCW
+    .filter(utils.balearenMention)
+    .filter(utils.tourismAndBothCategories).length;
+  let balearenTourismAndBothMentionsPercentCW = utils.getPercent(
+    balearenMentionsCW,
+    balearenTourismAndBothMentionsCountCW
   );
 
   // ============= SOV PER CATEGORY CURRENT WEEK================
-  let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  // let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
   let tourismBalearenMentionsCWPercent = utils.getPercent(
     balearenMentionsCW,
     docsCW.filter(utils.balearenMention).filter(utils.tourismCategory).length
@@ -36,14 +37,15 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   // ============= SOV PER CATEGORY A WEEK AGO (WA) ================
   // Total Mentions (Balearic Islands + Spain)
-  let totalMentionsCountWA = docsWA.length;
-  let tourismAndBothMentionsCountWA = docsWA.filter(
-    utils.tourismAndBothCategories
-  ).length;
-  let tourismAndBothMentionsPercentWA = utils.getPercent(
-    totalMentionsCountWA,
-    tourismAndBothMentionsCountWA
-  );
+  // let totalMentionsCountWA = docsWA.length;
+
+  // let tourismAndBothMentionsCountWA = docsWA.filter(
+  //   utils.tourismAndBothCategories
+  // ).length;
+  // let tourismAndBothMentionsPercentWA = utils.getPercent(
+  //   totalMentionsCountWA,
+  //   tourismAndBothMentionsCountWA
+  // );
 
   // Balearic Islands KPIs
   let balearenMentionsWA = docsWA.filter(utils.balearenMention).length;
@@ -69,14 +71,14 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   // ============= SOV PER CATEGORY TWO WEEKS AGO (TWA) ================
   // Total Mentions (Balearic Islands + Spain)
-  let totalMentionsCountTWA = docsTWA.length;
-  let tourismAndBothMentionsCountTWA = docsTWA.filter(
-    utils.tourismAndBothCategories
-  ).length;
-  let tourismAndBothMentionsPercentTWA = utils.getPercent(
-    totalMentionsCountTWA,
-    tourismAndBothMentionsCountTWA
-  );
+  // let totalMentionsCountTWA = docsTWA.length;
+  // let tourismAndBothMentionsCountTWA = docsTWA.filter(
+  //   utils.tourismAndBothCategories
+  // ).length;
+  // let tourismAndBothMentionsPercentTWA = utils.getPercent(
+  //   totalMentionsCountTWA,
+  //   tourismAndBothMentionsCountTWA
+  // );
 
   // Balearic Islands KPIs
   let balearenMentionsTWA = docsTWA.filter(utils.balearenMention).length;
@@ -137,10 +139,14 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   let pageRows = [];
   // Total Mentions and tourism percent
-  pageRows.push(["Mencions", totalMentionsCountCW]);
+  pageRows.push(["Mencions a Balears y/o les illes ", balearenMentionsCW]);
   pageRows.push([
     "Percentatge de mencions de turisme (inclou turisme i turisme + covid)",
-    tourismAndBothMentionsPercentCW,
+    balearenTourismAndBothMentionsPercentCW,
+  ]);
+  pageRows.push([
+    "Total de mencions de turisme (inclou turisme i turisme + covid)",
+    balearenTourismAndBothMentionsCountCW,
   ]);
 
   // SOV by categories
