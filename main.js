@@ -29,16 +29,16 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
-var currentWeekFrom = "2020-05-18";
-var currentWeekTo = "2020-05-25";
+var currentWeekFrom = "2020-05-25";
+var currentWeekTo = "2020-05-31";
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 
-var weekAgoFrom = "2020-05-11";
-var weekAgoTo = "2020-05-18";
+var weekAgoFrom = "2020-05-18";
+var weekAgoTo = "2020-05-25";
 var weekAgoDates = utils.getWeekDates(weekAgoFrom);
 
-var twoWeeksAgoFrom = "2020-05-04";
-var twoWeeksAgoTo = "2020-05-11";
+var twoWeeksAgoFrom = "2020-05-11";
+var twoWeeksAgoTo = "2020-05-18";
 var twoWeeksAgoDates = utils.getWeekDates(twoWeeksAgoFrom);
 
 var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);

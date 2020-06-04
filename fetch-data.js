@@ -14,10 +14,13 @@ const fetchNewsData = (dbName, fromData, toData) => {
         }
         // continue if connexion was successfull
         let db = client.db(dbName);
+        let from = new Date(fromData + " 00:00:00");
+        let to = new Date(toData + " 00:00:00");
+        let toQuery = new Date(to.setDate(to.getDate() + 1));
         let mongoQuery = {
           published: {
-            $gte: new Date(fromData),
-            $lt: new Date(toData),
+            $gte: from,
+            $lt: toQuery,
           },
         };
         let mongoProjection = {
