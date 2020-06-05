@@ -13,6 +13,8 @@ test("getPercent with a total of 0 and a part of 100 should return the String '0
   expect(utils.getPercent(0, 100)).toBe("0");
 });
 
+// ============ BRAND MENTIONS FILTERS TESTS =================
+
 // spainMentions tests
 // TODO: the current version does not checks if the brands are comma separated or not.
 // Neither if a uppercase characters are used. Do a more robust version that checks such incidences.
@@ -325,6 +327,8 @@ test("If a document (dictionary) is not passed should return false", () => {
   expect(utils.formenteraIslandMention(1)).toBe(false);
   expect(utils.formenteraIslandMention([])).toBe(false);
 });
+
+// ============ MENTIONS FROM COUNTRY FILTERS TESTS =================
 
 // mentionFromSpain
 test("A document with country value equal to 'ES' should return true", () => {
@@ -726,4 +730,277 @@ test("If a document (dictionary) is not passed should return false", () => {
   expect(utils.mentionFromAustria(NaN)).toBe(false);
   expect(utils.mentionFromAustria(1)).toBe(false);
   expect(utils.mentionFromAustria([])).toBe(false);
+});
+
+// ============ MENTIONS FOR CATEGORIES FILTERS TESTS =================
+
+// categoriesOfInterest filter
+
+test("A document with category value equal to 'tourism' or 'both' should return true", () => {
+  expect(utils.categoriesOfInterest({ category: "covid" })).toBe(true);
+  expect(utils.categoriesOfInterest({ category: "tourism" })).toBe(true);
+  expect(utils.categoriesOfInterest({ category: "both" })).toBe(true);
+});
+
+test("A document with category value with any uppercase character should return false", () => {
+  expect(utils.categoriesOfInterest({ category: "Covid" })).toBe(false);
+  expect(utils.categoriesOfInterest({ category: "tOurism" })).toBe(false);
+  expect(utils.categoriesOfInterest({ category: "BOTH" })).toBe(false);
+});
+
+test("A document with a non-valid string category value should return false", () => {
+  expect(utils.categoriesOfInterest({ category: "arbitraryString" })).toBe(
+    false
+  );
+});
+
+test("A document with category value equal to 'none' should return false", () => {
+  expect(utils.categoriesOfInterest({ category: "none" })).toBe(false);
+});
+
+test("A document including an empty string as category should return false", () => {
+  expect(utils.categoriesOfInterest({ category: "" })).toBe(false);
+});
+
+test("A document including null as category should return false", () => {
+  expect(utils.categoriesOfInterest({ category: null })).toBe(false);
+});
+
+test("A document including a Number as category should return false", () => {
+  expect(utils.categoriesOfInterest({ category: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as category should return false", () => {
+  expect(utils.categoriesOfInterest({ category: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.categoriesOfInterest(null)).toBe(false);
+  expect(utils.categoriesOfInterest("")).toBe(false);
+  expect(utils.categoriesOfInterest(NaN)).toBe(false);
+  expect(utils.categoriesOfInterest(1)).toBe(false);
+  expect(utils.categoriesOfInterest([])).toBe(false);
+});
+
+// tourismAndBothCategory filter
+
+test("A document with category value equal to 'covid' or 'tourism' should return true", () => {
+  expect(utils.tourismAndBothCategories({ category: "tourism" })).toBe(true);
+  expect(utils.tourismAndBothCategories({ category: "both" })).toBe(true);
+});
+
+test("A document with category value with any uppercase character should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: "tOurism" })).toBe(false);
+  expect(utils.tourismAndBothCategories({ category: "BOTH" })).toBe(false);
+});
+
+test("A document with a non-valid string category value should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: "arbitraryString" })).toBe(
+    false
+  );
+});
+
+test("A document with category value equal to 'none' or 'covid' should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: "none" })).toBe(false);
+  expect(utils.tourismAndBothCategories({ category: "covid" })).toBe(false);
+});
+
+test("A document including an empty string as category should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: "" })).toBe(false);
+});
+
+test("A document including null as category should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: null })).toBe(false);
+});
+
+test("A document including a Number as category should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as category should return false", () => {
+  expect(utils.tourismAndBothCategories({ category: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.tourismAndBothCategories(null)).toBe(false);
+  expect(utils.tourismAndBothCategories("")).toBe(false);
+  expect(utils.tourismAndBothCategories(NaN)).toBe(false);
+  expect(utils.tourismAndBothCategories(1)).toBe(false);
+  expect(utils.tourismAndBothCategories([])).toBe(false);
+});
+
+// tourismCategory filter
+
+test("A document with category value equal to 'tourism' should return true", () => {
+  expect(utils.tourismCategory({ category: "tourism" })).toBe(true);
+});
+
+test("A document with category value with any uppercase character should return false", () => {
+  expect(utils.tourismCategory({ category: "tOurism" })).toBe(false);
+});
+
+test("A document with a non-valid string category value should return false", () => {
+  expect(utils.tourismCategory({ category: "arbitraryString" })).toBe(false);
+});
+
+test("A document with category value equal to 'none', 'both' or 'covid' should return false", () => {
+  expect(utils.tourismCategory({ category: "none" })).toBe(false);
+  expect(utils.tourismCategory({ category: "covid" })).toBe(false);
+  expect(utils.tourismCategory({ category: "both" })).toBe(false);
+});
+
+test("A document including an empty string as category should return false", () => {
+  expect(utils.tourismCategory({ category: "" })).toBe(false);
+});
+
+test("A document including null as category should return false", () => {
+  expect(utils.tourismCategory({ category: null })).toBe(false);
+});
+
+test("A document including a Number as category should return false", () => {
+  expect(utils.tourismCategory({ category: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as category should return false", () => {
+  expect(utils.tourismCategory({ category: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.tourismCategory(null)).toBe(false);
+  expect(utils.tourismCategory("")).toBe(false);
+  expect(utils.tourismCategory(NaN)).toBe(false);
+  expect(utils.tourismCategory(1)).toBe(false);
+  expect(utils.tourismCategory([])).toBe(false);
+});
+
+// bothCategory filter
+
+test("A document with category value equal to 'both' should return true", () => {
+  expect(utils.bothCategory({ category: "both" })).toBe(true);
+});
+
+test("A document with category value with any uppercase character should return false", () => {
+  expect(utils.bothCategory({ category: "BOTh" })).toBe(false);
+});
+
+test("A document with a non-valid string category value should return false", () => {
+  expect(utils.bothCategory({ category: "arbitraryString" })).toBe(false);
+});
+
+test("A document with category value equal to 'tourism', 'none' or 'covid' should return false", () => {
+  expect(utils.bothCategory({ category: "none" })).toBe(false);
+  expect(utils.bothCategory({ category: "covid" })).toBe(false);
+  expect(utils.bothCategory({ category: "tourism" })).toBe(false);
+});
+
+test("A document including an empty string as category should return false", () => {
+  expect(utils.bothCategory({ category: "" })).toBe(false);
+});
+
+test("A document including null as category should return false", () => {
+  expect(utils.bothCategory({ category: null })).toBe(false);
+});
+
+test("A document including a Number as category should return false", () => {
+  expect(utils.bothCategory({ category: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as category should return false", () => {
+  expect(utils.bothCategory({ category: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.bothCategory(null)).toBe(false);
+  expect(utils.bothCategory("")).toBe(false);
+  expect(utils.bothCategory(NaN)).toBe(false);
+  expect(utils.bothCategory(1)).toBe(false);
+  expect(utils.bothCategory([])).toBe(false);
+});
+
+// covidCategory filter
+
+test("A document with category value equal to 'covid' should return true", () => {
+  expect(utils.covidCategory({ category: "covid" })).toBe(true);
+});
+
+test("A document with category value with any uppercase character should return false", () => {
+  expect(utils.covidCategory({ category: "COVid" })).toBe(false);
+});
+
+test("A document with a non-valid string category value should return false", () => {
+  expect(utils.covidCategory({ category: "arbitraryString" })).toBe(false);
+});
+
+test("A document with category value equal to 'tourism', 'none' or 'both' should return false", () => {
+  expect(utils.covidCategory({ category: "both" })).toBe(false);
+  expect(utils.covidCategory({ category: "none" })).toBe(false);
+  expect(utils.covidCategory({ category: "tourism" })).toBe(false);
+});
+
+test("A document including an empty string as category should return false", () => {
+  expect(utils.covidCategory({ category: "" })).toBe(false);
+});
+
+test("A document including null as category should return false", () => {
+  expect(utils.covidCategory({ category: null })).toBe(false);
+});
+
+test("A document including a Number as category should return false", () => {
+  expect(utils.covidCategory({ category: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as category should return false", () => {
+  expect(utils.covidCategory({ category: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.covidCategory(null)).toBe(false);
+  expect(utils.covidCategory("")).toBe(false);
+  expect(utils.covidCategory(NaN)).toBe(false);
+  expect(utils.covidCategory(1)).toBe(false);
+  expect(utils.covidCategory([])).toBe(false);
+});
+
+// otherCategory filter
+
+test("A document with category value equal to 'none' should return true", () => {
+  expect(utils.otherCategory({ category: "none" })).toBe(true);
+});
+
+test("A document with category value with any uppercase character should return false", () => {
+  expect(utils.otherCategory({ category: "NONE" })).toBe(false);
+});
+
+test("A document with a non-valid string category value should return false", () => {
+  expect(utils.otherCategory({ category: "arbitraryString" })).toBe(false);
+});
+
+test("A document with category value equal to 'tourism', 'none' or 'both' should return false", () => {
+  expect(utils.otherCategory({ category: "both" })).toBe(false);
+  expect(utils.otherCategory({ category: "covid" })).toBe(false);
+  expect(utils.otherCategory({ category: "tourism" })).toBe(false);
+});
+
+test("A document including an empty string as category should return false", () => {
+  expect(utils.otherCategory({ category: "" })).toBe(false);
+});
+
+test("A document including null as category should return false", () => {
+  expect(utils.otherCategory({ category: null })).toBe(false);
+});
+
+test("A document including a Number as category should return false", () => {
+  expect(utils.otherCategory({ category: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as category should return false", () => {
+  expect(utils.otherCategory({ category: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.otherCategory(null)).toBe(false);
+  expect(utils.otherCategory("")).toBe(false);
+  expect(utils.otherCategory(NaN)).toBe(false);
+  expect(utils.otherCategory(1)).toBe(false);
+  expect(utils.otherCategory([])).toBe(false);
 });
