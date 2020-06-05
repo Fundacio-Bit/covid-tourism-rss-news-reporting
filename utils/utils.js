@@ -76,7 +76,7 @@ const formenteraIslandMention = (doc) => {
 
 // mentions done from a country source
 const mentionFromSpain = (doc) => {
-  if (doc && doc.hasOwnProperty("country") && typeof doc.brand === "string") {
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
     return doc.country == "ES";
   } else {
     return false;
@@ -84,34 +84,66 @@ const mentionFromSpain = (doc) => {
 };
 
 const mentionFromUnitedKingdom = (doc) => {
-  return doc.country == "UK";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "UK";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromGermany = (doc) => {
-  return doc.country == "DE";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "DE";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromItaly = (doc) => {
-  return doc.country == "IT";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "IT";
+  } else {
+    return false;
+  }
 };
 const mentionFromFrance = (doc) => {
-  return doc.country == "FR";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "FR";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromSweden = (doc) => {
-  return doc.country == "SE";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "SE";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromSwitzerland = (doc) => {
-  return doc.country == "SZ";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "SZ";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromNetherlands = (doc) => {
-  return doc.country == "NL";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "NL";
+  } else {
+    return false;
+  }
 };
 
 const mentionFromAustria = (doc) => {
-  return doc.country == "AT";
+  if (doc && doc.hasOwnProperty("country") && typeof doc.country === "string") {
+    return doc.country == "AT";
+  } else {
+    return false;
+  }
 };
 
 // mentions belonging to a category
