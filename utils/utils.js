@@ -240,14 +240,18 @@ const otherCategory = (doc) => {
 // };
 
 const getWeekDates = (startDate) => {
-  let datesArray = [];
-  moment.locale("ca");
-  let currentDate = moment(startDate);
-  for (i = 0; i < 7; i++) {
-    datesArray.push(currentDate.format("ll"));
-    currentDate = currentDate.add(1, "days");
+  if (startDate === undefined || typeof startDate !== "string") {
+    throw new Error("Start date should be a string");
+  } else {
+    let datesArray = [];
+    moment.locale("ca");
+    let currentDate = moment(startDate);
+    for (i = 0; i < 7; i++) {
+      datesArray.push(currentDate.format("ll"));
+      currentDate = currentDate.add(1, "days");
+    }
+    return datesArray;
   }
-  return datesArray;
 };
 
 module.exports = {
