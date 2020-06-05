@@ -325,3 +325,405 @@ test("If a document (dictionary) is not passed should return false", () => {
   expect(utils.formenteraIslandMention(1)).toBe(false);
   expect(utils.formenteraIslandMention([])).toBe(false);
 });
+
+// mentionFromSpain
+test("A document with country value equal to 'ES' should return true", () => {
+  expect(utils.mentionFromSpain({ country: "ES" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromSpain({ country: "arbitraryString" })).toBe(false);
+});
+
+test("A document with a country value equal to a country of interest but not 'ES' should return false", () => {
+  expect(utils.mentionFromSpain({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromSpain({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromSpain({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromSpain({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromSpain({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromSpain({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromSpain(null)).toBe(false);
+  expect(utils.mentionFromSpain("")).toBe(false);
+  expect(utils.mentionFromSpain(NaN)).toBe(false);
+  expect(utils.mentionFromSpain(1)).toBe(false);
+  expect(utils.mentionFromSpain([])).toBe(false);
+});
+
+// mentionFromUnitedKingdom
+test("A document with country value equal to 'UK' should return true", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: "UK" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: "arbitraryString" })).toBe(
+    false
+  );
+});
+
+test("A document with a country value equal to a country of interest but not 'UK' should return false", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromUnitedKingdom({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromUnitedKingdom({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromUnitedKingdom(null)).toBe(false);
+  expect(utils.mentionFromUnitedKingdom("")).toBe(false);
+  expect(utils.mentionFromUnitedKingdom(NaN)).toBe(false);
+  expect(utils.mentionFromUnitedKingdom(1)).toBe(false);
+  expect(utils.mentionFromUnitedKingdom([])).toBe(false);
+});
+
+// mentionFromGermany
+test("A document with country value equal to 'DE' should return true", () => {
+  expect(utils.mentionFromGermany({ country: "DE" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromGermany({ country: "arbitraryString" })).toBe(false);
+});
+
+test("A document with a country value equal to a country of interest but not 'DE' should return false", () => {
+  expect(utils.mentionFromGermany({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromGermany({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromGermany({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromGermany({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromGermany({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromGermany({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromGermany(null)).toBe(false);
+  expect(utils.mentionFromGermany("")).toBe(false);
+  expect(utils.mentionFromGermany(NaN)).toBe(false);
+  expect(utils.mentionFromGermany(1)).toBe(false);
+  expect(utils.mentionFromGermany([])).toBe(false);
+});
+
+// mentionFromFrance
+test("A document with country value equal to 'FR' should return true", () => {
+  expect(utils.mentionFromFrance({ country: "FR" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromFrance({ country: "arbitraryString" })).toBe(false);
+});
+
+test("A document with a country value equal to a country of interest but not 'FR' should return false", () => {
+  expect(utils.mentionFromFrance({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromFrance({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromFrance({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromFrance({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromFrance({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromFrance({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromFrance(null)).toBe(false);
+  expect(utils.mentionFromFrance("")).toBe(false);
+  expect(utils.mentionFromFrance(NaN)).toBe(false);
+  expect(utils.mentionFromFrance(1)).toBe(false);
+  expect(utils.mentionFromFrance([])).toBe(false);
+});
+
+// mentionFromItaly
+test("A document with country value equal to 'IT' should return true", () => {
+  expect(utils.mentionFromItaly({ country: "IT" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromItaly({ country: "arbitraryString" })).toBe(false);
+});
+
+test("A document with a country value equal to a country of interest but not 'IT' should return false", () => {
+  expect(utils.mentionFromItaly({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromItaly({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromItaly({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromItaly({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromItaly({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromItaly({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromItaly(null)).toBe(false);
+  expect(utils.mentionFromItaly("")).toBe(false);
+  expect(utils.mentionFromItaly(NaN)).toBe(false);
+  expect(utils.mentionFromItaly(1)).toBe(false);
+  expect(utils.mentionFromItaly([])).toBe(false);
+});
+
+// mentionFromSweden
+test("A document with country value equal to 'SE' should return true", () => {
+  expect(utils.mentionFromSweden({ country: "SE" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromSweden({ country: "arbitraryString" })).toBe(false);
+});
+
+test("A document with a country value equal to a country of interest but not 'SE' should return false", () => {
+  expect(utils.mentionFromSweden({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromSweden({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromSweden({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromSweden({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromSweden({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromSweden({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromSweden(null)).toBe(false);
+  expect(utils.mentionFromSweden("")).toBe(false);
+  expect(utils.mentionFromSweden(NaN)).toBe(false);
+  expect(utils.mentionFromSweden(1)).toBe(false);
+  expect(utils.mentionFromSweden([])).toBe(false);
+});
+
+// mentionFromSwitzerland
+test("A document with country value equal to 'SZ' should return true", () => {
+  expect(utils.mentionFromSwitzerland({ country: "SZ" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromSwitzerland({ country: "arbitraryString" })).toBe(
+    false
+  );
+});
+
+test("A document with a country value equal to a country of interest but not 'SZ' should return false", () => {
+  expect(utils.mentionFromSwitzerland({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "NL" })).toBe(false);
+  expect(utils.mentionFromSwitzerland({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromSwitzerland({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromSwitzerland({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromSwitzerland({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromSwitzerland({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromSwitzerland(null)).toBe(false);
+  expect(utils.mentionFromSwitzerland("")).toBe(false);
+  expect(utils.mentionFromSwitzerland(NaN)).toBe(false);
+  expect(utils.mentionFromSwitzerland(1)).toBe(false);
+  expect(utils.mentionFromSwitzerland([])).toBe(false);
+});
+
+// mentionFromNetherlands
+test("A document with country value equal to 'NL' should return true", () => {
+  expect(utils.mentionFromNetherlands({ country: "NL" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromNetherlands({ country: "arbitraryString" })).toBe(
+    false
+  );
+});
+
+test("A document with a country value equal to a country of interest but not 'NL' should return false", () => {
+  expect(utils.mentionFromNetherlands({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromNetherlands({ country: "AT" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromNetherlands({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromNetherlands({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromNetherlands({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromNetherlands({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromNetherlands(null)).toBe(false);
+  expect(utils.mentionFromNetherlands("")).toBe(false);
+  expect(utils.mentionFromNetherlands(NaN)).toBe(false);
+  expect(utils.mentionFromNetherlands(1)).toBe(false);
+  expect(utils.mentionFromNetherlands([])).toBe(false);
+});
+
+// mentionFromAustria
+test("A document with country value equal to 'AT' should return true", () => {
+  expect(utils.mentionFromAustria({ country: "AT" })).toBe(true);
+});
+
+test("A document with a non-valid string country value should return false", () => {
+  expect(utils.mentionFromAustria({ country: "arbitraryString" })).toBe(false);
+});
+
+test("A document with a country value equal to a country of interest but not 'AT' should return false", () => {
+  expect(utils.mentionFromAustria({ country: "ES" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "UK" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "DE" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "FR" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "IT" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "SE" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "SZ" })).toBe(false);
+  expect(utils.mentionFromAustria({ country: "NL" })).toBe(false);
+});
+
+test("A document including an empty string as country should return false", () => {
+  expect(utils.mentionFromAustria({ country: "" })).toBe(false);
+});
+
+test("A document including null as country should return false", () => {
+  expect(utils.mentionFromAustria({ country: null })).toBe(false);
+});
+
+test("A document including a Number as country should return false", () => {
+  expect(utils.mentionFromAustria({ country: 1 })).toBe(false);
+});
+
+test("A document including a Boolean as country should return false", () => {
+  expect(utils.mentionFromAustria({ country: true })).toBe(false);
+});
+
+test("If a document (dictionary) is not passed should return false", () => {
+  expect(utils.mentionFromAustria(null)).toBe(false);
+  expect(utils.mentionFromAustria("")).toBe(false);
+  expect(utils.mentionFromAustria(NaN)).toBe(false);
+  expect(utils.mentionFromAustria(1)).toBe(false);
+  expect(utils.mentionFromAustria([])).toBe(false);
+});
