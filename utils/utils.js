@@ -149,31 +149,87 @@ const mentionFromAustria = (doc) => {
 // mentions belonging to a category
 
 const categoriesOfInterest = (doc) => {
-  return (
-    (doc.category == "tourism") |
-    (doc.category == "both") |
-    (doc.category == "covid")
-  );
+  if (
+    doc &&
+    doc.hasOwnProperty("category") &&
+    typeof doc.category === "string"
+  ) {
+    if (
+      (doc.category == "tourism") |
+      (doc.category == "both") |
+      (doc.category == "covid")
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
 };
 
 const tourismAndBothCategories = (doc) => {
-  return (doc.category == "tourism") | (doc.category == "both");
+  if (
+    doc &&
+    doc.hasOwnProperty("category") &&
+    typeof doc.category === "string"
+  ) {
+    if ((doc.category == "tourism") | (doc.category == "both")) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    return false;
+  }
 };
 
 const tourismCategory = (doc) => {
-  return doc.category == "tourism";
+  if (
+    doc &&
+    doc.hasOwnProperty("category") &&
+    typeof doc.category === "string"
+  ) {
+    return doc.category == "tourism";
+  } else {
+    return false;
+  }
 };
 
 const bothCategory = (doc) => {
-  return doc.category == "both";
+  if (
+    doc &&
+    doc.hasOwnProperty("category") &&
+    typeof doc.category === "string"
+  ) {
+    return doc.category == "both";
+  } else {
+    return false;
+  }
 };
 
 const covidCategory = (doc) => {
-  return doc.category == "covid";
+  if (
+    doc &&
+    doc.hasOwnProperty("category") &&
+    typeof doc.category === "string"
+  ) {
+    return doc.category == "covid";
+  } else {
+    return false;
+  }
 };
 
 const otherCategory = (doc) => {
-  return doc.category == "none";
+  if (
+    doc &&
+    doc.hasOwnProperty("category") &&
+    typeof doc.category === "string"
+  ) {
+    return doc.category == "none";
+  } else {
+    return false;
+  }
 };
 
 // Dates management
