@@ -1004,3 +1004,63 @@ test("If a document (dictionary) is not passed should return false", () => {
   expect(utils.otherCategory(1)).toBe(false);
   expect(utils.otherCategory([])).toBe(false);
 });
+
+// ============ DATES MANAGEMENT TESTS =================
+
+// toThrow checks if a given exception is thrown
+test("should throw an error if called without an arg", () => {
+  expect(utils.getWeekDates).toThrow("Start date should be a string");
+});
+test("should throw an error if called without a String", () => {
+  expect(() => {
+    utils.getWeekDates(45).toThrow("Start date should be a string");
+  });
+});
+
+// toEqual recursively checks every field of an object or array.
+test("The first of january (input format: '2020-01-01') as startDate should return the firts week of January (output format: '1 gen. 2020')", () => {
+  expect(utils.getWeekDates("2020-01-01")).toEqual([
+    "1 gen. 2020",
+    "2 gen. 2020",
+    "3 gen. 2020",
+    "4 gen. 2020",
+    "5 gen. 2020",
+    "6 gen. 2020",
+    "7 gen. 2020",
+  ]);
+});
+
+test("A year/month change is managed correctly", () => {
+  expect(utils.getWeekDates("2019-12-30")).toEqual([
+    "30 des. 2019",
+    "31 des. 2019",
+    "1 gen. 2020",
+    "2 gen. 2020",
+    "3 gen. 2020",
+    "4 gen. 2020",
+    "5 gen. 2020",
+  ]);
+});
+
+// 2020 is leap-year. It should include the 29th february as date.
+// 2019 is not leap year. The 29th february should not appear.
+test("Leap-years are managed correctly", () => {
+  expect(utils.getWeekDates("2020-02-27")).toEqual([
+    "27 febr. 2020",
+    "28 febr. 2020",
+    "29 febr. 2020",
+    "1 març 2020",
+    "2 març 2020",
+    "3 març 2020",
+    "4 març 2020",
+  ]);
+  expect(utils.getWeekDates("2019-02-27")).toEqual([
+    "27 febr. 2019",
+    "28 febr. 2019",
+    "1 març 2019",
+    "2 març 2019",
+    "3 març 2019",
+    "4 març 2019",
+    "5 març 2019",
+  ]);
+});
