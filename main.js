@@ -26,16 +26,25 @@ var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
 var currentWeekFrom = "2020-06-01";
-var currentWeekTo = "2020-06-07";
+var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
+console.log("Current week start date: " + currentWeekFrom);
+console.log("Current week end date: " + currentWeekTo);
+console.log("CurrentWeekDates:" + currentWeekDates);
 
-var weekAgoFrom = "2020-05-25";
-var weekAgoTo = "2020-05-31";
+var weekAgoFrom = utils.getWeekAgoDate(currentWeekFrom);
+var weekAgoTo = utils.getLastWeekDay(weekAgoFrom);
 var weekAgoDates = utils.getWeekDates(weekAgoFrom);
+console.log("Week ago start date: " + weekAgoFrom);
+console.log("Week ago end date: " + weekAgoTo);
+console.log("WeekAgoDates:" + weekAgoDates);
 
-var twoWeeksAgoFrom = "2020-05-18";
-var twoWeeksAgoTo = "2020-05-25";
+var twoWeeksAgoFrom = utils.getWeekAgoDate(weekAgoFrom);
+var twoWeeksAgoTo = utils.getLastWeekDay(twoWeeksAgoFrom);
 var twoWeeksAgoDates = utils.getWeekDates(twoWeeksAgoFrom);
+console.log("Two weeks ago start date: " + twoWeeksAgoFrom);
+console.log("Two weeks ago end date: " + twoWeeksAgoTo);
+console.log("Two weeks ago dates:" + twoWeeksAgoDates);
 
 var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);
 var dataWeekAgo = fetchData.getNews(weekAgoFrom, weekAgoTo);

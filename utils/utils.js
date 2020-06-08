@@ -254,6 +254,18 @@ const getWeekDates = (startDate) => {
   }
 };
 
+const getWeekAgoDate = (startDate) => {
+  let date_el = startDate.split("-");
+  let weekAgoDate = new Date(
+    new Date(date_el[0], date_el[1] - 1, date_el[2]) - 7 * 24 * 60 * 60 * 1000
+  );
+  return moment(weekAgoDate).format("YYYY-MM-DD");
+};
+
+const getLastWeekDay = (startDate) => {
+  return moment(startDate).add(6, "days").format("YYYY-MM-DD");
+};
+
 module.exports = {
   getPercent,
   spainMention,
@@ -279,4 +291,6 @@ module.exports = {
   mentionFromNetherlands,
   mentionFromAustria,
   getWeekDates,
+  getWeekAgoDate,
+  getLastWeekDay,
 };
