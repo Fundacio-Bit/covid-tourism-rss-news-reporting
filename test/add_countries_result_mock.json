@@ -34,5 +34,30 @@
   {
     "source_id": "RSS_AIR_1",
     "country": "ES"
+  },
+  {
+    "exception_description": "Is an arbitrary string",
+    "source_id": "",
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is an empty string",
+    "source_id": "nonsense",
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is a boolean",
+    "source_id": true,
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is an Array",
+    "source_id": [],
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is a Number",
+    "source_id": 0,
+    "country": "unknown"
   }
 ]

@@ -25,5 +25,25 @@
   },
   {
     "source_id": "RSS_AIR_1"
+  },
+  {
+    "exception_description": "Is an arbitrary string",
+    "source_id": ""
+  },
+  {
+    "exception_description": "Is an empty string",
+    "source_id": "nonsense"
+  },
+  {
+    "exception_description": "Is a boolean",
+    "source_id": true
+  },
+  {
+    "exception_description": "Is an Array",
+    "source_id": []
+  },
+  {
+    "exception_description": "Is a Number",
+    "source_id": 0
   }
 ]
