@@ -1,11 +1,7 @@
-// TODO separate grouping
-// TODO create CSV (notice that some brands have multiple values)
-
 var d3 = require("d3");
 
 var fetchData = require("./fetch-data.js");
 var addData = require("./add-processed-data.js");
-// var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 var page6 = require("./page6kpis.js");
@@ -29,16 +25,16 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
-var currentWeekFrom = "2020-05-25";
-var currentWeekTo = "2020-05-31";
+var currentWeekFrom = "2020-06-01";
+var currentWeekTo = "2020-06-07";
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 
-var weekAgoFrom = "2020-05-18";
-var weekAgoTo = "2020-05-25";
+var weekAgoFrom = "2020-05-25";
+var weekAgoTo = "2020-05-31";
 var weekAgoDates = utils.getWeekDates(weekAgoFrom);
 
-var twoWeeksAgoFrom = "2020-05-11";
-var twoWeeksAgoTo = "2020-05-18";
+var twoWeeksAgoFrom = "2020-05-18";
+var twoWeeksAgoTo = "2020-05-25";
 var twoWeeksAgoDates = utils.getWeekDates(twoWeeksAgoFrom);
 
 var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);
