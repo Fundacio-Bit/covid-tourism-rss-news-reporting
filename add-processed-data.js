@@ -4,9 +4,14 @@ var moment = require("moment");
 const addCountry = (newsArray) => {
   // get country from source_id
   newsArray.map((doc) => {
-    if (!("source_id" in doc)) {
+    if (
+      !("source_id" in doc) ||
+      doc.source_id === undefined ||
+      typeof doc.source_id !== "string" ||
+      doc.source_id.split("_").length !== 3
+    ) {
       doc.country = "unknown";
-    } else if (doc.source_id.includes("AIR")) {
+    } else if (doc.source_id.split("_")[1] == "AIR") {
       doc.country = "ES";
     } else {
       doc.country = doc.source_id.split("_")[1];
