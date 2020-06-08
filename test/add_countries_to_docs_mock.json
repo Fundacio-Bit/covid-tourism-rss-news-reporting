@@ -1,92 +1,29 @@
 [
   {
-    "source_id": "RSS_ES_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_ES_1"
   },
   {
-    "source_id": "RSS_UK_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_UK_1"
   },
   {
-    "source_id": "RSS_DE_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_DE_1"
   },
   {
-    "source_id": "RSS_FR_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_FR_1"
   },
   {
-    "source_id": "RSS_IT_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_IT_1"
   },
   {
-    "source_id": "RSS_SE_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_SE_1"
   },
   {
-    "source_id": "RSS_SZ_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_SZ_1"
   },
   {
-    "source_id": "RSS_AT_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_AT_1"
   },
   {
-    "source_id": "RSS_AIR_1",
-    "title": "title with nothing",
-    "tags": "tags with nothing",
-    "summary": "summary with nothing",
-    "description": "description with nothing",
-    "content_value": "content_value with nothing",
-    "published": "2020-01-01T00:00:00.000+0000",
-    "brand": "baleares"
+    "source_id": "RSS_AIR_1"
   }
 ]
