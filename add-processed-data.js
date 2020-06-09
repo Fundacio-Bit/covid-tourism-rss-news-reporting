@@ -21,21 +21,53 @@ const addCountry = (newsArray) => {
   return newsArray;
 };
 
+// TODO create an "unknown" category and exclude the docs with that categroy from the analysis
 const addCategory = (newsArray) => {
   // assign a category for each document after cheking if any term belonging to that category
   // appears in any content field (title, summary, description, content_value and tags).
   // Category values are: covid, tourism, both and none.
   newsArray.map((doc) => {
+    const title =
+      "title" in doc && doc.title !== undefined && typeof doc.title === "string"
+        ? doc.title
+        : "";
+
+    const summary =
+      "summary" in doc &&
+      doc.summary !== undefined &&
+      typeof doc.summary === "string"
+        ? doc.summary
+        : "";
+
+    const description =
+      "description" in doc &&
+      doc.description !== undefined &&
+      typeof doc.description === "string"
+        ? doc.description
+        : "";
+
+    const content_value =
+      "content_value" in doc &&
+      doc.content_value !== undefined &&
+      typeof doc.content_value === "string"
+        ? doc.content_value
+        : "";
+
+    const tags =
+      "tags" in doc && doc.tags !== undefined && typeof doc.tags === "string"
+        ? doc.tags
+        : "";
+
     let concatenatedTexts =
-      doc.title +
+      title +
       " " +
-      doc.summary +
+      summary +
       " " +
-      doc.description +
+      description +
       " " +
-      doc.content_value +
+      content_value +
       " " +
-      doc.tags;
+      tags;
 
     const hasCategoryTerm = (text, category_terms) => {
       for (i = 0; i < category_terms.length; i++) {
@@ -66,11 +98,14 @@ const addCategory = (newsArray) => {
   return newsArray;
 };
 
+// TODO control KPIs calculation for docs without publishedFormatted date
 const addFormattedDate = (newsArray) => {
   // format date in catalan
   moment.locale("ca");
   newsArray.map((doc) => {
-    doc.publishedFormatted = moment(doc.published).format("ll");
+    if ("published" in doc && doc.published !== undefined) {
+      doc.publishedFormatted = moment(doc.published).format("ll");
+    }
     return doc;
   });
   return newsArray;
