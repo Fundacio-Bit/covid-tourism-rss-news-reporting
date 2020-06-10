@@ -1,4 +1,4 @@
-var csv_manager = require("./create-csv.js");
+// var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
@@ -139,7 +139,7 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   let pageRows = [];
   // Total Mentions and tourism percent
-  pageRows.push(["Mencions a Balears y/o les illes ", balearenMentionsCW]);
+  pageRows.push(["Mencions a Balears i/o les illes ", balearenMentionsCW]);
   pageRows.push([
     "Percentatge de mencions de turisme (inclou turisme i turisme + covid)",
     balearenTourismAndBothMentionsPercentCW,
@@ -185,8 +185,9 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   pageRows.push(balearenTimeSeriesArray);
   pageRows.push(spainTimeSeriesArray);
 
-  // create the page 6 CSV
-  csv_manager.create_csv("output/page6_news.csv", pageRows);
+  // // create the page 6 CSV
+  // csv_manager.create_csv("output/page6_news.csv", pageRows);
+  return pageRows;
 };
 
 module.exports = { getKPIs };
