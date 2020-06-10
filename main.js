@@ -194,8 +194,76 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // ************* Page 32 KPIs.**************
     page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
 
-    // ************* Page 32 KPIs.**************
+    // ************* Page 33 KPIs.**************
     page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+
+    // ************* News CSV **************
+    var categoriesDict = require("./categories-dictionary.js");
+    var tourimsTerms = categoriesDict.tourism;
+
+    for (i = 0; i < tourimsTerms.length; i++) {
+      let term = tourimsTerms[i];
+      let rowsPerTerm = [["Títol", "Enllaç"]];
+      for (
+        j = 0;
+        j < docsWithCountryAndCategoryAndFormattedDateCW.length;
+        j++
+      ) {
+        doc = docsWithCountryAndCategoryAndFormattedDateCW[j];
+        const title =
+          "title" in doc &&
+          doc.title !== undefined &&
+          typeof doc.title === "string"
+            ? doc.title
+            : "";
+
+        const summary =
+          "summary" in doc &&
+          doc.summary !== undefined &&
+          typeof doc.summary === "string"
+            ? doc.summary
+            : "";
+
+        const description =
+          "description" in doc &&
+          doc.description !== undefined &&
+          typeof doc.description === "string"
+            ? doc.description
+            : "";
+
+        const content_value =
+          "content_value" in doc &&
+          doc.content_value !== undefined &&
+          typeof doc.content_value === "string"
+            ? doc.content_value
+            : "";
+
+        const tags =
+          "tags" in doc &&
+          doc.tags !== undefined &&
+          typeof doc.tags === "string"
+            ? doc.tags
+            : "";
+
+        let concatenatedTexts =
+          title +
+          " " +
+          summary +
+          " " +
+          description +
+          " " +
+          content_value +
+          " " +
+          tags;
+
+        if (concatenatedTexts.includes(term)) {
+          rowsPerTerm.push([doc.title, doc.link]);
+        }
+      }
+      csv_manager.create_csv(`output/news/${term}_news.csv`, rowsPerTerm);
+    }
+
+    // docsWithCountryAndCategoryAndFormattedDateCW;
 
     // get news count grouped by brand, market and category (in this order)
     // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
