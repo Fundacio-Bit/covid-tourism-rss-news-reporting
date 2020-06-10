@@ -28,7 +28,6 @@ const fetchNewsData = (dbName, fromData, toData) => {
             _id: 0,
             extraction_date: 0,
             topics: 0,
-            link: 0,
             section: 0,
             source_name: 0,
             selected: 0,
