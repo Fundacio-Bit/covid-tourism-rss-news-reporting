@@ -1,0 +1,160 @@
+[
+  {
+    "title": "title with covid",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "covid"
+  },
+  {
+    "title": "title with tourism",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "tourism"
+  },
+  {
+    "title": "title with tourism and covid",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "both"
+  },
+
+  {
+    "title": "title with nothing ",
+    "tags": "tags with covid",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "covid"
+  },
+  {
+    "title": "title with nothing ",
+    "tags": "tags with tourism",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "tourism"
+  },
+  {
+    "title": "title with nothing",
+    "tags": "tags with tourism and covid",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "both"
+  },
+
+  {
+    "title": "title with nothing ",
+    "tags": "tags with nothing",
+    "summary": "summary with covid",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "covid"
+  },
+  {
+    "title": "title with nothing ",
+    "tags": "tags with nothing",
+    "summary": "summary with tourism",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "tourism"
+  },
+  {
+    "title": "title with nothing",
+    "tags": "tags with nothing",
+    "summary": "summary with tourism and covid",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "both"
+  },
+
+  {
+    "title": "title with nothing ",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with covid",
+    "content_value": "content_value with nothing",
+    "category": "covid"
+  },
+  {
+    "title": "title with nothing ",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with tourism",
+    "content_value": "content_value with nothing",
+    "category": "tourism"
+  },
+  {
+    "title": "title with nothing",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with tourism and covid",
+    "content_value": "content_value with nothing",
+    "category": "both"
+  },
+
+  {
+    "title": "title with nothing ",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with covid",
+    "category": "covid"
+  },
+  {
+    "title": "title with nothing ",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with tourism",
+    "category": "tourism"
+  },
+  {
+    "title": "title with nothing",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with tourism and covid",
+    "category": "both"
+  },
+  {
+    "title": "title with nothing",
+    "tags": "tags with nothing",
+    "summary": "summary with nothing",
+    "description": "description with nothing",
+    "content_value": "content_value with nothing",
+    "category": "none"
+  },
+  {
+    "title": "title with tourism",
+    "category": "tourism"
+  },
+  {
+    "tags": "tags with covid",
+    "category": "covid"
+  },
+  {
+    "summary": "summary with covid and tourism",
+    "category": "both"
+  },
+  {
+    "description": "description with tourism",
+    "category": "tourism"
+  },
+  {
+    "content_value": "content_value with covid",
+    "category": "covid"
+  },
+  {
+    "title": "title with tourism",
+    "content_value": "content_value with covid",
+    "category": "both"
+  },
+  { "category": "none" }
+]

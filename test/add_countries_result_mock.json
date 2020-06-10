@@ -1,0 +1,63 @@
+[
+  {
+    "source_id": "RSS_ES_1",
+    "country": "ES"
+  },
+  {
+    "source_id": "RSS_UK_1",
+    "country": "UK"
+  },
+  {
+    "source_id": "RSS_DE_1",
+    "country": "DE"
+  },
+  {
+    "source_id": "RSS_FR_1",
+    "country": "FR"
+  },
+  {
+    "source_id": "RSS_IT_1",
+    "country": "IT"
+  },
+  {
+    "source_id": "RSS_SE_1",
+    "country": "SE"
+  },
+  {
+    "source_id": "RSS_SZ_1",
+    "country": "SZ"
+  },
+  {
+    "source_id": "RSS_AT_1",
+    "country": "AT"
+  },
+  {
+    "source_id": "RSS_AIR_1",
+    "country": "ES"
+  },
+  {
+    "exception_description": "Is an arbitrary string",
+    "source_id": "",
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is an empty string",
+    "source_id": "nonsense",
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is a boolean",
+    "source_id": true,
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is an Array",
+    "source_id": [],
+    "country": "unknown"
+  },
+  {
+    "exception_description": "Is a Number",
+    "source_id": 0,
+    "country": "unknown"
+  }
+]
