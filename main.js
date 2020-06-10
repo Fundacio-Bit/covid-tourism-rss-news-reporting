@@ -1,4 +1,5 @@
 var d3 = require("d3");
+var csv_manager = require("./create-csv.js");
 
 var fetchData = require("./fetch-data.js");
 var addData = require("./add-processed-data.js");
@@ -111,13 +112,17 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA);
 
     // ************* Page 6 KPIs.**************
-    page6.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      docsWithCountryAndCategoryWA,
-      docsWithCountryAndCategoryTWA,
-      currentWeekDates,
-      weekAgoDates,
-      twoWeeksAgoDates
+    // create the page 6 CSV
+    csv_manager.create_csv(
+      "output/page6_news.csv",
+      page6.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        docsWithCountryAndCategoryWA,
+        docsWithCountryAndCategoryTWA,
+        currentWeekDates,
+        weekAgoDates,
+        twoWeeksAgoDates
+      )
     );
 
     // ************* Page 8 KPIs.**************
