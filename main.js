@@ -203,7 +203,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     for (i = 0; i < tourimsTerms.length; i++) {
       let term = tourimsTerms[i];
-      let rowsPerTerm = [["Títol", "Enllaç"]];
+      let rowsPerTerm = [["Marca", "País", "Títol", "Enllaç"]];
       for (
         j = 0;
         j < docsWithCountryAndCategoryAndFormattedDateCW.length;
@@ -256,8 +256,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
           " " +
           tags;
 
-        if (concatenatedTexts.includes(term)) {
-          rowsPerTerm.push([doc.title, doc.link]);
+        if (concatenatedTexts.includes(term) && doc.brand !== "españa") {
+          rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
         }
       }
       csv_manager.create_csv(`output/news/${term}_news.csv`, rowsPerTerm);
