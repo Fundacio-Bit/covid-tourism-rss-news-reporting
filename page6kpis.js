@@ -36,16 +36,6 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   );
 
   // ============= SOV PER CATEGORY A WEEK AGO (WA) ================
-  // Total Mentions (Balearic Islands + Spain)
-  // let totalMentionsCountWA = docsWA.length;
-
-  // let tourismAndBothMentionsCountWA = docsWA.filter(
-  //   utils.tourismAndBothCategories
-  // ).length;
-  // let tourismAndBothMentionsPercentWA = utils.getPercent(
-  //   totalMentionsCountWA,
-  //   tourismAndBothMentionsCountWA
-  // );
 
   // Balearic Islands KPIs
   let balearenMentionsWA = docsWA.filter(utils.balearenMention).length;
@@ -70,15 +60,6 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   );
 
   // ============= SOV PER CATEGORY TWO WEEKS AGO (TWA) ================
-  // Total Mentions (Balearic Islands + Spain)
-  // let totalMentionsCountTWA = docsTWA.length;
-  // let tourismAndBothMentionsCountTWA = docsTWA.filter(
-  //   utils.tourismAndBothCategories
-  // ).length;
-  // let tourismAndBothMentionsPercentTWA = utils.getPercent(
-  //   totalMentionsCountTWA,
-  //   tourismAndBothMentionsCountTWA
-  // );
 
   // Balearic Islands KPIs
   let balearenMentionsTWA = docsTWA.filter(utils.balearenMention).length;
@@ -118,22 +99,6 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   }
 
   balearenTimeSeriesArray.unshift("Balears");
-
-  // calculate Spain time series
-  var spainTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-
-  let spainTimeSeriesDocs = docsCW
-    .filter(utils.spainMention)
-    .filter(utils.categoriesOfInterest);
-
-  // Add 1 per document to the corresponding timesSeriesArray position
-  for (i = 0; i < spainTimeSeriesDocs.length; i++) {
-    spainTimeSeriesArray[
-      datesCW.indexOf(spainTimeSeriesDocs[i].publishedFormatted)
-    ]++;
-  }
-
-  spainTimeSeriesArray.unshift("Espanya");
 
   // ============= CSV creation ================
 
@@ -176,14 +141,11 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
     otherBalearenMentionsTWAPercent,
   ]);
 
-  // Spain and Balearen Time series (mentions to covid, tourism and both)
+  // Balearen Time series (mentions to covid, tourism and both)
   pageRows.push(["\n"]);
-  pageRows.push([
-    "Evolutiu Balears vs Espanya (turisme, covid, turisme + covid)",
-  ]);
+  pageRows.push(["Evolutiu Balears (turisme, covid, turisme + covid)"]);
   pageRows.push([""].concat(datesCW));
   pageRows.push(balearenTimeSeriesArray);
-  pageRows.push(spainTimeSeriesArray);
 
   // // create the page 6 CSV
   // csv_manager.create_csv("output/page6_news.csv", pageRows);
