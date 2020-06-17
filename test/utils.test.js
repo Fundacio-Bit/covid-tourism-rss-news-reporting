@@ -15,57 +15,6 @@ test("getPercent with a total of 0 and a part of 100 should return the String '0
 
 // ============ BRAND MENTIONS FILTERS TESTS =================
 
-// spainMentions tests
-// TODO: the current version does not checks if the brands are comma separated or not.
-// Neither if a uppercase characters are used. Do a more robust version that checks such incidences.
-test("A document including 'españa' as brand should return true", () => {
-  expect(utils.spainMention({ brand: "españa" })).toBe(true);
-});
-
-test("A document including 'mallorca,españa' as brand should return true", () => {
-  expect(utils.spainMention({ brand: "mallorca,españa" })).toBe(true);
-});
-
-test("A document including 'ESPAÑA' as brand should return true", () => {
-  expect(utils.spainMention({ brand: "ESPAÑA" })).toBe(false);
-});
-
-test("A document including 'espanya' as brand should return false", () => {
-  expect(utils.spainMention({ brand: "espanya" })).toBe(false);
-});
-
-test("A document including a valid brand but not 'españa' as brand should return false", () => {
-  expect(utils.spainMention({ brand: "baleares" })).toBe(false);
-  expect(utils.spainMention({ brand: "mallorca" })).toBe(false);
-  expect(utils.spainMention({ brand: "menorca" })).toBe(false);
-  expect(utils.spainMention({ brand: "ibiza" })).toBe(false);
-  expect(utils.spainMention({ brand: "formentera" })).toBe(false);
-});
-
-test("A document including an empty string as brand should return false", () => {
-  expect(utils.spainMention({ brand: "" })).toBe(false);
-});
-
-test("A document including null as brand should return false", () => {
-  expect(utils.spainMention({ brand: null })).toBe(false);
-});
-
-test("A document including a Number as brand should return false", () => {
-  expect(utils.spainMention({ brand: 1 })).toBe(false);
-});
-
-test("A document including a Boolean as brand should return false", () => {
-  expect(utils.spainMention({ brand: true })).toBe(false);
-});
-
-test("If a document (dictionary) is not passed should return false", () => {
-  expect(utils.spainMention(null)).toBe(false);
-  expect(utils.spainMention("")).toBe(false);
-  expect(utils.spainMention(NaN)).toBe(false);
-  expect(utils.spainMention(1)).toBe(false);
-  expect(utils.spainMention([])).toBe(false);
-});
-
 // balearenMention tests (the brand should include, either "baleares" or an island names or several of them)
 // TODO: the current version does not checks if the brands are comma separated or not.
 // Neither if a uppercase characters are used. Do a more robust version that checks such incidences.
