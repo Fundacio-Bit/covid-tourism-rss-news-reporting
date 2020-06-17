@@ -2,41 +2,8 @@ var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW) => {
-  // ===== SWISS MENTIONS OF CATEGORIES OF INTEREST FOR SPAIN AND BALEAREN  ========
+  // ===== SWISS MENTIONS OF CATEGORIES OF INTEREST FOR BALEAREN  ========
   // Categories of Interest = tourism, covid and covid + tourism
-
-  // Spain
-  let categoriesOfInterestSpainNewsFromSwitzerland = docsCW
-    .filter(utils.spainMention)
-    .filter(utils.categoriesOfInterest)
-    .filter(utils.mentionFromSwitzerland);
-
-  let categoriesOfInterestSpainMentionsFromSwitzerland =
-    categoriesOfInterestSpainNewsFromSwitzerland.length;
-
-  let mentionsTourismSpainFromSwitzerlandPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromSwitzerland,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.tourismCategory)
-      .filter(utils.mentionFromSwitzerland).length
-  );
-
-  let mentionsCovidSpainFromSwitzerlandPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromSwitzerland,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.covidCategory)
-      .filter(utils.mentionFromSwitzerland).length
-  );
-
-  let mentionsBothSpainFromSwitzerlandPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromSwitzerland,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.bothCategory)
-      .filter(utils.mentionFromSwitzerland).length
-  );
 
   // Balearen
   let categoriesOfInterestBalearenNewsFromSwitzerland = docsCW
@@ -208,30 +175,8 @@ const getKPIs = (docsCW) => {
 
   // ============= CSV creation ================
   let pageRows = [];
-  // SOV by country of Formentera
-  pageRows.push([
-    "MENCIONS A MITJANS SUÏSSOS (Turisme, covid i covid + turisme)",
-  ]);
-  pageRows.push(["", "Turisme", "COVID", "Turisme + COVID", "Mencions totals"]);
-  pageRows.push([
-    "Balears",
-    mentionsTourismBalearenFromSwitzerlandPercent,
-    mentionsCovidBalearenFromSwitzerlandPercent,
-    mentionsBothBalearenFromSwitzerlandPercent,
-    categoriesOfInterestBalearenMentionsFromSwitzerland,
-  ]);
+  // SOV from Switzerland by island (Tourism, covid and covid+tourism)
 
-  pageRows.push([
-    "Espanya",
-    mentionsTourismSpainFromSwitzerlandPercent,
-    mentionsCovidSpainFromSwitzerlandPercent,
-    mentionsBothSpainFromSwitzerlandPercent,
-    categoriesOfInterestSpainMentionsFromSwitzerland,
-  ]);
-
-  pageRows.push([]);
-
-  // SOV of Formentera (Tourism, covid and covid+tourism)
   pageRows.push([
     "CONVERSA A MITJANS SUÏSSOS PER ILLA (Turisme, covid i covid + turisme)",
   ]);
@@ -272,6 +217,16 @@ const getKPIs = (docsCW) => {
     mentionsCovidFormenteraFromSwitzerlandPercent,
     mentionsBothFormenteraFromSwitzerlandPercent,
     categoriesOfInterestFormenteraMentionsFromSwitzerland,
+  ]);
+
+  pageRows.push([]);
+
+  pageRows.push([
+    "Balears",
+    mentionsTourismBalearenFromSwitzerlandPercent,
+    mentionsCovidBalearenFromSwitzerlandPercent,
+    mentionsBothBalearenFromSwitzerlandPercent,
+    categoriesOfInterestBalearenMentionsFromSwitzerland,
   ]);
 
   // create the page 32 CSV

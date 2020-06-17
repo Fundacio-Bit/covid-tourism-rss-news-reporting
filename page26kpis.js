@@ -2,41 +2,8 @@ var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW) => {
-  // ===== BRITISH MENTIONS OF CATEGORIES OF INTEREST FOR SPAIN AND BALEAREN  ========
+  // ===== BRITISH MENTIONS OF CATEGORIES OF INTEREST FOR BALEAREN  ========
   // Categories of Interest = tourism, covid and covid + tourism
-
-  // Spain
-  let categoriesOfInterestSpainNewsFromUnitedKingdom = docsCW
-    .filter(utils.spainMention)
-    .filter(utils.categoriesOfInterest)
-    .filter(utils.mentionFromUnitedKingdom);
-
-  let categoriesOfInterestSpainMentionsFromUnitedKingdom =
-    categoriesOfInterestSpainNewsFromUnitedKingdom.length;
-
-  let mentionsTourismSpainFromUnitedKingdomPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromUnitedKingdom,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.tourismCategory)
-      .filter(utils.mentionFromUnitedKingdom).length
-  );
-
-  let mentionsCovidSpainFromUnitedKingdomPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromUnitedKingdom,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.covidCategory)
-      .filter(utils.mentionFromUnitedKingdom).length
-  );
-
-  let mentionsBothSpainFromUnitedKingdomPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromUnitedKingdom,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.bothCategory)
-      .filter(utils.mentionFromUnitedKingdom).length
-  );
 
   // Balearen
   let categoriesOfInterestBalearenNewsFromUnitedKingdom = docsCW
@@ -208,30 +175,7 @@ const getKPIs = (docsCW) => {
 
   // ============= CSV creation ================
   let pageRows = [];
-  // SOV by country of Formentera
-  pageRows.push([
-    "MENCIONS A MITJANS BRITÀNICS (Turisme, covid i covid + turisme)",
-  ]);
-  pageRows.push(["", "Turisme", "COVID", "Turisme + COVID", "Mencions totals"]);
-  pageRows.push([
-    "Balears",
-    mentionsTourismBalearenFromUnitedKingdomPercent,
-    mentionsCovidBalearenFromUnitedKingdomPercent,
-    mentionsBothBalearenFromUnitedKingdomPercent,
-    categoriesOfInterestBalearenMentionsFromUnitedKingdom,
-  ]);
-
-  pageRows.push([
-    "Espanya",
-    mentionsTourismSpainFromUnitedKingdomPercent,
-    mentionsCovidSpainFromUnitedKingdomPercent,
-    mentionsBothSpainFromUnitedKingdomPercent,
-    categoriesOfInterestSpainMentionsFromUnitedKingdom,
-  ]);
-
-  pageRows.push([]);
-
-  // SOV of Formentera (Tourism, covid and covid+tourism)
+  // SOV from United Kingdom by island (Tourism, covid and covid+tourism)
   pageRows.push([
     "CONVERSA  A MITJANS BRITÀNICS PER ILLA (Turisme, covid i covid + turisme)",
   ]);
@@ -272,6 +216,15 @@ const getKPIs = (docsCW) => {
     mentionsCovidFormenteraFromUnitedKingdomPercent,
     mentionsBothFormenteraFromUnitedKingdomPercent,
     categoriesOfInterestFormenteraMentionsFromUnitedKingdom,
+  ]);
+
+  pageRows.push([]);
+  pageRows.push([
+    "Balears",
+    mentionsTourismBalearenFromUnitedKingdomPercent,
+    mentionsCovidBalearenFromUnitedKingdomPercent,
+    mentionsBothBalearenFromUnitedKingdomPercent,
+    categoriesOfInterestBalearenMentionsFromUnitedKingdom,
   ]);
 
   // create the page 26 CSV

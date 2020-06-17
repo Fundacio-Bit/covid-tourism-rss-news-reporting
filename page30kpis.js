@@ -2,41 +2,8 @@ var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW) => {
-  // ===== ITALIAN MENTIONS OF CATEGORIES OF INTEREST FOR SPAIN AND BALEAREN  ========
+  // ===== ITALIAN MENTIONS OF CATEGORIES OF INTEREST FOR BALEAREN  ========
   // Categories of Interest = tourism, covid and covid + tourism
-
-  // Spain
-  let categoriesOfInterestSpainNewsFromItaly = docsCW
-    .filter(utils.spainMention)
-    .filter(utils.categoriesOfInterest)
-    .filter(utils.mentionFromItaly);
-
-  let categoriesOfInterestSpainMentionsFromItaly =
-    categoriesOfInterestSpainNewsFromItaly.length;
-
-  let mentionsTourismSpainFromItalyPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromItaly,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.tourismCategory)
-      .filter(utils.mentionFromItaly).length
-  );
-
-  let mentionsCovidSpainFromItalyPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromItaly,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.covidCategory)
-      .filter(utils.mentionFromItaly).length
-  );
-
-  let mentionsBothSpainFromItalyPercent = utils.getPercent(
-    categoriesOfInterestSpainMentionsFromItaly,
-    docsCW
-      .filter(utils.spainMention)
-      .filter(utils.bothCategory)
-      .filter(utils.mentionFromItaly).length
-  );
 
   // Balearen
   let categoriesOfInterestBalearenNewsFromItaly = docsCW
@@ -208,30 +175,8 @@ const getKPIs = (docsCW) => {
 
   // ============= CSV creation ================
   let pageRows = [];
-  // SOV by country of Formentera
-  pageRows.push([
-    "MENCIONS A MITJANS ITALIANS (Turisme, covid i covid + turisme)",
-  ]);
-  pageRows.push(["", "Turisme", "COVID", "Turisme + COVID", "Mencions totals"]);
-  pageRows.push([
-    "Balears",
-    mentionsTourismBalearenFromItalyPercent,
-    mentionsCovidBalearenFromItalyPercent,
-    mentionsBothBalearenFromItalyPercent,
-    categoriesOfInterestBalearenMentionsFromItaly,
-  ]);
+  // SOV from Italy by island (Tourism, covid and covid+tourism)
 
-  pageRows.push([
-    "Espanya",
-    mentionsTourismSpainFromItalyPercent,
-    mentionsCovidSpainFromItalyPercent,
-    mentionsBothSpainFromItalyPercent,
-    categoriesOfInterestSpainMentionsFromItaly,
-  ]);
-
-  pageRows.push([]);
-
-  // SOV of Formentera (Tourism, covid and covid+tourism)
   pageRows.push([
     "CONVERSA A MITJANS ITALIANS PER ILLA (Turisme, covid i covid + turisme)",
   ]);
@@ -272,6 +217,16 @@ const getKPIs = (docsCW) => {
     mentionsCovidFormenteraFromItalyPercent,
     mentionsBothFormenteraFromItalyPercent,
     categoriesOfInterestFormenteraMentionsFromItaly,
+  ]);
+
+  pageRows.push([]);
+
+  pageRows.push([
+    "Balears",
+    mentionsTourismBalearenFromItalyPercent,
+    mentionsCovidBalearenFromItalyPercent,
+    mentionsBothBalearenFromItalyPercent,
+    categoriesOfInterestBalearenMentionsFromItaly,
   ]);
 
   // create the page 30 CSV

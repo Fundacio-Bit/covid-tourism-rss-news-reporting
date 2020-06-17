@@ -12,14 +12,6 @@ const getPercent = (total, part) => {
 };
 
 // mention to brands (in text)
-const spainMention = (doc) => {
-  if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
-    return doc.brand.includes("españa");
-  } else {
-    return false;
-  }
-};
-
 const balearenMention = (doc) => {
   if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
     if (
@@ -37,10 +29,6 @@ const balearenMention = (doc) => {
     return false;
   }
 };
-
-// const balearicArchipelagoMention = (doc) => {
-//   return doc.brand.includes("balearen");
-// };
 
 const mallorcaIslandMention = (doc) => {
   if (doc && doc.hasOwnProperty("brand") && typeof doc.brand === "string") {
@@ -233,11 +221,6 @@ const otherCategory = (doc) => {
 };
 
 // Dates management
-// const addDays = (days) => {
-//   var date = new Date(this.valueOf());
-//   date.setDate(date.getDate() + days);
-//   return date;
-// };
 
 const getWeekDates = (startDate) => {
   if (startDate === undefined || typeof startDate !== "string") {
@@ -268,9 +251,7 @@ const getLastWeekDay = (startDate) => {
 
 module.exports = {
   getPercent,
-  spainMention,
   balearenMention,
-  // balearicArchipelagoMention,
   mallorcaIslandMention,
   menorcaIslandMention,
   ibizaIslandMention,
