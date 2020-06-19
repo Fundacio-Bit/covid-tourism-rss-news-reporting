@@ -1,38 +1,44 @@
 [
   {
     "source_id": "RSS_ES_1",
-    "title": "covid",
-    "published": "2020-01-01T00:00:00.000+0000",
+    "category": "covid",
+    "publishedFormatted": "1 gen. 2020",
     "brand": "mallorca"
   },
   {
     "source_id": "RSS_ES_1",
-    "title": "covid",
-    "published": "2020-01-08T00:00:00.000+0000",
+    "category": "covid",
+    "publishedFormatted": "8 gen. 2020",
     "brand": "mallorca"
   },
   {
     "source_id": "RSS_ES_1",
-    "title": "covid",
-    "published": "2020-01-15T00:00:00.000+0000",
+    "category": "covid",
+    "publishedFormatted": "15 gen. 2020",
     "brand": "mallorca"
   },
   {
     "source_id": "RSS_ES_1",
-    "title": "turismo",
-    "published": "2020-01-15T00:00:00.000+0000",
+    "category": "tourism",
+    "publishedFormatted": "15 gen. 2020",
     "brand": "mallorca"
   },
   {
     "source_id": "RSS_ES_1",
-    "title": "turismo y covid",
-    "published": "2020-01-15T00:00:00.000+0000",
+    "category": "both",
+    "publishedFormatted": "15 gen. 2020",
     "brand": "mallorca"
   },
   {
     "source_id": "RSS_ES_1",
-    "title": "",
-    "published": "2020-01-15T00:00:00.000+0000",
+    "category": "none",
+    "publishedFormatted": "15 gen. 2020",
     "brand": "mallorca"
+  },
+  {
+    "source_id": "RSS_ES_1",
+    "category": "none",
+    "publishedFormatted": "15 gen. 2020",
+    "brand": "españa"
   }
 ]
