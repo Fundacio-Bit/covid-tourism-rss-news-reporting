@@ -54,17 +54,6 @@ const getKPIs = (docsCW, datesCW) => {
   );
 
   // ============= Time series Balearen: totals by country ================
-  // calculate Balearen time series
-  // var mentionsFromSpainTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-
-  // let balearenTimeSeriesDocs = docsCW.filter(utils.balearenMention);
-
-  // // Add 1 per document to the corresponding timesSeriesArray position
-  // for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
-  //   balearenTimeSeriesArray[
-  //     datesCW.indexOf(balearenTimeSeriesDocs[i].publishedFormatted)
-  //   ]++;
-  // }
 
   // calculate total mentions from Spain time series
   var mentionsFromSpainTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
@@ -246,8 +235,7 @@ const getKPIs = (docsCW, datesCW) => {
   pageRows.push(mentionsFromNetherlandsTimeSeriesArray);
   pageRows.push(mentionsFromAustriaTimeSeriesArray);
 
-  // create the page 8 CSV
-  csv_manager.create_csv("output/page8_news.csv", pageRows);
+  return pageRows;
 };
 
 module.exports = { getKPIs };

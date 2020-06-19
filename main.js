@@ -126,9 +126,13 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     );
 
     // ************* Page 8 KPIs.**************
-    page8.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+
+    csv_manager.create_csv(
+      "output/page8_news.csv",
+      page8.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 10 KPIs.**************
