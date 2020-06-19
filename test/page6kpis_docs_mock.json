@@ -1,44 +1,54 @@
-[
-  {
-    "source_id": "RSS_ES_1",
-    "category": "covid",
-    "publishedFormatted": "1 gen. 2020",
-    "brand": "mallorca"
+{
+  "description": {
+    "totalDocsNr": 7,
+    "docsCurrentWeek": 4,
+    "docsWeekAgo": 1,
+    "docsTwoWeeksAgo": 1,
+    "nonValidDocs": 1,
+    "publishedFormattedDatesCurrentWeek": "4 15 gen"
   },
-  {
-    "source_id": "RSS_ES_1",
-    "category": "covid",
-    "publishedFormatted": "8 gen. 2020",
-    "brand": "mallorca"
-  },
-  {
-    "source_id": "RSS_ES_1",
-    "category": "covid",
-    "publishedFormatted": "15 gen. 2020",
-    "brand": "mallorca"
-  },
-  {
-    "source_id": "RSS_ES_1",
-    "category": "tourism",
-    "publishedFormatted": "15 gen. 2020",
-    "brand": "mallorca"
-  },
-  {
-    "source_id": "RSS_ES_1",
-    "category": "both",
-    "publishedFormatted": "15 gen. 2020",
-    "brand": "mallorca"
-  },
-  {
-    "source_id": "RSS_ES_1",
-    "category": "none",
-    "publishedFormatted": "15 gen. 2020",
-    "brand": "mallorca"
-  },
-  {
-    "source_id": "RSS_ES_1",
-    "category": "none",
-    "publishedFormatted": "15 gen. 2020",
-    "brand": "españa"
-  }
-]
+  "docs": [
+    {
+      "source_id": "RSS_ES_1",
+      "category": "covid",
+      "publishedFormatted": "1 gen. 2020",
+      "brand": "mallorca"
+    },
+    {
+      "source_id": "RSS_ES_1",
+      "category": "covid",
+      "publishedFormatted": "8 gen. 2020",
+      "brand": "mallorca"
+    },
+    {
+      "source_id": "RSS_ES_1",
+      "category": "covid",
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca"
+    },
+    {
+      "source_id": "RSS_ES_1",
+      "category": "tourism",
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca"
+    },
+    {
+      "source_id": "RSS_ES_1",
+      "category": "both",
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca"
+    },
+    {
+      "source_id": "RSS_ES_1",
+      "category": "none",
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca"
+    },
+    {
+      "source_id": "RSS_ES_1",
+      "category": "none",
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "españa"
+    }
+  ]
+}
