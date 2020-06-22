@@ -26,7 +26,7 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
-var currentWeekFrom = "2020-06-08";
+var currentWeekFrom = "2020-06-15";
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 console.log("Current week start date: " + currentWeekFrom);
@@ -114,7 +114,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
     csv_manager.create_csv(
-      "output/page6_news.csv",
+      // `output/page6_news_${currentWeekFrom}.csv`,
+      `output/page6_news.csv`,
       page6.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
         docsWithCountryAndCategoryWA,
@@ -136,7 +137,11 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     );
 
     // ************* Page 10 KPIs.**************
-    page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 10 CSV
+    csv_manager.create_csv(
+      "output/page10_news.csv",
+      page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 12 KPIs.**************
     page12.getKPIs(
