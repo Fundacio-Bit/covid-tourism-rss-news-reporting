@@ -30,20 +30,38 @@ var page33 = require("./page33kpis.js");
 
 // In production this process will be run every week on monday.
 // If the date argument is not provided the week under analysis starting date will be calculated as:
-var currentWeekFrom = moment().subtract(7, "d").format("YYYY-MM-DD");
 
-// ----------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------------------------------
 // Read CLI arguments
 // Arguments are passed as --date --mode
-// ----------------------------------------------------
-if (argv.date) currentWeekFrom = argv.date;
+// If date is 'lastWeek' the starting date will be the current date minus 7 days, if is a string date with format 'YYYY-MM-DD' that date will be the
+// starting date, in either case argument it will abort execution.
+// If mode is 'dev' it will run in development mode, if 'prod' in production mode. In any other case it will abort execution.
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+var stringifiedDatePattern = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
 
-// if (argv.mode) {
-//   var output_path = path + '/files/output/twitter/covid_tourism'
-// } else {
-//   var output_path = '/data-mongo/files/output/twitter/covid_tourism'
-// }
-// console.log("Output path: " + output_path)
+if (argv.date == "lastWeek") {
+  var currentWeekFrom = moment().subtract(7, "d").format("YYYY-MM-DD");
+} else if (stringifiedDatePattern.test(argv.date)) {
+  currentWeekFrom = argv.date;
+} else {
+  console.log(
+    '***EXECUTION ERROR!: A --date argument is required and its value should be "lastWeek" or a string date formatted as "YYYY-MM--DD"***'
+  );
+  process.exit();
+}
+
+if (argv.mode == "dev") {
+  var output_path = `${path}/files/output/rss_news/covid_tourism/${currentWeekFrom}`;
+} else if (argv.mode == "prod") {
+  var output_path = `/data-mongo/files/output/rss_news/covid_tourism/${currentWeekFrom}`;
+} else {
+  console.log(
+    '***EXECUTION ERROR!: A --mode argument is required and its value should be "dev" for development mode or "prod" for production mode***'
+  );
+  process.exit();
+}
+console.log("Output path: " + output_path);
 
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
