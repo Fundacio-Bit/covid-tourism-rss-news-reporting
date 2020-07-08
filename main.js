@@ -1,4 +1,6 @@
-var d3 = require("d3");
+const path = require("path").resolve(__dirname, "..");
+const argv = require("yargs").argv;
+const moment = require("moment");
 var csv_manager = require("./create-csv.js");
 
 var fetchData = require("./fetch-data.js");
@@ -26,7 +28,23 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
-var currentWeekFrom = "2020-06-29";
+// In production this process will be run every week on monday.
+// If the date argument is not provided the week under analysis starting date will be calculated as:
+var currentWeekFrom = moment().subtract(7, "d").format("YYYY-MM-DD");
+
+// ----------------------------------------------------
+// Read CLI arguments
+// Arguments are passed as --date --mode
+// ----------------------------------------------------
+if (argv.date) currentWeekFrom = argv.date;
+
+// if (argv.mode) {
+//   var output_path = path + '/files/output/twitter/covid_tourism'
+// } else {
+//   var output_path = '/data-mongo/files/output/twitter/covid_tourism'
+// }
+// console.log("Output path: " + output_path)
+
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 console.log("Current week start date: " + currentWeekFrom);
