@@ -121,8 +121,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
     csv_manager.create_csv(
-      // `output/page6_news_${currentWeekFrom}.csv`,
-      `output/page6_news.csv`,
+      path.join(output_path, "page6_news.csv"),
       page6.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
         docsWithCountryAndCategoryWA,
@@ -136,7 +135,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // ************* Page 8 KPIs.**************
 
     csv_manager.create_csv(
-      "output/page8_news.csv",
+      path.join(output_path, "page8_news.csv"),
       page8.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
@@ -146,72 +145,140 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // ************* Page 10 KPIs.**************
     // create the page 10 CSV
     csv_manager.create_csv(
-      "output/page10_news.csv",
+      path.join(output_path, "page10_news.csv"),
       page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 12 KPIs.**************
-    page12.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 12 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page12_news.csv"),
+      page12.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 13 KPIs.**************
-    page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 10 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page13_news.csv"),
+      page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 15 KPIs.**************
-    page15.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 10 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page15_news.csv"),
+      page15.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 16 KPIs.**************
-    page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 16 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page16_news.csv"),
+      page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 18 KPIs.**************
-    page18.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 18 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page18_news.csv"),
+      page18.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 19 KPIs.**************
-    page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 19 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page19_news.csv"),
+      page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 21 KPIs.**************
-    page21.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 21 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page21_news.csv"),
+      page21.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 22 KPIs.**************
-    page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 22 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page22_news.csv"),
+      page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 25 KPIs.**************
-    page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 25 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page25_news.csv"),
+      page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 26 KPIs.**************
-    page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 26 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page26_news.csv"),
+      page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 27 KPIs.**************
-    page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 27 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page27_news.csv"),
+      page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 28 KPIs.**************
-    page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 28 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page28_news.csv"),
+      page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 29 KPIs.**************
-    page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 29 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page29_news.csv"),
+      page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 30 KPIs.**************
-    page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 30 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page30_news.csv"),
+      page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 31 KPIs.**************
-    page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 31 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page31_news.csv"),
+      page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 32 KPIs.**************
-    page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 32 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page32_news.csv"),
+      page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 33 KPIs.**************
-    page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 33 CSV
+    csv_manager.create_csv(
+      path.join(output_path, "page33_news.csv"),
+      page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* News CSV **************
     var categoriesDict = require("./categories-dictionary.js");

@@ -228,8 +228,8 @@ const getKPIs = (docsCW) => {
     mentionsBothBalearenFromSwedenPercent,
     categoriesOfInterestBalearenMentionsFromSweden,
   ]);
-  // create the page 31 CSV
-  csv_manager.create_csv("output/page31_news.csv", pageRows);
+
+  return pageRows;
 };
 
 module.exports = { getKPIs };

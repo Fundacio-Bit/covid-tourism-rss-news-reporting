@@ -47,8 +47,7 @@ const getKPIs = (docsCW, datesCW) => {
   pageRows.push(balearenTimeSeriesArray);
   pageRows.push(mallorcaTimeSeriesArray);
 
-  // create the page 12 CSV
-  csv_manager.create_csv("output/page12_news.csv", pageRows);
+  return pageRows;
 };
 
 module.exports = { getKPIs };

@@ -229,8 +229,7 @@ const getKPIs = (docsCW) => {
     categoriesOfInterestBalearenMentionsFromSwitzerland,
   ]);
 
-  // create the page 32 CSV
-  csv_manager.create_csv("output/page32_news.csv", pageRows);
+  return pageRows;
 };
 
 module.exports = { getKPIs };

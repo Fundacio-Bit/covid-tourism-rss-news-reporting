@@ -229,8 +229,7 @@ const getKPIs = (docsCW) => {
     categoriesOfInterestBalearenMentionsFromItaly,
   ]);
 
-  // create the page 30 CSV
-  csv_manager.create_csv("output/page30_news.csv", pageRows);
+  return pageRows;
 };
 
 module.exports = { getKPIs };
