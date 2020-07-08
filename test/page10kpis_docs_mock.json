@@ -1,0 +1,621 @@
+{
+  "description": {
+    "docsNr": 45,
+    "rows": {
+      "row1": []
+    },
+    "categories": {
+      "tourism": {
+        "total": 6,
+        "percent": "13,33",
+        "countries": {
+          "ES": {
+            "docs": 3,
+            "percent": "50,00",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "33,33" },
+              "menorca": { "total": 1, "percent": "33,33" },
+              "ibiza": { "total": 1, "percent": "33,33" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "UK": {
+            "docs": 2,
+            "percent": "33,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "DE": {
+            "docs": 1,
+            "percent": "16,67",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "IT": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "FR": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SE": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SZ": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "NL": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "AT": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          }
+        }
+      },
+      "covid": {
+        "total": 15,
+        "percent": "33,33",
+        "countries": {
+          "ES": {
+            "docs": 3,
+            "percent": "20,00",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "33,33" },
+              "menorca": { "total": 1, "percent": "33,33" },
+              "ibiza": { "total": 1, "percent": "33,33" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "UK": {
+            "docs": 3,
+            "percent": "20,00",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "33,33" },
+              "menorca": { "total": 1, "percent": "33,33" },
+              "ibiza": { "total": 1, "percent": "33,33" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "DE": {
+            "docs": 3,
+            "percent": "20,00",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "33,33" },
+              "menorca": { "total": 1, "percent": "33,33" },
+              "ibiza": { "total": 1, "percent": "33,33" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "IT": {
+            "docs": 3,
+            "percent": "20,00",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "33,33" },
+              "menorca": { "total": 1, "percent": "33,33" },
+              "ibiza": { "total": 1, "percent": "33,33" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "FR": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SE": {
+            "docs": 1,
+            "percent": "6,67",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SZ": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "NL": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "AT": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          }
+        }
+      },
+      "both": {
+        "total": 15,
+        "percent": "33,33",
+        "countries": {
+          "ES": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "UK": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "DE": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "IT": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "FR": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SE": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SZ": {
+            "docs": 2,
+            "percent": "13,33",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "50,00" },
+              "menorca": { "total": 1, "percent": "50,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "NL": {
+            "docs": 1,
+            "percent": "6,67",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "AT": {
+            "docs": 0,
+            "percent": "0,00",
+            "islands": {
+              "mallorca": { "total": 0, "percent": "0,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          }
+        }
+      },
+      "none": {
+        "total": 9,
+        "percent": "20,00",
+        "countries": {
+          "ES": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "UK": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "DE": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "IT": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "FR": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SE": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "SZ": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "NL": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          },
+          "AT": {
+            "docs": 1,
+            "percent": "11,11",
+            "islands": {
+              "mallorca": { "total": 1, "percent": "100,00" },
+              "menorca": { "total": 0, "percent": "0,00" },
+              "ibiza": { "total": 0, "percent": "0,00" },
+              "formentera": { "total": 0, "percent": "0,00" }
+            }
+          }
+        }
+      }
+    }
+  },
+  "docs": [
+    {
+      "brand": "mallorca",
+      "country": "ES",
+      "category": "tourism"
+    },
+    {
+      "brand": "menorca",
+      "country": "ES",
+      "category": "tourism"
+    },
+    {
+      "brand": "ibiza",
+      "country": "ES",
+      "category": "tourism"
+    },
+    {
+      "brand": "mallorca",
+      "country": "UK",
+      "category": "tourism"
+    },
+    {
+      "brand": "menorca",
+      "country": "UK",
+      "category": "tourism"
+    },
+    {
+      "brand": "mallorca",
+      "country": "DE",
+      "category": "tourism"
+    },
+    {
+      "brand": "mallorca",
+      "country": "ES",
+      "category": "covid"
+    },
+    {
+      "brand": "menorca",
+      "country": "ES",
+      "category": "covid"
+    },
+    {
+      "brand": "ibiza",
+      "country": "ES",
+      "category": "covid"
+    },
+    {
+      "brand": "mallorca",
+      "country": "UK",
+      "category": "covid"
+    },
+    {
+      "brand": "menorca",
+      "country": "UK",
+      "category": "covid"
+    },
+    {
+      "brand": "ibiza",
+      "country": "UK",
+      "category": "covid"
+    },
+    {
+      "brand": "mallorca",
+      "country": "DE",
+      "category": "covid"
+    },
+    {
+      "brand": "menorca",
+      "country": "DE",
+      "category": "covid"
+    },
+    {
+      "brand": "ibiza",
+      "country": "DE",
+      "category": "covid"
+    },
+    {
+      "brand": "mallorca",
+      "country": "IT",
+      "category": "covid"
+    },
+    {
+      "brand": "menorca",
+      "country": "IT",
+      "category": "covid"
+    },
+    {
+      "brand": "ibiza",
+      "country": "IT",
+      "category": "covid"
+    },
+    {
+      "brand": "mallorca",
+      "country": "FR",
+      "category": "covid"
+    },
+    {
+      "brand": "menorca",
+      "country": "FR",
+      "category": "covid"
+    },
+    {
+      "brand": "mallorca",
+      "country": "SE",
+      "category": "covid"
+    },
+    {
+      "brand": "mallorca",
+      "country": "ES",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "ES",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "UK",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "UK",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "DE",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "DE",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "IT",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "IT",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "FR",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "FR",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "SE",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "SE",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "SZ",
+      "category": "both"
+    },
+    {
+      "brand": "menorca",
+      "country": "SZ",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "NL",
+      "category": "both"
+    },
+    {
+      "brand": "mallorca",
+      "country": "ES",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "UK",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "DE",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "IT",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "FR",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "SE",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "SZ",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "NL",
+      "category": "none"
+    },
+    {
+      "brand": "mallorca",
+      "country": "AT",
+      "category": "none"
+    }
+  ]
+}

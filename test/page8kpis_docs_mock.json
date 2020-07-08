@@ -1,0 +1,244 @@
+{
+  "description": {
+    "docsNr": 45,
+    "countries": {
+      "ES": { "docs": 9, "percent": "20,00", "15gen2020": 9 },
+      "UK": { "docs": 8, "percent": "17,78", "15gen2020": 8 },
+      "DE": { "docs": 7, "percent": "15,56", "15gen2020": 7 },
+      "IT": { "docs": 6, "percent": "13,33", "16gen2020": 6 },
+      "FR": { "docs": 5, "percent": "11,11", "17gen2020": 5 },
+      "SE": { "docs": 4, "percent": "8,89", "18gen2020": 4 },
+      "SZ": { "docs": 3, "percent": "6,67", "19gen2020": 3 },
+      "NL": { "docs": 2, "percent": "4,44", "20gen2020": 2 },
+      "AT": { "docs": 1, "percent": "2,22", "21gen2020": 1 }
+    },
+    "publishedFormattedDates": "24 15 gen, 6 16 gen, 5 17 gen, 4 18 gen, 3 19 gen, 2 20 gen, 1 21 gen"
+  },
+  "docs": [
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "ES"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "UK"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "15 gen. 2020",
+      "brand": "mallorca",
+      "country": "DE"
+    },
+    {
+      "publishedFormatted": "16 gen. 2020",
+      "brand": "mallorca",
+      "country": "IT"
+    },
+    {
+      "publishedFormatted": "16 gen. 2020",
+      "brand": "mallorca",
+      "country": "IT"
+    },
+    {
+      "publishedFormatted": "16 gen. 2020",
+      "brand": "mallorca",
+      "country": "IT"
+    },
+    {
+      "publishedFormatted": "16 gen. 2020",
+      "brand": "mallorca",
+      "country": "IT"
+    },
+    {
+      "publishedFormatted": "16 gen. 2020",
+      "brand": "mallorca",
+      "country": "IT"
+    },
+    {
+      "publishedFormatted": "16 gen. 2020",
+      "brand": "mallorca",
+      "country": "IT"
+    },
+    {
+      "publishedFormatted": "17 gen. 2020",
+      "brand": "mallorca",
+      "country": "FR"
+    },
+    {
+      "publishedFormatted": "17 gen. 2020",
+      "brand": "mallorca",
+      "country": "FR"
+    },
+    {
+      "publishedFormatted": "17 gen. 2020",
+      "brand": "mallorca",
+      "country": "FR"
+    },
+    {
+      "publishedFormatted": "17 gen. 2020",
+      "brand": "mallorca",
+      "country": "FR"
+    },
+    {
+      "publishedFormatted": "17 gen. 2020",
+      "brand": "mallorca",
+      "country": "FR"
+    },
+    {
+      "publishedFormatted": "18 gen. 2020",
+      "brand": "mallorca",
+      "country": "SE"
+    },
+    {
+      "publishedFormatted": "18 gen. 2020",
+      "brand": "mallorca",
+      "country": "SE"
+    },
+    {
+      "publishedFormatted": "18 gen. 2020",
+      "brand": "mallorca",
+      "country": "SE"
+    },
+    {
+      "publishedFormatted": "18 gen. 2020",
+      "brand": "mallorca",
+      "country": "SE"
+    },
+    {
+      "publishedFormatted": "19 gen. 2020",
+      "brand": "mallorca",
+      "country": "SZ"
+    },
+    {
+      "publishedFormatted": "19 gen. 2020",
+      "brand": "mallorca",
+      "country": "SZ"
+    },
+    {
+      "publishedFormatted": "19 gen. 2020",
+      "brand": "mallorca",
+      "country": "SZ"
+    },
+    {
+      "publishedFormatted": "20 gen. 2020",
+      "brand": "mallorca",
+      "country": "NL"
+    },
+    {
+      "publishedFormatted": "20 gen. 2020",
+      "brand": "mallorca",
+      "country": "NL"
+    },
+    {
+      "publishedFormatted": "21 gen. 2020",
+      "brand": "mallorca",
+      "country": "AT"
+    }
+  ]
+}

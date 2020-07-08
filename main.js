@@ -26,7 +26,7 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
-var currentWeekFrom = "2020-06-08";
+var currentWeekFrom = "2020-06-29";
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 console.log("Current week start date: " + currentWeekFrom);
@@ -50,42 +50,6 @@ console.log("Two weeks ago dates:" + twoWeeksAgoDates);
 var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);
 var dataWeekAgo = fetchData.getNews(weekAgoFrom, weekAgoTo);
 var dataTwoWeeksAgo = fetchData.getNews(twoWeeksAgoFrom, twoWeeksAgoTo);
-
-// let getNewsByBrandMarketCategory = (news) => {
-//   let newsByBrandByCountry = d3
-//     .nest()
-//     .key(function (doc) {
-//       return doc.brand;
-//     })
-//     .key(function (doc) {
-//       return doc.country;
-//     })
-//     .key(function (doc) {
-//       return doc.category;
-//     })
-//     .rollup(function (brandGroup) {
-//       return brandGroup.length;
-//     })
-//     .entries(news);
-//   console.log(JSON.stringify(newsByBrandByCountry));
-// };
-
-// let getNewsByBrandCategory = (news) => {
-//   return JSON.stringify(
-//     d3
-//       .nest()
-//       .key(function (doc) {
-//         return doc.brand;
-//       })
-//       .key(function (doc) {
-//         return doc.category;
-//       })
-//       .rollup(function (brandGroup) {
-//         return brandGroup.length;
-//       })
-//       .entries(news)
-//   );
-// };
 
 // Get data from the las three weeks. Variable names will refer to them using the following codes:
 // CW: current week.
@@ -114,7 +78,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
     csv_manager.create_csv(
-      "output/page6_news.csv",
+      // `output/page6_news_${currentWeekFrom}.csv`,
+      `output/page6_news.csv`,
       page6.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
         docsWithCountryAndCategoryWA,
@@ -126,13 +91,21 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     );
 
     // ************* Page 8 KPIs.**************
-    page8.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+
+    csv_manager.create_csv(
+      "output/page8_news.csv",
+      page8.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 10 KPIs.**************
-    page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 10 CSV
+    csv_manager.create_csv(
+      "output/page10_news.csv",
+      page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 12 KPIs.**************
     page12.getKPIs(
