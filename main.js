@@ -1,6 +1,8 @@
-const path = require("path").resolve(__dirname, "..");
-const argv = require("yargs").argv;
-const moment = require("moment");
+var path = require("path");
+var argv = require("yargs").argv;
+var moment = require("moment");
+var mkdirp = require("mkdirp");
+
 var csv_manager = require("./create-csv.js");
 
 var fetchData = require("./fetch-data.js");
@@ -37,6 +39,7 @@ var page33 = require("./page33kpis.js");
 // If date is 'lastWeek' the starting date will be the current date minus 7 days, if is a string date with format 'YYYY-MM-DD' that date will be the
 // starting date, in either case argument it will abort execution.
 // If mode is 'dev' it will run in development mode, if 'prod' in production mode. In any other case it will abort execution.
+// In development mode output files will be saved to a subfolder of the project. In production mode to the files folder in the "datamongo" disk unit.
 // -------------------------------------------------------------------------------------------------------------------------------------------------
 var stringifiedDatePattern = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
 
@@ -52,15 +55,19 @@ if (argv.date == "lastWeek") {
 }
 
 if (argv.mode == "dev") {
-  var output_path = `${path}/files/output/rss_news/covid_tourism/${currentWeekFrom}`;
+  var output_path = path.join(__dirname, "/output/", currentWeekFrom);
 } else if (argv.mode == "prod") {
-  var output_path = `/data-mongo/files/output/rss_news/covid_tourism/${currentWeekFrom}`;
+  var output_path = path.join(
+    "/data-mongo/files/output/rss_news/covid_tourism/",
+    currentWeekFrom
+  );
 } else {
   console.log(
     '***EXECUTION ERROR!: A --mode argument is required and its value should be "dev" for development mode or "prod" for production mode***'
   );
   process.exit();
 }
+mkdirp.sync(output_path);
 console.log("Output path: " + output_path);
 
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
