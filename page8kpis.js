@@ -223,7 +223,7 @@ const getKPIs = (docsCW, datesCW) => {
   // Time series by country
 
   pageRows.push(["\n"]);
-  pageRows.push(["Evolutiu per idiomas sobre Balears"]);
+  pageRows.push(["Evolutiu per països sobre Balears"]);
   pageRows.push([""].concat(datesCW));
   pageRows.push(mentionsFromSpainTimeSeriesArray);
   pageRows.push(mentionsFromUnitedKingdomTimeSeriesArray);
