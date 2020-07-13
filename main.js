@@ -55,7 +55,7 @@ if (argv.date == "lastWeek") {
 }
 
 if (argv.mode == "dev") {
-  var output_path = path.join(__dirname, "/output/", currentWeekFrom);
+  var output_path = path.join(__dirname, "output", currentWeekFrom);
 } else if (argv.mode == "prod") {
   var output_path = path.join(
     "/data-mongo/files/output/rss_news/covid_tourism/",
@@ -67,9 +67,11 @@ if (argv.mode == "dev") {
   );
   process.exit();
 }
-mkdirp.sync(output_path);
+// Create the output required subfolders (kpis and news)
+mkdirp.sync(path.join(output_path, "news"));
 console.log("Output path: " + output_path);
 
+// Get starting and ending dates for the week under analysis (current week) and the two previous
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 console.log("Current week start date: " + currentWeekFrom);
@@ -343,7 +345,10 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
           rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
         }
       }
-      csv_manager.create_csv(`output/news/${term}_news.csv`, rowsPerTerm);
+      csv_manager.create_csv(
+        path.join(output_path, "news", `${term}_news.csv`),
+        rowsPerTerm
+      );
     }
 
     // docsWithCountryAndCategoryAndFormattedDateCW;
