@@ -3,10 +3,11 @@ var argv = require("yargs").argv;
 var moment = require("moment");
 var mkdirp = require("mkdirp");
 
-var csv_manager = require("./create-csv.js");
+var csvManager = require("./utils/create-csv.js");
+var zipGenerator = require("./utils/generate-zip.js");
 
-var fetchData = require("./fetch-data.js");
-var addData = require("./add-processed-data.js");
+var fetchData = require("./utils/fetch-data.js");
+var addData = require("./utils/add-processed-data.js");
 var utils = require("./utils/utils.js");
 
 var page6 = require("./page6kpis.js");
@@ -31,7 +32,6 @@ var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
 // In production this process will be run every week on monday.
-// If the date argument is not provided the week under analysis starting date will be calculated as:
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------
 // Read CLI arguments
@@ -122,7 +122,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page6_news.csv"),
       page6.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
@@ -136,7 +136,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 8 KPIs.**************
 
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page8_news.csv"),
       page8.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
@@ -146,14 +146,14 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 10 KPIs.**************
     // create the page 10 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page10_news.csv"),
       page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 12 KPIs.**************
     // create the page 12 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page12_news.csv"),
       page12.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
@@ -163,14 +163,14 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 13 KPIs.**************
     // create the page 10 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page13_news.csv"),
       page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 15 KPIs.**************
     // create the page 10 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page15_news.csv"),
       page15.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
@@ -180,14 +180,14 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 16 KPIs.**************
     // create the page 16 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page16_news.csv"),
       page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 18 KPIs.**************
     // create the page 18 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page18_news.csv"),
       page18.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
@@ -197,14 +197,14 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 19 KPIs.**************
     // create the page 19 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page19_news.csv"),
       page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 21 KPIs.**************
     // create the page 21 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page21_news.csv"),
       page21.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
@@ -214,76 +214,76 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 22 KPIs.**************
     // create the page 22 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page22_news.csv"),
       page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 25 KPIs.**************
     // create the page 25 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page25_news.csv"),
       page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 26 KPIs.**************
     // create the page 26 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page26_news.csv"),
       page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 27 KPIs.**************
     // create the page 27 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page27_news.csv"),
       page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 28 KPIs.**************
     // create the page 28 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page28_news.csv"),
       page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 29 KPIs.**************
     // create the page 29 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page29_news.csv"),
       page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 30 KPIs.**************
     // create the page 30 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page30_news.csv"),
       page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 31 KPIs.**************
     // create the page 31 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page31_news.csv"),
       page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 32 KPIs.**************
     // create the page 32 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page32_news.csv"),
       page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 33 KPIs.**************
     // create the page 33 CSV
-    csv_manager.create_csv(
+    csvManager.create_csv(
       path.join(output_path, "page33_news.csv"),
       page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* News CSV **************
-    var categoriesDict = require("./categories-dictionary.js");
+    var categoriesDict = require("./utils/categories-dictionary.js");
     var tourimsTerms = categoriesDict.tourism;
 
     for (i = 0; i < tourimsTerms.length; i++) {
@@ -345,7 +345,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
           rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
         }
       }
-      csv_manager.create_csv(
+      csvManager.create_csv(
         path.join(output_path, "news", `${term}_news.csv`),
         rowsPerTerm
       );
@@ -357,3 +357,18 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
   })
   .catch(console.log);
+
+// wait 2 minutes and create ZIPS (let the KPIs and news calculations finish firts)
+// this could solved chaining Promises but that complicated the code extremely.
+// also doing a separate CRON JOB to create the ZIP was an option
+// however this solution requires just a bit of code and works fine
+var base_path = path.join(__dirname, "output");
+var zip =
+  base_path +
+  "/escolta_activa_rss_news_covid_tourism_" +
+  currentWeekFrom +
+  ".zip";
+
+// setTimeout syntaxis: https://nodejs.org/en/docs/guides/timers-in-node/
+// arguments provioded after timer
+setTimeout(zipGenerator.zip_directory, 300000, zip, output_path);
