@@ -45,12 +45,30 @@ git clone https://github.com/Fundacio-Bit/covid-tourism-rss-news-reporting.git
 npm install
 ```
 
-- **News retreieval**
-
-Execute the retrieval of news from the database.
+- **KPIs and news by term ZIP creation**
+  **_ Development _**
+  Execute
 
 ```console
-node get-news.js
+node main.js --date <date> --mode dev
+```
+
+Valid <date> argument is 'lastWeek' to start the analysis with data from one week go. Or a date formatted as "YYYY-MM-DD" as statring date.
+
+**_ Production _**
+
+Execute:
+
+```console
+node main.js --date <date> --mode prod
+```
+
+Valid <date> argument is 'lastWeek' to start the analysis with data from one week go. Or a date formatted as "YYYY-MM-DD" as statring date.
+
+You can also program a CRONTAB to schedule weekly executions. I.e:
+
+```bash
+00 5 * * 1  node /home/ubuntu/fbit_projects/escolta_activa/covid-tourism-rss-news-reporting/main.js --date lastWeek --mode prod
 ```
 
 ## License
