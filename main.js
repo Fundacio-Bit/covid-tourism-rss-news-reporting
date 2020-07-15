@@ -1,8 +1,13 @@
-var d3 = require("d3");
-var csv_manager = require("./create-csv.js");
+var path = require("path");
+var argv = require("yargs").argv;
+var moment = require("moment");
+var mkdirp = require("mkdirp");
 
-var fetchData = require("./fetch-data.js");
-var addData = require("./add-processed-data.js");
+var csvManager = require("./utils/create-csv.js");
+var zipGenerator = require("./utils/generate-zip.js");
+
+var fetchData = require("./utils/fetch-data.js");
+var addData = require("./utils/add-processed-data.js");
 var utils = require("./utils/utils.js");
 
 var page6 = require("./page6kpis.js");
@@ -26,7 +31,47 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 
-var currentWeekFrom = "2020-06-29";
+// In production this process will be run every week on monday.
+
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+// Read CLI arguments
+// Arguments are passed as --date --mode
+// If date is 'lastWeek' the starting date will be the current date minus 7 days, if is a string date with format 'YYYY-MM-DD' that date will be the
+// starting date, in either case argument it will abort execution.
+// If mode is 'dev' it will run in development mode, if 'prod' in production mode. In any other case it will abort execution.
+// In development mode output files will be saved to a subfolder of the project. In production mode to the files folder in the "datamongo" disk unit.
+// -------------------------------------------------------------------------------------------------------------------------------------------------
+var stringifiedDatePattern = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;
+
+if (argv.date == "lastWeek") {
+  var currentWeekFrom = moment().subtract(7, "d").format("YYYY-MM-DD");
+} else if (stringifiedDatePattern.test(argv.date)) {
+  currentWeekFrom = argv.date;
+} else {
+  console.log(
+    '***EXECUTION ERROR!: A --date argument is required and its value should be "lastWeek" or a string date formatted as "YYYY-MM--DD"***'
+  );
+  process.exit();
+}
+
+if (argv.mode == "dev") {
+  var output_path = path.join(__dirname, "output", currentWeekFrom);
+} else if (argv.mode == "prod") {
+  var output_path = path.join(
+    "/data-mongo/files/output/rss_news/covid_tourism",
+    currentWeekFrom
+  );
+} else {
+  console.log(
+    '***EXECUTION ERROR!: A --mode argument is required and its value should be "dev" for development mode or "prod" for production mode***'
+  );
+  process.exit();
+}
+// Create the output required subfolders (kpis and news)
+mkdirp.sync(path.join(output_path, "news"));
+console.log("Output path: " + output_path);
+
+// Get starting and ending dates for the week under analysis (current week) and the two previous
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 console.log("Current week start date: " + currentWeekFrom);
@@ -77,9 +122,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
-    csv_manager.create_csv(
-      // `output/page6_news_${currentWeekFrom}.csv`,
-      `output/page6_news.csv`,
+    csvManager.create_csv(
+      path.join(output_path, "page6_news.csv"),
       page6.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
         docsWithCountryAndCategoryWA,
@@ -92,8 +136,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 8 KPIs.**************
 
-    csv_manager.create_csv(
-      "output/page8_news.csv",
+    csvManager.create_csv(
+      path.join(output_path, "page8_news.csv"),
       page8.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
@@ -102,76 +146,144 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 
     // ************* Page 10 KPIs.**************
     // create the page 10 CSV
-    csv_manager.create_csv(
-      "output/page10_news.csv",
+    csvManager.create_csv(
+      path.join(output_path, "page10_news.csv"),
       page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
     // ************* Page 12 KPIs.**************
-    page12.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 12 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page12_news.csv"),
+      page12.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 13 KPIs.**************
-    page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 10 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page13_news.csv"),
+      page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 15 KPIs.**************
-    page15.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 10 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page15_news.csv"),
+      page15.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 16 KPIs.**************
-    page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 16 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page16_news.csv"),
+      page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 18 KPIs.**************
-    page18.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 18 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page18_news.csv"),
+      page18.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 19 KPIs.**************
-    page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 19 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page19_news.csv"),
+      page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 21 KPIs.**************
-    page21.getKPIs(
-      docsWithCountryAndCategoryAndFormattedDateCW,
-      currentWeekDates
+    // create the page 21 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page21_news.csv"),
+      page21.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
 
     // ************* Page 22 KPIs.**************
-    page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 22 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page22_news.csv"),
+      page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 25 KPIs.**************
-    page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 25 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page25_news.csv"),
+      page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 26 KPIs.**************
-    page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 26 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page26_news.csv"),
+      page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 27 KPIs.**************
-    page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 27 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page27_news.csv"),
+      page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 28 KPIs.**************
-    page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 28 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page28_news.csv"),
+      page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 29 KPIs.**************
-    page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 29 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page29_news.csv"),
+      page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 30 KPIs.**************
-    page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 30 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page30_news.csv"),
+      page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 31 KPIs.**************
-    page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 31 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page31_news.csv"),
+      page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 32 KPIs.**************
-    page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 32 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page32_news.csv"),
+      page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* Page 33 KPIs.**************
-    page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW);
+    // create the page 33 CSV
+    csvManager.create_csv(
+      path.join(output_path, "page33_news.csv"),
+      page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+    );
 
     // ************* News CSV **************
-    var categoriesDict = require("./categories-dictionary.js");
+    var categoriesDict = require("./utils/categories-dictionary.js");
     var tourimsTerms = categoriesDict.tourism;
 
     for (i = 0; i < tourimsTerms.length; i++) {
@@ -233,7 +345,10 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
           rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
         }
       }
-      csv_manager.create_csv(`output/news/${term}_news.csv`, rowsPerTerm);
+      csvManager.create_csv(
+        path.join(output_path, "news", `${term}_news.csv`),
+        rowsPerTerm
+      );
     }
 
     // docsWithCountryAndCategoryAndFormattedDateCW;
@@ -242,3 +357,18 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
   })
   .catch(console.log);
+
+// wait 2 minutes and create ZIPS (let the KPIs and news calculations finish firts)
+// this could solved chaining Promises but that complicated the code extremely.
+// also doing a separate CRON JOB to create the ZIP was an option
+// however this solution requires just a bit of code and works fine
+var base_path = path.join(__dirname, "output");
+var zip =
+  base_path +
+  "/escolta_activa_rss_news_covid_tourism_" +
+  currentWeekFrom +
+  ".zip";
+
+// setTimeout syntaxis: https://nodejs.org/en/docs/guides/timers-in-node/
+// arguments provioded after timer
+setTimeout(zipGenerator.zip_directory, 300000, zip, output_path);

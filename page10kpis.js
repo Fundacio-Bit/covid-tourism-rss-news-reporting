@@ -1,4 +1,3 @@
-var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 // TODO: balearen total mentionsin CSV

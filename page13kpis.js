@@ -1,4 +1,3 @@
-var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW) => {
@@ -438,8 +437,7 @@ const getKPIs = (docsCW) => {
     categoriesOfInterestBalearenMentions,
   ]);
 
-  // create the page 13 CSV
-  csv_manager.create_csv("output/page13_news.csv", pageRows);
+  return pageRows;
 };
 
 module.exports = { getKPIs };

@@ -147,8 +147,6 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   pageRows.push([""].concat(datesCW));
   pageRows.push(balearenTimeSeriesArray);
 
-  // // create the page 6 CSV
-  // csv_manager.create_csv("output/page6_news.csv", pageRows);
   return pageRows;
 };
 
