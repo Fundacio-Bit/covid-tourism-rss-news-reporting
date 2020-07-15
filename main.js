@@ -55,12 +55,11 @@ if (argv.date == "lastWeek") {
 }
 
 if (argv.mode == "dev") {
-  var output_path = path.join(__dirname, "output", currentWeekFrom);
+  var base_path = path.join(__dirname, "output");
+  var output_path = path.join(base_path, currentWeekFrom);
 } else if (argv.mode == "prod") {
-  var output_path = path.join(
-    "/data-mongo/files/output/rss_news/covid_tourism",
-    currentWeekFrom
-  );
+  var base_path = "/data-mongo/files/output/rss_news/covid_tourism";
+  var output_path = path.join(base_path, currentWeekFrom);
 } else {
   console.log(
     '***EXECUTION ERROR!: A --mode argument is required and its value should be "dev" for development mode or "prod" for production mode***'
@@ -362,7 +361,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
 // this could solved chaining Promises but that complicated the code extremely.
 // also doing a separate CRON JOB to create the ZIP was an option
 // however this solution requires just a bit of code and works fine
-var base_path = path.join(__dirname, "output");
+
 var zip =
   base_path +
   "/escolta_activa_rss_news_covid_tourism_" +
