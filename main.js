@@ -58,7 +58,7 @@ if (argv.mode == "dev") {
   var output_path = path.join(__dirname, "output", currentWeekFrom);
 } else if (argv.mode == "prod") {
   var output_path = path.join(
-    "/data-mongo/files/output/rss_news/covid_tourism",
+    "/data-mongo/files/output/rss_news/covid_tourism/",
     currentWeekFrom
   );
 } else {
@@ -67,12 +67,11 @@ if (argv.mode == "dev") {
   );
   process.exit();
 }
-
 // Create the output required subfolders (kpis and news)
 mkdirp.sync(path.join(output_path, "news"));
 console.log("Output path: " + output_path);
 
-// Get and format relevant dates
+// Get starting and ending dates for the week under analysis (current week) and the two previous
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
 var currentWeekDates = utils.getWeekDates(currentWeekFrom);
 console.log("Current week start date: " + currentWeekFrom);
@@ -93,28 +92,16 @@ console.log("Two weeks ago start date: " + twoWeeksAgoFrom);
 console.log("Two weeks ago end date: " + twoWeeksAgoTo);
 console.log("Two weeks ago dates:" + twoWeeksAgoDates);
 
-// dates inputs element
-var dates = {
-  cw: currentWeekDates,
-  wa: weekAgoDates,
-  twa: twoWeeksAgoDates,
-};
-
-// Define the three data fetching processes (promises)
 var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);
 var dataWeekAgo = fetchData.getNews(weekAgoFrom, weekAgoTo);
 var dataTwoWeeksAgo = fetchData.getNews(twoWeeksAgoFrom, twoWeeksAgoTo);
 
-// Get data from the las three weeks.
+// Get data from the las three weeks. Variable names will refer to them using the following codes:
+// CW: current week.
+// WA: week ago.
+// TWA: two weeks ago.
 Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
   .then((resultsArray) => {
-    // Get starting and ending dates for the week under analysis (current week) and the two previous
-
-    // Element names use the following codes:
-    // CW: current week.
-    // WA: week ago.
-    // TWA: two weeks ago.
-
     // *********** docs enrichment *************
     // enrich documents/news adding country and category (results of processing their current content)
     let docsWithCountryCW = addData.addCountry(resultsArray[0]);
@@ -133,223 +120,240 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
     let docsWithCountryTWA = addData.addCountry(resultsArray[2]);
     let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA);
 
-    // data inputs element
-    let data = {
-      cw: docsWithCountryAndCategoryAndFormattedDateCW,
-      wa: docsWithCountryAndCategoryWA,
-      twa: docsWithCountryAndCategoryTWA,
-    };
-
-    // inputs Object. Will be passed through all promises because concatenated KPIs calculations need all or some of them.
-    let inputs = {
-      data: data,
-      dates: dates,
-    };
-    return csv_manager.create_csv(
+    // ************* Page 6 KPIs.**************
+    // create the page 6 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page6_news.csv"),
       page6.getKPIs(
-        inputs.data.cw,
-        inputs.data.wa,
-        inputs.data.twa,
-        inputs.dates.cw,
-        inputs.dates.wa,
-        inputs.dates.twa
-      ),
-      inputs
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        docsWithCountryAndCategoryWA,
+        docsWithCountryAndCategoryTWA,
+        currentWeekDates,
+        weekAgoDates,
+        twoWeeksAgoDates
+      )
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 8 KPIs.**************
+
+    csv_manager.create_csv(
       path.join(output_path, "page8_news.csv"),
-      page8.getKPIs(inputs.data.cw, inputs.dates.cw),
-      inputs
+      page8.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 10 KPIs.**************
+    // create the page 10 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page10_news.csv"),
-      page10.getKPIs(inputs.data.cw),
-      inputs
+      page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 12 KPIs.**************
+    // create the page 12 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page12_news.csv"),
-      page12.getKPIs(inputs.data.cw, inputs.dates.cw),
-      inputs
+      page12.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 13 KPIs.**************
+    // create the page 10 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page13_news.csv"),
-      page13.getKPIs(inputs.data.cw),
-      inputs
+      page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 15 KPIs.**************
+    // create the page 10 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page15_news.csv"),
-      page15.getKPIs(inputs.data.cw, inputs.dates.cw),
-      inputs
+      page15.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 16 KPIs.**************
+    // create the page 16 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page16_news.csv"),
-      page16.getKPIs(inputs.data.cw),
-      inputs
+      page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 18 KPIs.**************
+    // create the page 18 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page18_news.csv"),
-      page18.getKPIs(inputs.data.cw, inputs.dates.cw),
-      inputs
+      page18.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 19 KPIs.**************
+    // create the page 19 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page19_news.csv"),
-      page19.getKPIs(inputs.data.cw),
-      inputs
+      page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 21 KPIs.**************
+    // create the page 21 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page21_news.csv"),
-      page21.getKPIs(inputs.data.cw, inputs.dates.cw),
-      inputs
+      page21.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        currentWeekDates
+      )
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 22 KPIs.**************
+    // create the page 22 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page22_news.csv"),
-      page22.getKPIs(inputs.data.cw),
-      inputs
+      page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 25 KPIs.**************
+    // create the page 25 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page25_news.csv"),
-      page25.getKPIs(inputs.data.cw),
-      inputs
+      page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 26 KPIs.**************
+    // create the page 26 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page26_news.csv"),
-      page26.getKPIs(inputs.data.cw),
-      inputs
+      page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 27 KPIs.**************
+    // create the page 27 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page27_news.csv"),
-      page27.getKPIs(inputs.data.cw),
-      inputs
+      page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 28 KPIs.**************
+    // create the page 28 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page28_news.csv"),
-      page28.getKPIs(inputs.data.cw),
-      inputs
+      page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 29 KPIs.**************
+    // create the page 29 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page29_news.csv"),
-      page29.getKPIs(inputs.data.cw),
-      inputs
+      page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 30 KPIs.**************
+    // create the page 30 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page30_news.csv"),
-      page30.getKPIs(inputs.data.cw),
-      inputs
+      page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 31 KPIs.**************
+    // create the page 31 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page31_news.csv"),
-      page31.getKPIs(inputs.data.cw),
-      inputs
+      page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 32 KPIs.**************
+    // create the page 32 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page32_news.csv"),
-      page32.getKPIs(inputs.data.cw),
-      inputs
+      page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
-  })
-  .then((inputs) => {
-    return csv_manager.create_csv(
+
+    // ************* Page 33 KPIs.**************
+    // create the page 33 CSV
+    csv_manager.create_csv(
       path.join(output_path, "page33_news.csv"),
-      page33.getKPIs(inputs.data.cw),
-      inputs
+      page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
+
+    // ************* News CSV **************
+    var categoriesDict = require("./categories-dictionary.js");
+    var tourimsTerms = categoriesDict.tourism;
+
+    for (i = 0; i < tourimsTerms.length; i++) {
+      let term = tourimsTerms[i];
+      let rowsPerTerm = [["Marca", "País", "Títol", "Enllaç"]];
+      for (
+        j = 0;
+        j < docsWithCountryAndCategoryAndFormattedDateCW.length;
+        j++
+      ) {
+        doc = docsWithCountryAndCategoryAndFormattedDateCW[j];
+        const title =
+          "title" in doc &&
+          doc.title !== undefined &&
+          typeof doc.title === "string"
+            ? doc.title
+            : "";
+
+        const summary =
+          "summary" in doc &&
+          doc.summary !== undefined &&
+          typeof doc.summary === "string"
+            ? doc.summary
+            : "";
+
+        const description =
+          "description" in doc &&
+          doc.description !== undefined &&
+          typeof doc.description === "string"
+            ? doc.description
+            : "";
+
+        const content_value =
+          "content_value" in doc &&
+          doc.content_value !== undefined &&
+          typeof doc.content_value === "string"
+            ? doc.content_value
+            : "";
+
+        const tags =
+          "tags" in doc &&
+          doc.tags !== undefined &&
+          typeof doc.tags === "string"
+            ? doc.tags
+            : "";
+
+        let concatenatedTexts =
+          title +
+          " " +
+          summary +
+          " " +
+          description +
+          " " +
+          content_value +
+          " " +
+          tags;
+
+        if (concatenatedTexts.includes(term) && doc.brand !== "españa") {
+          rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
+        }
+      }
+      csv_manager.create_csv(
+        path.join(output_path, "news", `${term}_news.csv`),
+        rowsPerTerm
+      );
+    }
+
+    // docsWithCountryAndCategoryAndFormattedDateCW;
+
+    // get news count grouped by brand, market and category (in this order)
+    // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
   })
   .catch(console.log);
-
-// // ************* News CSV **************
-// var categoriesDict = require("./categories-dictionary.js");
-// var tourimsTerms = categoriesDict.tourism;
-
-// for (i = 0; i < tourimsTerms.length; i++) {
-//   let term = tourimsTerms[i];
-//   let rowsPerTerm = [["Marca", "País", "Títol", "Enllaç"]];
-//   for (j = 0; j < docsWithCountryAndCategoryAndFormattedDateCW.length; j++) {
-//     doc = docsWithCountryAndCategoryAndFormattedDateCW[j];
-//     const title =
-//       "title" in doc && doc.title !== undefined && typeof doc.title === "string"
-//         ? doc.title
-//         : "";
-
-//     const summary =
-//       "summary" in doc &&
-//       doc.summary !== undefined &&
-//       typeof doc.summary === "string"
-//         ? doc.summary
-//         : "";
-
-//     const description =
-//       "description" in doc &&
-//       doc.description !== undefined &&
-//       typeof doc.description === "string"
-//         ? doc.description
-//         : "";
-
-//     const content_value =
-//       "content_value" in doc &&
-//       doc.content_value !== undefined &&
-//       typeof doc.content_value === "string"
-//         ? doc.content_value
-//         : "";
-
-//     const tags =
-//       "tags" in doc && doc.tags !== undefined && typeof doc.tags === "string"
-//         ? doc.tags
-//         : "";
-
-//     let concatenatedTexts =
-//       title +
-//       " " +
-//       summary +
-//       " " +
-//       description +
-//       " " +
-//       content_value +
-//       " " +
-//       tags;
-
-//     if (concatenatedTexts.includes(term) && doc.brand !== "españa") {
-//       rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
-//     }
-//   }
-//   csv_manager.create_csv(
-//     path.join(output_path, "news", `${term}_news.csv`),
-//     rowsPerTerm
-//   );
-// }
