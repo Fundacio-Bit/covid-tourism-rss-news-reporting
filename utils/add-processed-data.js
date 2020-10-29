@@ -21,53 +21,16 @@ const addCountry = (newsArray) => {
   return newsArray;
 };
 
-// TODO create an "unknown" category and exclude the docs with that categroy from the analysis
+// TODO create an "unknown" category and exclude the docs with that category from the analysis
 const addCategory = (newsArray) => {
   // assign a category for each document after cheking if any term belonging to that category
-  // appears in any content field (title, summary, description, content_value and tags).
+  // appears in the title.
   // Category values are: covid, tourism, both and none.
   newsArray.map((doc) => {
     const title =
       "title" in doc && doc.title !== undefined && typeof doc.title === "string"
         ? doc.title
         : "";
-
-    const summary =
-      "summary" in doc &&
-      doc.summary !== undefined &&
-      typeof doc.summary === "string"
-        ? doc.summary
-        : "";
-
-    const description =
-      "description" in doc &&
-      doc.description !== undefined &&
-      typeof doc.description === "string"
-        ? doc.description
-        : "";
-
-    const content_value =
-      "content_value" in doc &&
-      doc.content_value !== undefined &&
-      typeof doc.content_value === "string"
-        ? doc.content_value
-        : "";
-
-    const tags =
-      "tags" in doc && doc.tags !== undefined && typeof doc.tags === "string"
-        ? doc.tags
-        : "";
-
-    let concatenatedTexts =
-      title +
-      " " +
-      summary +
-      " " +
-      description +
-      " " +
-      content_value +
-      " " +
-      tags;
 
     const hasCategoryTerm = (text, category_terms) => {
       for (i = 0; i < category_terms.length; i++) {
@@ -79,15 +42,15 @@ const addCategory = (newsArray) => {
     };
 
     if (
-      hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
-      hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
+      hasCategoryTerm(title, categoriesDict["covid"]) &&
+      hasCategoryTerm(title, categoriesDict["tourism"])
     ) {
       doc.category = "both";
       return doc;
-    } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])) {
+    } else if (hasCategoryTerm(title, categoriesDict["covid"])) {
       doc.category = "covid";
       return doc;
-    } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])) {
+    } else if (hasCategoryTerm(title, categoriesDict["tourism"])) {
       doc.category = "tourism";
       return doc;
     } else {

@@ -281,6 +281,10 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
       page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
+
+    // TODO:Use addCategory method to manage this part also. The category filtering is done twice within the code.
+    // TODO: once should be enough.
+
     // ************* News CSV **************
     var categoriesDict = require("./utils/categories-dictionary.js");
     var tourimsTerms = categoriesDict.tourism;
@@ -301,46 +305,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
             ? doc.title
             : "";
 
-        const summary =
-          "summary" in doc &&
-          doc.summary !== undefined &&
-          typeof doc.summary === "string"
-            ? doc.summary
-            : "";
-
-        const description =
-          "description" in doc &&
-          doc.description !== undefined &&
-          typeof doc.description === "string"
-            ? doc.description
-            : "";
-
-        const content_value =
-          "content_value" in doc &&
-          doc.content_value !== undefined &&
-          typeof doc.content_value === "string"
-            ? doc.content_value
-            : "";
-
-        const tags =
-          "tags" in doc &&
-          doc.tags !== undefined &&
-          typeof doc.tags === "string"
-            ? doc.tags
-            : "";
-
-        let concatenatedTexts =
-          title +
-          " " +
-          summary +
-          " " +
-          description +
-          " " +
-          content_value +
-          " " +
-          tags;
-
-        if (concatenatedTexts.includes(term) && doc.brand !== "españa") {
+        
+        if (title.includes(term) && doc.brand !== "españa") {
           rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
         }
       }
@@ -357,8 +323,8 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
   })
   .catch(console.log);
 
-// wait 2 minutes and create ZIPS (let the KPIs and news calculations finish firts)
-// this could solved chaining Promises but that complicated the code extremely.
+// wait some time and create ZIPS (let the KPIs and news calculations finish firts)
+// this could be solved chaining Promises but that complicated the code extremely.
 // also doing a separate CRON JOB to create the ZIP was an option
 // however this solution requires just a bit of code and works fine
 
