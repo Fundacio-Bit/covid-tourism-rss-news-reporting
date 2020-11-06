@@ -5,6 +5,7 @@ var mkdirp = require("mkdirp");
 
 var csvManager = require("./utils/create-csv.js");
 var zipGenerator = require("./utils/generate-zip.js");
+var getUniqueNews = require("./utils/get-unique-news.js");
 
 var fetchData = require("./utils/fetch-data.js");
 var addData = require("./utils/add-processed-data.js");
@@ -67,8 +68,8 @@ if (argv.mode == "dev") {
   process.exit();
 }
 // Create the output required subfolders (kpis and news)
-mkdirp.sync(path.join(output_path, "news"));
-console.log("Output path: " + output_path);
+mkdirp.sync(output_path);
+// console.log("Output path: " + output_path);
 
 // Get starting and ending dates for the week under analysis (current week) and the two previous
 var currentWeekTo = utils.getLastWeekDay(currentWeekFrom);
@@ -281,51 +282,23 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
       page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
     );
 
-
     // TODO:Use addCategory method to manage this part also. The category filtering is done twice within the code.
     // TODO: once should be enough.
 
-    // ************* News CSV **************
-    var categoriesDict = require("./utils/categories-dictionary.js");
-    var tourimsTerms = categoriesDict.tourism;
-
-    for (i = 0; i < tourimsTerms.length; i++) {
-      let term = tourimsTerms[i];
-      let rowsPerTerm = [["Marca", "País", "Títol", "Enllaç"]];
-      for (
-        j = 0;
-        j < docsWithCountryAndCategoryAndFormattedDateCW.length;
-        j++
-      ) {
-        doc = docsWithCountryAndCategoryAndFormattedDateCW[j];
-        const title =
-          "title" in doc &&
-          doc.title !== undefined &&
-          typeof doc.title === "string"
-            ? doc.title
-            : "";
-
-        
-        if (title.includes(term) && doc.brand !== "españa") {
-          rowsPerTerm.push([doc.brand, doc.country, doc.title, doc.link]);
-        }
-      }
-      csvManager.create_csv(
-        path.join(output_path, "news", `${term}_news.csv`),
-        rowsPerTerm
-      );
-    }
-
-    // docsWithCountryAndCategoryAndFormattedDateCW;
-
-    // get news count grouped by brand, market and category (in this order)
-    // getNewsByBrandMarketCategory(docsWithCountryAndCategory);
+    // *******   All news *******
+    // create the all news CSV
+    csvManager.create_csv(
+      path.join(output_path, "all_news.csv"),
+      getUniqueNews.get_unique_news(
+        docsWithCountryAndCategoryAndFormattedDateCW
+      )
+    );
   })
   .catch(console.log);
 
-// wait some time and create ZIPS (let the KPIs and news calculations finish firts)
+// wait some time and create ZIPS and all news csv (let the KPIs and news calculations finish firts)
 // this could be solved chaining Promises but that complicated the code extremely.
-// also doing a separate CRON JOB to create the ZIP was an option
+// also doing a separate CRON JOB for such processings was an option
 // however this solution requires just a bit of code and works fine
 
 var zip =
@@ -335,5 +308,6 @@ var zip =
   ".zip";
 
 // setTimeout syntaxis: https://nodejs.org/en/docs/guides/timers-in-node/
-// arguments provioded after timer
-setTimeout(zipGenerator.zip_directory, 300000, zip, output_path);
+// arguments provided after timer
+
+setTimeout(zipGenerator.zip_directory, 120000, zip, output_path);
