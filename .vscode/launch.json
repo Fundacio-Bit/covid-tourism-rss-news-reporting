@@ -10,7 +10,7 @@
       "name": "Launch Program",
       "skipFiles": ["<node_internals>/**"],
       "program": "${workspaceFolder}\\main.js",
-      "args": ["--date=lastWeek", "--mode=dev"]
+      "args": ["--date=2020-07-08", "--mode=dev"]
     }
   ]
 }
