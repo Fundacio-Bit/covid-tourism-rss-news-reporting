@@ -24,7 +24,7 @@ const addCountry = (newsArray) => {
 // TODO create an "unknown" category and exclude the docs with that category from the analysis
 const addCategory = (newsArray) => {
   // assign a category for each document after cheking if any term belonging to that category
-  // appears in the title.
+  // appears in any content field (title, summary, description, content_value and tags).
   // Category values are: covid, tourism, both and none.
   newsArray.map((doc) => {
     const title =
@@ -32,9 +32,60 @@ const addCategory = (newsArray) => {
         ? doc.title
         : "";
 
+    const summary =
+      "summary" in doc &&
+      doc.summary !== undefined &&
+      typeof doc.summary === "string"
+        ? doc.summary
+        : "";
+
+    const description =
+      "description" in doc &&
+      doc.description !== undefined &&
+      typeof doc.description === "string"
+        ? doc.description
+        : "";
+
+    const content_value =
+      "content_value" in doc &&
+      doc.content_value !== undefined &&
+      typeof doc.content_value === "string"
+        ? doc.content_value
+        : "";
+
+    const tags =
+      "tags" in doc && doc.tags !== undefined && typeof doc.tags === "string"
+        ? doc.tags
+        : "";
+
+    let concatenatedTexts =
+      title +
+      " " +
+      summary +
+      " " +
+      description +
+      " " +
+      content_value +
+      " " +
+      tags;
+
     const hasCategoryTerm = (text, category_terms) => {
       for (i = 0; i < category_terms.length; i++) {
-        if (text.toLowerCase().includes(category_terms[i])) {
+        // Check for exact match (search_mode should be "exact")
+        if (
+          category_terms[i].search_mode === "exact" &&
+          new RegExp(
+            "(\\W+|^)" + category_terms[i].term + "(\\W+|$)",
+            "g"
+          ).test(text.toLowerCase())
+        ) {
+          return true;
+        }
+        // Check for partial match (search_mode should be "substring")
+        else if (
+          category_terms[i].search_mode === "substring" &&
+          text.toLowerCase().includes(category_terms[i].term)
+        ) {
           return true;
         }
       }
@@ -42,15 +93,15 @@ const addCategory = (newsArray) => {
     };
 
     if (
-      hasCategoryTerm(title, categoriesDict["covid"]) &&
-      hasCategoryTerm(title, categoriesDict["tourism"])
+      hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
+      hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
     ) {
       doc.category = "both";
       return doc;
-    } else if (hasCategoryTerm(title, categoriesDict["covid"])) {
+    } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])) {
       doc.category = "covid";
       return doc;
-    } else if (hasCategoryTerm(title, categoriesDict["tourism"])) {
+    } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])) {
       doc.category = "tourism";
       return doc;
     } else {
