@@ -21,7 +21,7 @@ const addCountry = (newsArray) => {
   return newsArray;
 };
 
-// TODO create an "unknown" category and exclude the docs with that categroy from the analysis
+// TODO create an "unknown" category and exclude the docs with that category from the analysis
 const addCategory = (newsArray) => {
   // assign a category for each document after cheking if any term belonging to that category
   // appears in any content field (title, summary, description, content_value and tags).
@@ -71,7 +71,21 @@ const addCategory = (newsArray) => {
 
     const hasCategoryTerm = (text, category_terms) => {
       for (i = 0; i < category_terms.length; i++) {
-        if (text.toLowerCase().includes(category_terms[i])) {
+        // Check for exact match (search_mode should be "exact")
+        if (
+          category_terms[i].search_mode === "exact" &&
+          new RegExp(
+            "(\\W+|^)" + category_terms[i].term + "(\\W+|$)",
+            "g"
+          ).test(text.toLowerCase())
+        ) {
+          return true;
+        }
+        // Check for partial match (search_mode should be "substring")
+        else if (
+          category_terms[i].search_mode === "substring" &&
+          text.toLowerCase().includes(category_terms[i].term)
+        ) {
           return true;
         }
       }
