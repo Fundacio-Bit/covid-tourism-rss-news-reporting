@@ -177,7 +177,10 @@ Promise.all([
     // create the page 10 CSV
     csvManager.create_csv(
       path.join(output_path, "page10_news.csv"),
-      page10.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page10.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndFormattedDateCW
+      )
     );
 
     // ************* Page 12 KPIs.**************

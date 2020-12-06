@@ -3,9 +3,13 @@ var utils = require("./utils/utils.js");
 // TODO: balearen total mentionsin CSV
 // TODO: languages time series CSV
 
-const getKPIs = (docsCW) => {
+const getKPIs = (docsCW, discardedDocsCW) => {
   // ============= SOV BY CATEGORY AND MARKET  (country) ================
-  let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  // let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsCW =
+    docsCW.filter(utils.balearenMention).length +
+    discardedDocsCW.filter(utils.balearenMention).length;
 
   // Totals (only by category)
   let tourismMentions = docsCW
@@ -21,16 +25,13 @@ const getKPIs = (docsCW) => {
     .filter(utils.bothCategory).length;
 
   let tourismMentionsPercent = utils.getPercent(
-    balearenMentionsCW,
+    totalMentionsCW,
     tourismMentions
   );
 
-  let covidMentionsPercent = utils.getPercent(
-    balearenMentionsCW,
-    covidMentions
-  );
+  let covidMentionsPercent = utils.getPercent(totalMentionsCW, covidMentions);
 
-  let bothMentionsPercent = utils.getPercent(balearenMentionsCW, bothMentions);
+  let bothMentionsPercent = utils.getPercent(totalMentionsCW, bothMentions);
 
   // Spain (by market and category)
   let tourismMentionsFromSpainPercent = utils.getPercent(
