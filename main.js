@@ -92,15 +92,37 @@ console.log("Two weeks ago start date: " + twoWeeksAgoFrom);
 console.log("Two weeks ago end date: " + twoWeeksAgoTo);
 console.log("Two weeks ago dates:" + twoWeeksAgoDates);
 
-var dataCurrentWeek = fetchData.getNews(currentWeekFrom, currentWeekTo);
-var dataWeekAgo = fetchData.getNews(weekAgoFrom, weekAgoTo);
-var dataTwoWeeksAgo = fetchData.getNews(twoWeeksAgoFrom, twoWeeksAgoTo);
+var dataCurrentWeek = fetchData.getNews("news", currentWeekFrom, currentWeekTo);
+var dataWeekAgo = fetchData.getNews("news", weekAgoFrom, weekAgoTo);
+var dataTwoWeeksAgo = fetchData.getNews("news", twoWeeksAgoFrom, twoWeeksAgoTo);
+var discardedDataCurrentWeek = fetchData.getNews(
+  "news_discarded",
+  currentWeekFrom,
+  currentWeekTo
+);
+var discardedDataWeekAgo = fetchData.getNews(
+  "news_discarded",
+  weekAgoFrom,
+  weekAgoTo
+);
+var discardedDataTwoWeeksAgo = fetchData.getNews(
+  "news_discarded",
+  twoWeeksAgoFrom,
+  twoWeeksAgoTo
+);
 
 // Get data from the las three weeks. Variable names will refer to them using the following codes:
 // CW: current week.
 // WA: week ago.
 // TWA: two weeks ago.
-Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
+Promise.all([
+  dataCurrentWeek,
+  dataWeekAgo,
+  dataTwoWeeksAgo,
+  discardedDataCurrentWeek,
+  discardedDataWeekAgo,
+  discardedDataTwoWeeksAgo,
+])
   .then((resultsArray) => {
     // *********** docs enrichment *************
     // enrich documents/news adding country and category (results of processing their current content)
@@ -110,15 +132,18 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
       docsWithCountryAndCategoryCW
     );
 
-    // let newsByBrandCategory = getNewsByBrandCategory(
-    //   docsWithCountryAndCategoryAndFormattedDateCW
-    // );
-
     let docsWithCountryWA = addData.addCountry(resultsArray[1]);
     let docsWithCountryAndCategoryWA = addData.addCategory(docsWithCountryWA);
 
     let docsWithCountryTWA = addData.addCountry(resultsArray[2]);
     let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA);
+
+    let discardedDocsWithCountryCW = addData.addCountry(resultsArray[3]);
+    let discardedDocsWithCountryAndFormattedDateCW = addData.addFormattedDate(
+      discardedDocsWithCountryCW
+    );
+    let discardedDocsWithCountryWA = addData.addCountry(resultsArray[4]);
+    let discardedDocsWithCountryTWA = addData.addCountry(resultsArray[5]);
 
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
@@ -128,6 +153,9 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
         docsWithCountryAndCategoryAndFormattedDateCW,
         docsWithCountryAndCategoryWA,
         docsWithCountryAndCategoryTWA,
+        discardedDocsWithCountryAndFormattedDateCW,
+        discardedDocsWithCountryWA,
+        discardedDocsWithCountryTWA,
         currentWeekDates,
         weekAgoDates,
         twoWeeksAgoDates
@@ -140,6 +168,7 @@ Promise.all([dataCurrentWeek, dataWeekAgo, dataTwoWeeksAgo])
       path.join(output_path, "page8_news.csv"),
       page8.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndFormattedDateCW,
         currentWeekDates
       )
     );
