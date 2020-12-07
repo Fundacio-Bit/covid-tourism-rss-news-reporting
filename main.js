@@ -210,7 +210,10 @@ Promise.all([
     // create the page 10 CSV
     csvManager.create_csv(
       path.join(output_path, "page13_news.csv"),
-      page13.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page13.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 15 KPIs.**************
@@ -219,6 +222,7 @@ Promise.all([
       path.join(output_path, "page15_news.csv"),
       page15.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
       )
     );
@@ -227,7 +231,10 @@ Promise.all([
     // create the page 16 CSV
     csvManager.create_csv(
       path.join(output_path, "page16_news.csv"),
-      page16.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page16.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 18 KPIs.**************
@@ -236,6 +243,7 @@ Promise.all([
       path.join(output_path, "page18_news.csv"),
       page18.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
       )
     );
@@ -244,7 +252,10 @@ Promise.all([
     // create the page 19 CSV
     csvManager.create_csv(
       path.join(output_path, "page19_news.csv"),
-      page19.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page19.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 21 KPIs.**************
@@ -253,6 +264,7 @@ Promise.all([
       path.join(output_path, "page21_news.csv"),
       page21.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
       )
     );
@@ -261,70 +273,100 @@ Promise.all([
     // create the page 22 CSV
     csvManager.create_csv(
       path.join(output_path, "page22_news.csv"),
-      page22.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page22.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 25 KPIs.**************
     // create the page 25 CSV
     csvManager.create_csv(
       path.join(output_path, "page25_news.csv"),
-      page25.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page25.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 26 KPIs.**************
     // create the page 26 CSV
     csvManager.create_csv(
       path.join(output_path, "page26_news.csv"),
-      page26.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page26.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 27 KPIs.**************
     // create the page 27 CSV
     csvManager.create_csv(
       path.join(output_path, "page27_news.csv"),
-      page27.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page27.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 28 KPIs.**************
     // create the page 28 CSV
     csvManager.create_csv(
       path.join(output_path, "page28_news.csv"),
-      page28.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page28.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 29 KPIs.**************
     // create the page 29 CSV
     csvManager.create_csv(
       path.join(output_path, "page29_news.csv"),
-      page29.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page29.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 30 KPIs.**************
     // create the page 30 CSV
     csvManager.create_csv(
       path.join(output_path, "page30_news.csv"),
-      page30.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page30.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 31 KPIs.**************
     // create the page 31 CSV
     csvManager.create_csv(
       path.join(output_path, "page31_news.csv"),
-      page31.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page31.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 32 KPIs.**************
     // create the page 32 CSV
     csvManager.create_csv(
       path.join(output_path, "page32_news.csv"),
-      page32.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page32.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // ************* Page 33 KPIs.**************
     // create the page 33 CSV
     csvManager.create_csv(
       path.join(output_path, "page33_news.csv"),
-      page33.getKPIs(docsWithCountryAndCategoryAndFormattedDateCW)
+      page33.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
+      )
     );
 
     // TODO:Use addCategory method to manage this part also. The category filtering is done twice within the code.

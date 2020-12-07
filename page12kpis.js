@@ -31,9 +31,17 @@ const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
   // calculate Mallorca time series
   var mallorcaTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let mallorcaTimeSeriesDocs = docsCW
+  let mallorcaTourismAndBothDocs = docsCW
     .filter(utils.mallorcaIslandMention)
-    .filter(utils.categoriesOfInterest);
+    .filter(utils.tourismAndBothCategories);
+
+  let mallorcaCovidDocs = allDocsCW
+    .filter(utils.mallorcaIslandMention)
+    .filter(utils.covidCategory);
+
+  let mallorcaTimeSeriesDocs = mallorcaTourismAndBothDocs.concat(
+    mallorcaCovidDocs
+  );
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < mallorcaTimeSeriesDocs.length; i++) {

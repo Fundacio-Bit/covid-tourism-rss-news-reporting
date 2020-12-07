@@ -1,15 +1,35 @@
 var utils = require("./utils/utils.js");
 
-const getKPIs = (docsCW) => {
-  // ===== MENTIONS OF CATEGORIES OF INTEREST BY MARKET (menorca)  ========
+const getKPIs = (docsCW, discardedDocsCW) => {
+  // ===== MENTIONS OF CATEGORIES OF INTEREST BY MARKET (Menorca)  ========
   // Categories of Interest = tourism, covid and covid + tourism
-  let categoriesOfInterestBalearenNews = docsCW
-    .filter(utils.balearenMention)
-    .filter(utils.categoriesOfInterest);
 
-  let categoriesOfInterestMenorcaNews = docsCW
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
+
+  let tourismAndBothBalearenNews = docsCW
+    .filter(utils.balearenMention)
+    .filter(utils.tourismAndBothCategories);
+
+  let covidBalearenNews = allDocsCW
+    .filter(utils.balearenMention)
+    .filter(utils.covidCategory);
+
+  let categoriesOfInterestBalearenNews = tourismAndBothBalearenNews.concat(
+    covidBalearenNews
+  );
+
+  let tourismAndBothMenorcaNews = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest);
+    .filter(utils.tourismAndBothCategories);
+
+  let covidMenorcaNews = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory);
+
+  let categoriesOfInterestMenorcaNews = tourismAndBothMenorcaNews.concat(
+    covidMenorcaNews
+  );
 
   let categoriesOfInterestBalearenMentions =
     categoriesOfInterestBalearenNews.length;
@@ -18,10 +38,18 @@ const getKPIs = (docsCW) => {
     categoriesOfInterestMenorcaNews.length;
 
   // Spain
-  let mentionsCategoriesOfInterestMenorcaFromSpain = docsCW
+  let mentionsTourismAndBothMenorcaFromSpain = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSpain).length;
+
+  let mentionsCovidMenorcaFromSpain = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSpain).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromSpain =
+    mentionsTourismAndBothMenorcaFromSpain + mentionsCovidMenorcaFromSpain;
 
   let mentionsTourismMenorcaFromSpainPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromSpain,
@@ -33,7 +61,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromSpainPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromSpain,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSpain).length
@@ -48,10 +76,19 @@ const getKPIs = (docsCW) => {
   );
 
   // United Kingdom
-  let mentionsCategoriesOfInterestMenorcaFromUnitedKingdom = docsCW
+  let mentionsTourismAndBothMenorcaFromUnitedKingdom = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromUnitedKingdom).length;
+
+  let mentionsCovidMenorcaFromUnitedKingdom = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromUnitedKingdom).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromUnitedKingdom =
+    mentionsTourismAndBothMenorcaFromUnitedKingdom +
+    mentionsCovidMenorcaFromUnitedKingdom;
 
   let mentionsTourismMenorcaFromUnitedKingdomPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromUnitedKingdom,
@@ -63,7 +100,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromUnitedKingdomPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromUnitedKingdom,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromUnitedKingdom).length
@@ -78,10 +115,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Germany
-  let mentionsCategoriesOfInterestMenorcaFromGermany = docsCW
+  let mentionsTourismAndBothMenorcaFromGermany = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromGermany).length;
+
+  let mentionsCovidMenorcaFromGermany = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromGermany).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromGermany =
+    mentionsTourismAndBothMenorcaFromGermany + mentionsCovidMenorcaFromGermany;
 
   let mentionsTourismMenorcaFromGermanyPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromGermany,
@@ -93,7 +138,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromGermanyPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromGermany,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromGermany).length
@@ -108,10 +153,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Italy
-  let mentionsCategoriesOfInterestMenorcaFromItaly = docsCW
+  let mentionsTourismAndBothMenorcaFromItaly = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromItaly).length;
+
+  let mentionsCovidMenorcaFromItaly = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromItaly).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromItaly =
+    mentionsTourismAndBothMenorcaFromItaly + mentionsCovidMenorcaFromItaly;
 
   let mentionsTourismMenorcaFromItalyPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromItaly,
@@ -123,7 +176,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromItalyPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromItaly,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromItaly).length
@@ -138,10 +191,18 @@ const getKPIs = (docsCW) => {
   );
 
   // France
-  let mentionsCategoriesOfInterestMenorcaFromFrance = docsCW
+  let mentionsTourismAndBothMenorcaFromFrance = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromFrance).length;
+
+  let mentionsCovidMenorcaFromFrance = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromFrance).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromFrance =
+    mentionsTourismAndBothMenorcaFromFrance + mentionsCovidMenorcaFromFrance;
 
   let mentionsTourismMenorcaFromFrancePercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromFrance,
@@ -153,7 +214,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromFrancePercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromFrance,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromFrance).length
@@ -168,10 +229,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Sweden
-  let mentionsCategoriesOfInterestMenorcaFromSweden = docsCW
+  let mentionsTourismAndBothMenorcaFromSweden = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden).length;
+
+  let mentionsCovidMenorcaFromSweden = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromSweden =
+    mentionsTourismAndBothMenorcaFromSweden + mentionsCovidMenorcaFromSweden;
 
   let mentionsTourismMenorcaFromSwedenPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromSweden,
@@ -183,7 +252,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromSwedenPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -198,10 +267,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Switzerland
-  let mentionsCategoriesOfInterestMenorcaFromSwitzerland = docsCW
+  let mentionsTourismAndBothMenorcaFromSwitzerland = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSwitzerland).length;
+
+  let mentionsCovidMenorcaFromSwitzerland = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSwitzerland).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromSwitzerland =
+    mentionsTourismAndBothMenorcaFromSwitzerland +
+    mentionsCovidMenorcaFromSwitzerland;
 
   let mentionsTourismMenorcaFromSwitzerlandPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromSwitzerland,
@@ -213,7 +291,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromSwitzerlandPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromSwitzerland,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSwitzerland).length
@@ -228,10 +306,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Netherlands
-  let mentionsCategoriesOfInterestMenorcaFromNetherlands = docsCW
+  let mentionsTourismAndBothMenorcaFromNetherlands = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromNetherlands).length;
+
+  let mentionsCovidMenorcaFromNetherlands = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromNetherlands).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromNetherlands =
+    mentionsTourismAndBothMenorcaFromNetherlands +
+    mentionsCovidMenorcaFromNetherlands;
 
   let mentionsTourismMenorcaFromNetherlandsPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromNetherlands,
@@ -243,7 +330,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromNetherlandsPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromNetherlands,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromNetherlands).length
@@ -258,10 +345,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Austria
-  let mentionsCategoriesOfInterestMenorcaFromAustria = docsCW
+  let mentionsTourismAndBothMenorcaFromAustria = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromAustria).length;
+
+  let mentionsCovidMenorcaFromAustria = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromAustria).length;
+
+  let mentionsCategoriesOfInterestMenorcaFromAustria =
+    mentionsTourismAndBothMenorcaFromAustria + mentionsCovidMenorcaFromAustria;
 
   let mentionsTourismMenorcaFromAustriaPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromAustria,
@@ -273,7 +368,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromAustriaPercent = utils.getPercent(
     mentionsCategoriesOfInterestMenorcaFromAustria,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromAustria).length
@@ -287,7 +382,7 @@ const getKPIs = (docsCW) => {
       .filter(utils.mentionFromAustria).length
   );
 
-  // ===== MENTIONS OF CATEGORIES OF INTEREST (MENORCA)  ========
+  // ===== MENTIONS OF CATEGORIES OF INTEREST (Menorca)  ========
   // Categories of Interest = tourism, covid and covid + tourism
 
   // Menorca
@@ -299,7 +394,8 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaPercent = utils.getPercent(
     categoriesOfInterestMenorcaMentions,
-    docsCW.filter(utils.menorcaIslandMention).filter(utils.covidCategory).length
+    allDocsCW.filter(utils.menorcaIslandMention).filter(utils.covidCategory)
+      .length
   );
 
   let mentionsBothMenorcaPercent = utils.getPercent(
@@ -315,7 +411,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidBalearenPercent = utils.getPercent(
     categoriesOfInterestBalearenMentions,
-    docsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
+    allDocsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let mentionsBothBalearenPercent = utils.getPercent(
@@ -327,7 +423,7 @@ const getKPIs = (docsCW) => {
   let pageRows = [];
   // SOV by country of Menorca
   pageRows.push([
-    "CONVERSA PER PAÏSOS DE MENORCA (Turisme, covid i covid + turisme)",
+    "CONVERSA PER PAÏSOS DE Menorca (Turisme, covid i covid + turisme)",
   ]);
   pageRows.push([
     "Pais",
@@ -410,7 +506,7 @@ const getKPIs = (docsCW) => {
   pageRows.push([]);
 
   // SOV of Menorca (Tourism, covid and covid+tourism)
-  pageRows.push(["MENCIONS DE MENORCA (Turisme, covid i covid + turisme)"]);
+  pageRows.push(["MENCIONS DE Menorca (Turisme, covid i covid + turisme)"]);
   pageRows.push(["", "Turisme", "COVID", "Turisme + COVID", "Mencions totals"]);
   pageRows.push([
     "Menorca",
