@@ -31,6 +31,7 @@ var page30 = require("./page30kpis.js");
 var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
+const { covidCategory } = require("./utils/utils.js");
 
 // In production this process will be run every week on monday.
 
@@ -139,11 +140,22 @@ Promise.all([
     let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA);
 
     let discardedDocsWithCountryCW = addData.addCountry(resultsArray[3]);
-    let discardedDocsWithCountryAndFormattedDateCW = addData.addFormattedDate(
+    let discardedDocsWithCountryAndCategoryCW = addData.addCategory(
       discardedDocsWithCountryCW
     );
+    let discardedDocsWithCountryAndCategoryAndFormattedDateCW = addData.addFormattedDate(
+      discardedDocsWithCountryAndCategoryCW
+    );
+
     let discardedDocsWithCountryWA = addData.addCountry(resultsArray[4]);
+    let discardedDocsWithCountryAndCategoryWA = addData.addCategory(
+      discardedDocsWithCountryWA
+    );
+
     let discardedDocsWithCountryTWA = addData.addCountry(resultsArray[5]);
+    let discardedDocsWithCountryAndCategoryTWA = addData.addCategory(
+      discardedDocsWithCountryTWA
+    );
 
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
@@ -153,9 +165,9 @@ Promise.all([
         docsWithCountryAndCategoryAndFormattedDateCW,
         docsWithCountryAndCategoryWA,
         docsWithCountryAndCategoryTWA,
-        discardedDocsWithCountryAndFormattedDateCW,
-        discardedDocsWithCountryWA,
-        discardedDocsWithCountryTWA,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryWA,
+        discardedDocsWithCountryAndCategoryTWA,
         currentWeekDates,
         weekAgoDates,
         twoWeeksAgoDates
@@ -168,7 +180,7 @@ Promise.all([
       path.join(output_path, "page8_news.csv"),
       page8.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
-        discardedDocsWithCountryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
       )
     );
@@ -179,7 +191,7 @@ Promise.all([
       path.join(output_path, "page10_news.csv"),
       page10.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
-        discardedDocsWithCountryAndFormattedDateCW
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW
       )
     );
 
@@ -189,6 +201,7 @@ Promise.all([
       path.join(output_path, "page12_news.csv"),
       page12.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
+        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
       )
     );

@@ -6,17 +6,17 @@ var utils = require("./utils/utils.js");
 const getKPIs = (docsCW, discardedDocsCW) => {
   // ============= SOV BY CATEGORY AND MARKET  (country) ================
   // let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
   //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
-  let totalMentionsCW =
-    docsCW.filter(utils.balearenMention).length +
-    discardedDocsCW.filter(utils.balearenMention).length;
+  let totalMentionsCW = allDocsCW.filter(utils.balearenMention).length;
 
   // Totals (only by category)
   let tourismMentions = docsCW
     .filter(utils.balearenMention)
     .filter(utils.tourismCategory).length;
 
-  let covidMentions = docsCW
+  let covidMentions = allDocsCW
     .filter(utils.balearenMention)
     .filter(utils.covidCategory).length;
 
@@ -44,7 +44,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromSpainPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSpain).length
@@ -69,7 +69,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromUnitedKingdomPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromUnitedKingdom).length
@@ -94,7 +94,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromGermanyPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromGermany).length
@@ -119,7 +119,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromItalyPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromItaly).length
@@ -144,7 +144,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromFrancePercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromFrance).length
@@ -169,7 +169,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromSwedenPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -194,7 +194,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromSwitzerlandPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSwitzerland).length
@@ -219,7 +219,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromNetherlandsPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromNetherlands).length
@@ -244,7 +244,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
 
   let covidMentionsFromAustriaPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromAustria).length

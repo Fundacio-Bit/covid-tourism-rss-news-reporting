@@ -12,12 +12,10 @@ const getKPIs = (
   datesWA,
   datesTWA
 ) => {
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
   //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
-  let totalMentionsCW =
-    docsCW.filter(utils.balearenMention).length +
-    discardedDocsCW.filter(utils.balearenMention).length;
-
-  // // Balearen Mentions (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsCW = allDocsCW.filter(utils.balearenMention).length;
 
   let balearenTourismAndBothMentionsCountCW = docsCW
     .filter(utils.balearenMention)
@@ -35,9 +33,10 @@ const getKPIs = (
     docsCW.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
+  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
   let covidBalearenMentionsCWPercent = utils.getPercent(
     totalMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
+    allDocsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let bothBalearenMentionsCWPercent = utils.getPercent(
@@ -54,21 +53,20 @@ const getKPIs = (
 
   // ============= SOV PER CATEGORY A WEEK AGO (WA) ================
 
-  // Balearic Islands KPIs
-  // let balearenMentionsWA = docsWA.filter(utils.balearenMention).length;
-
-  let totalMentionsWA =
-    docsWA.filter(utils.balearenMention).length +
-    discardedDocsWA.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocsWA = docsWA.concat(discardedDocsWA);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsWA = allDocsWA.filter(utils.balearenMention).length;
 
   let tourismBalearenMentionsWAPercent = utils.getPercent(
     totalMentionsWA,
     docsWA.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
+  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
   let covidBalearenMentionsWAPercent = utils.getPercent(
     totalMentionsWA,
-    docsWA.filter(utils.balearenMention).filter(utils.covidCategory).length
+    allDocsWA.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let bothBalearenMentionsWAPercent = utils.getPercent(
@@ -85,20 +83,20 @@ const getKPIs = (
 
   // ============= SOV PER CATEGORY TWO WEEKS AGO (TWA) ================
 
-  // Balearic Islands KPIs
-  // let balearenMentionsTWA = docsTWA.filter(utils.balearenMention).length;
-  let totalMentionsTWA =
-    docsTWA.filter(utils.balearenMention).length +
-    discardedDocsTWA.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocsTWA = docsTWA.concat(discardedDocsTWA);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsTWA = allDocsTWA.filter(utils.balearenMention).length;
 
   let tourismBalearenMentionsTWAPercent = utils.getPercent(
     totalMentionsTWA,
     docsTWA.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
+  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
   let covidBalearenMentionsTWAPercent = utils.getPercent(
     totalMentionsTWA,
-    docsTWA.filter(utils.balearenMention).filter(utils.covidCategory).length
+    allDocsTWA.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let bothBalearenMentionsTWAPercent = utils.getPercent(
@@ -117,9 +115,17 @@ const getKPIs = (
   // calculate Balearen time series
   var balearenTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let balearenTimeSeriesDocs = docsCW
+  let balearenTourismAndBothDocs = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.categoriesOfInterest);
+    .filter(utils.tourismAndBothCategories);
+
+  let balearenCovidDocs = allDocsCW
+    .filter(utils.balearenMention)
+    .filter(utils.covidCategory);
+
+  let balearenTimeSeriesDocs = balearenTourismAndBothDocs.concat(
+    balearenCovidDocs
+  );
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
