@@ -263,30 +263,30 @@ const getKPIs = (docsCW, discardedDocsCW) => {
   // TOTALS (only by island)
   let bothBalearenMentions = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.bothCategory).length;
+    .filter(utils.tourismAndBothCategories).length;
 
   let bothMallorcaMentions = docsCW
     .filter(utils.mallorcaIslandMention)
-    .filter(utils.bothCategory).length;
+    .filter(utils.tourismAndBothCategories).length;
 
   let bothMenorcaMentions = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.bothCategory).length;
+    .filter(utils.tourismAndBothCategories).length;
 
   let bothIbizaMentions = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.bothCategory).length;
+    .filter(utils.tourismAndBothCategories).length;
 
   let bothFormenteraMentions = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.bothCategory).length;
+    .filter(utils.tourismAndBothCategories).length;
 
   // Spain mentions to tourism + covid (by market and island)
   let bothBalearenMentionsFromSpainPercent = utils.getPercent(
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSpain).length
   );
 
@@ -294,7 +294,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSpain).length
   );
 
@@ -302,7 +302,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSpain).length
   );
 
@@ -310,7 +310,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSpain).length
   );
 
@@ -318,7 +318,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSpain).length
   );
 
@@ -327,7 +327,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromUnitedKingdom).length
   );
 
@@ -335,7 +335,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromUnitedKingdom).length
   );
 
@@ -343,7 +343,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromUnitedKingdom).length
   );
 
@@ -351,7 +351,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromUnitedKingdom).length
   );
 
@@ -359,7 +359,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromUnitedKingdom).length
   );
 
@@ -368,7 +368,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromGermany).length
   );
 
@@ -376,7 +376,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromGermany).length
   );
 
@@ -384,7 +384,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromGermany).length
   );
 
@@ -392,7 +392,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromGermany).length
   );
 
@@ -400,7 +400,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromGermany).length
   );
 
@@ -409,7 +409,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromItaly).length
   );
 
@@ -417,7 +417,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromItaly).length
   );
 
@@ -425,7 +425,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromItaly).length
   );
 
@@ -433,7 +433,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromItaly).length
   );
 
@@ -441,7 +441,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromItaly).length
   );
 
@@ -450,7 +450,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromFrance).length
   );
 
@@ -458,7 +458,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromFrance).length
   );
 
@@ -466,7 +466,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromFrance).length
   );
 
@@ -474,7 +474,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromFrance).length
   );
 
@@ -482,7 +482,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromFrance).length
   );
 
@@ -491,7 +491,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSweden).length
   );
 
@@ -499,7 +499,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSweden).length
   );
 
@@ -507,7 +507,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSweden).length
   );
 
@@ -515,7 +515,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSweden).length
   );
 
@@ -523,7 +523,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSweden).length
   );
 
@@ -532,7 +532,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSwitzerland).length
   );
 
@@ -540,7 +540,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSwitzerland).length
   );
 
@@ -548,7 +548,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSwitzerland).length
   );
 
@@ -556,7 +556,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSwitzerland).length
   );
 
@@ -564,7 +564,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromSwitzerland).length
   );
 
@@ -573,7 +573,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromNetherlands).length
   );
 
@@ -581,7 +581,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromNetherlands).length
   );
 
@@ -589,7 +589,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromNetherlands).length
   );
 
@@ -597,7 +597,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromNetherlands).length
   );
 
@@ -605,7 +605,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromNetherlands).length
   );
 
@@ -614,7 +614,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothBalearenMentions,
     docsCW
       .filter(utils.balearenMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromAustria).length
   );
 
@@ -622,7 +622,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMallorcaMentions,
     docsCW
       .filter(utils.mallorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromAustria).length
   );
 
@@ -630,7 +630,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothMenorcaMentions,
     docsCW
       .filter(utils.menorcaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromAustria).length
   );
 
@@ -638,7 +638,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothIbizaMentions,
     docsCW
       .filter(utils.ibizaIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromAustria).length
   );
 
@@ -646,7 +646,7 @@ const getKPIs = (docsCW, discardedDocsCW) => {
     bothFormenteraMentions,
     docsCW
       .filter(utils.formenteraIslandMention)
-      .filter(utils.bothCategory)
+      .filter(utils.tourismAndBothCategories)
       .filter(utils.mentionFromAustria).length
   );
 
