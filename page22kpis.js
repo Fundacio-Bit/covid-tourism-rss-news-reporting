@@ -1,15 +1,35 @@
 var utils = require("./utils/utils.js");
 
-const getKPIs = (docsCW) => {
-  // ===== MENTIONS OF CATEGORIES OF INTEREST BY MARKET (FORMENTERA)  ========
+const getKPIs = (docsCW, discardedDocsCW) => {
+  // ===== MENTIONS OF CATEGORIES OF INTEREST BY MARKET (formentera)  ========
   // Categories of Interest = tourism, covid and covid + tourism
-  let categoriesOfInterestBalearenNews = docsCW
-    .filter(utils.balearenMention)
-    .filter(utils.categoriesOfInterest);
 
-  let categoriesOfInterestFormenteraNews = docsCW
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
+
+  let tourismAndBothBalearenNews = docsCW
+    .filter(utils.balearenMention)
+    .filter(utils.tourismAndBothCategories);
+
+  let covidBalearenNews = allDocsCW
+    .filter(utils.balearenMention)
+    .filter(utils.covidCategory);
+
+  let categoriesOfInterestBalearenNews = tourismAndBothBalearenNews.concat(
+    covidBalearenNews
+  );
+
+  let tourismAndBothFormenteraNews = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest);
+    .filter(utils.tourismAndBothCategories);
+
+  let covidFormenteraNews = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory);
+
+  let categoriesOfInterestFormenteraNews = tourismAndBothFormenteraNews.concat(
+    covidFormenteraNews
+  );
 
   let categoriesOfInterestBalearenMentions =
     categoriesOfInterestBalearenNews.length;
@@ -18,10 +38,19 @@ const getKPIs = (docsCW) => {
     categoriesOfInterestFormenteraNews.length;
 
   // Spain
-  let mentionsCategoriesOfInterestFormenteraFromSpain = docsCW
+  let mentionsTourismAndBothFormenteraFromSpain = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSpain).length;
+
+  let mentionsCovidFormenteraFromSpain = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSpain).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromSpain =
+    mentionsTourismAndBothFormenteraFromSpain +
+    mentionsCovidFormenteraFromSpain;
 
   let mentionsTourismFormenteraFromSpainPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromSpain,
@@ -33,7 +62,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromSpainPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromSpain,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSpain).length
@@ -48,10 +77,19 @@ const getKPIs = (docsCW) => {
   );
 
   // United Kingdom
-  let mentionsCategoriesOfInterestFormenteraFromUnitedKingdom = docsCW
+  let mentionsTourismAndBothFormenteraFromUnitedKingdom = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromUnitedKingdom).length;
+
+  let mentionsCovidFormenteraFromUnitedKingdom = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromUnitedKingdom).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromUnitedKingdom =
+    mentionsTourismAndBothFormenteraFromUnitedKingdom +
+    mentionsCovidFormenteraFromUnitedKingdom;
 
   let mentionsTourismFormenteraFromUnitedKingdomPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromUnitedKingdom,
@@ -63,7 +101,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromUnitedKingdomPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromUnitedKingdom,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromUnitedKingdom).length
@@ -78,10 +116,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Germany
-  let mentionsCategoriesOfInterestFormenteraFromGermany = docsCW
+  let mentionsTourismAndBothFormenteraFromGermany = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromGermany).length;
+
+  let mentionsCovidFormenteraFromGermany = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromGermany).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromGermany =
+    mentionsTourismAndBothFormenteraFromGermany +
+    mentionsCovidFormenteraFromGermany;
 
   let mentionsTourismFormenteraFromGermanyPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromGermany,
@@ -93,7 +140,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromGermanyPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromGermany,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromGermany).length
@@ -108,10 +155,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Italy
-  let mentionsCategoriesOfInterestFormenteraFromItaly = docsCW
+  let mentionsTourismAndBothFormenteraFromItaly = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromItaly).length;
+
+  let mentionsCovidFormenteraFromItaly = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromItaly).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromItaly =
+    mentionsTourismAndBothFormenteraFromItaly +
+    mentionsCovidFormenteraFromItaly;
 
   let mentionsTourismFormenteraFromItalyPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromItaly,
@@ -123,7 +179,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromItalyPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromItaly,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromItaly).length
@@ -138,10 +194,19 @@ const getKPIs = (docsCW) => {
   );
 
   // France
-  let mentionsCategoriesOfInterestFormenteraFromFrance = docsCW
+  let mentionsTourismAndBothFormenteraFromFrance = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromFrance).length;
+
+  let mentionsCovidFormenteraFromFrance = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromFrance).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromFrance =
+    mentionsTourismAndBothFormenteraFromFrance +
+    mentionsCovidFormenteraFromFrance;
 
   let mentionsTourismFormenteraFromFrancePercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromFrance,
@@ -153,7 +218,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromFrancePercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromFrance,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromFrance).length
@@ -168,10 +233,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Sweden
-  let mentionsCategoriesOfInterestFormenteraFromSweden = docsCW
+  let mentionsTourismAndBothFormenteraFromSweden = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden).length;
+
+  let mentionsCovidFormenteraFromSweden = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromSweden =
+    mentionsTourismAndBothFormenteraFromSweden +
+    mentionsCovidFormenteraFromSweden;
 
   let mentionsTourismFormenteraFromSwedenPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromSweden,
@@ -183,7 +257,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromSwedenPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -198,10 +272,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Switzerland
-  let mentionsCategoriesOfInterestFormenteraFromSwitzerland = docsCW
+  let mentionsTourismAndBothFormenteraFromSwitzerland = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSwitzerland).length;
+
+  let mentionsCovidFormenteraFromSwitzerland = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSwitzerland).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromSwitzerland =
+    mentionsTourismAndBothFormenteraFromSwitzerland +
+    mentionsCovidFormenteraFromSwitzerland;
 
   let mentionsTourismFormenteraFromSwitzerlandPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromSwitzerland,
@@ -213,7 +296,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromSwitzerlandPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromSwitzerland,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSwitzerland).length
@@ -228,10 +311,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Netherlands
-  let mentionsCategoriesOfInterestFormenteraFromNetherlands = docsCW
+  let mentionsTourismAndBothFormenteraFromNetherlands = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromNetherlands).length;
+
+  let mentionsCovidFormenteraFromNetherlands = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromNetherlands).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromNetherlands =
+    mentionsTourismAndBothFormenteraFromNetherlands +
+    mentionsCovidFormenteraFromNetherlands;
 
   let mentionsTourismFormenteraFromNetherlandsPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromNetherlands,
@@ -243,7 +335,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromNetherlandsPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromNetherlands,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromNetherlands).length
@@ -258,10 +350,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Austria
-  let mentionsCategoriesOfInterestFormenteraFromAustria = docsCW
+  let mentionsTourismAndBothFormenteraFromAustria = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromAustria).length;
+
+  let mentionsCovidFormenteraFromAustria = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromAustria).length;
+
+  let mentionsCategoriesOfInterestFormenteraFromAustria =
+    mentionsTourismAndBothFormenteraFromAustria +
+    mentionsCovidFormenteraFromAustria;
 
   let mentionsTourismFormenteraFromAustriaPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromAustria,
@@ -273,7 +374,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromAustriaPercent = utils.getPercent(
     mentionsCategoriesOfInterestFormenteraFromAustria,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromAustria).length
@@ -287,7 +388,7 @@ const getKPIs = (docsCW) => {
       .filter(utils.mentionFromAustria).length
   );
 
-  // ===== MENTIONS OF CATEGORIES OF INTEREST (FORMENTERA)  ========
+  // ===== MENTIONS OF CATEGORIES OF INTEREST (Formentera)  ========
   // Categories of Interest = tourism, covid and covid + tourism
 
   // Formentera
@@ -299,7 +400,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraPercent = utils.getPercent(
     categoriesOfInterestFormenteraMentions,
-    docsCW.filter(utils.formenteraIslandMention).filter(utils.covidCategory)
+    allDocsCW.filter(utils.formenteraIslandMention).filter(utils.covidCategory)
       .length
   );
 
@@ -309,7 +410,7 @@ const getKPIs = (docsCW) => {
       .length
   );
 
-  // Balearen (Balearic islands + Formentera, Formentera + Formentera + Formentera)
+  // Balearen (Balearic islands + Mallorca, Menorca + Formentera + Formentera)
   let mentionsTourismBalearenPercent = utils.getPercent(
     categoriesOfInterestBalearenMentions,
     docsCW.filter(utils.balearenMention).filter(utils.tourismCategory).length
@@ -317,7 +418,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidBalearenPercent = utils.getPercent(
     categoriesOfInterestBalearenMentions,
-    docsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
+    allDocsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let mentionsBothBalearenPercent = utils.getPercent(

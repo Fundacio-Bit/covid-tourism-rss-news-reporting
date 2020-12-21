@@ -1,15 +1,35 @@
 var utils = require("./utils/utils.js");
 
-const getKPIs = (docsCW) => {
-  // ===== MENTIONS OF CATEGORIES OF INTEREST BY MARKET (IBIZA)  ========
+const getKPIs = (docsCW, discardedDocsCW) => {
+  // ===== MENTIONS OF CATEGORIES OF INTEREST BY MARKET (ibiza)  ========
   // Categories of Interest = tourism, covid and covid + tourism
-  let categoriesOfInterestBalearenNews = docsCW
-    .filter(utils.balearenMention)
-    .filter(utils.categoriesOfInterest);
 
-  let categoriesOfInterestIbizaNews = docsCW
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
+
+  let tourismAndBothBalearenNews = docsCW
+    .filter(utils.balearenMention)
+    .filter(utils.tourismAndBothCategories);
+
+  let covidBalearenNews = allDocsCW
+    .filter(utils.balearenMention)
+    .filter(utils.covidCategory);
+
+  let categoriesOfInterestBalearenNews = tourismAndBothBalearenNews.concat(
+    covidBalearenNews
+  );
+
+  let tourismAndBothIbizaNews = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest);
+    .filter(utils.tourismAndBothCategories);
+
+  let covidIbizaNews = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory);
+
+  let categoriesOfInterestIbizaNews = tourismAndBothIbizaNews.concat(
+    covidIbizaNews
+  );
 
   let categoriesOfInterestBalearenMentions =
     categoriesOfInterestBalearenNews.length;
@@ -17,10 +37,18 @@ const getKPIs = (docsCW) => {
   let categoriesOfInterestIbizaMentions = categoriesOfInterestIbizaNews.length;
 
   // Spain
-  let mentionsCategoriesOfInterestIbizaFromSpain = docsCW
+  let mentionsTourismAndBothIbizaFromSpain = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSpain).length;
+
+  let mentionsCovidIbizaFromSpain = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSpain).length;
+
+  let mentionsCategoriesOfInterestIbizaFromSpain =
+    mentionsTourismAndBothIbizaFromSpain + mentionsCovidIbizaFromSpain;
 
   let mentionsTourismIbizaFromSpainPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromSpain,
@@ -32,7 +60,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromSpainPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromSpain,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSpain).length
@@ -47,10 +75,19 @@ const getKPIs = (docsCW) => {
   );
 
   // United Kingdom
-  let mentionsCategoriesOfInterestIbizaFromUnitedKingdom = docsCW
+  let mentionsTourismAndBothIbizaFromUnitedKingdom = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromUnitedKingdom).length;
+
+  let mentionsCovidIbizaFromUnitedKingdom = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromUnitedKingdom).length;
+
+  let mentionsCategoriesOfInterestIbizaFromUnitedKingdom =
+    mentionsTourismAndBothIbizaFromUnitedKingdom +
+    mentionsCovidIbizaFromUnitedKingdom;
 
   let mentionsTourismIbizaFromUnitedKingdomPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromUnitedKingdom,
@@ -62,7 +99,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromUnitedKingdomPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromUnitedKingdom,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromUnitedKingdom).length
@@ -77,10 +114,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Germany
-  let mentionsCategoriesOfInterestIbizaFromGermany = docsCW
+  let mentionsTourismAndBothIbizaFromGermany = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromGermany).length;
+
+  let mentionsCovidIbizaFromGermany = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromGermany).length;
+
+  let mentionsCategoriesOfInterestIbizaFromGermany =
+    mentionsTourismAndBothIbizaFromGermany + mentionsCovidIbizaFromGermany;
 
   let mentionsTourismIbizaFromGermanyPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromGermany,
@@ -92,7 +137,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromGermanyPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromGermany,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromGermany).length
@@ -107,10 +152,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Italy
-  let mentionsCategoriesOfInterestIbizaFromItaly = docsCW
+  let mentionsTourismAndBothIbizaFromItaly = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromItaly).length;
+
+  let mentionsCovidIbizaFromItaly = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromItaly).length;
+
+  let mentionsCategoriesOfInterestIbizaFromItaly =
+    mentionsTourismAndBothIbizaFromItaly + mentionsCovidIbizaFromItaly;
 
   let mentionsTourismIbizaFromItalyPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromItaly,
@@ -122,7 +175,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromItalyPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromItaly,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromItaly).length
@@ -137,10 +190,18 @@ const getKPIs = (docsCW) => {
   );
 
   // France
-  let mentionsCategoriesOfInterestIbizaFromFrance = docsCW
+  let mentionsTourismAndBothIbizaFromFrance = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromFrance).length;
+
+  let mentionsCovidIbizaFromFrance = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromFrance).length;
+
+  let mentionsCategoriesOfInterestIbizaFromFrance =
+    mentionsTourismAndBothIbizaFromFrance + mentionsCovidIbizaFromFrance;
 
   let mentionsTourismIbizaFromFrancePercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromFrance,
@@ -152,7 +213,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromFrancePercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromFrance,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromFrance).length
@@ -167,10 +228,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Sweden
-  let mentionsCategoriesOfInterestIbizaFromSweden = docsCW
+  let mentionsTourismAndBothIbizaFromSweden = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden).length;
+
+  let mentionsCovidIbizaFromSweden = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden).length;
+
+  let mentionsCategoriesOfInterestIbizaFromSweden =
+    mentionsTourismAndBothIbizaFromSweden + mentionsCovidIbizaFromSweden;
 
   let mentionsTourismIbizaFromSwedenPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromSweden,
@@ -182,7 +251,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromSwedenPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -197,10 +266,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Switzerland
-  let mentionsCategoriesOfInterestIbizaFromSwitzerland = docsCW
+  let mentionsTourismAndBothIbizaFromSwitzerland = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSwitzerland).length;
+
+  let mentionsCovidIbizaFromSwitzerland = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSwitzerland).length;
+
+  let mentionsCategoriesOfInterestIbizaFromSwitzerland =
+    mentionsTourismAndBothIbizaFromSwitzerland +
+    mentionsCovidIbizaFromSwitzerland;
 
   let mentionsTourismIbizaFromSwitzerlandPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromSwitzerland,
@@ -212,7 +290,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromSwitzerlandPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromSwitzerland,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSwitzerland).length
@@ -227,10 +305,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Netherlands
-  let mentionsCategoriesOfInterestIbizaFromNetherlands = docsCW
+  let mentionsTourismAndBothIbizaFromNetherlands = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromNetherlands).length;
+
+  let mentionsCovidIbizaFromNetherlands = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromNetherlands).length;
+
+  let mentionsCategoriesOfInterestIbizaFromNetherlands =
+    mentionsTourismAndBothIbizaFromNetherlands +
+    mentionsCovidIbizaFromNetherlands;
 
   let mentionsTourismIbizaFromNetherlandsPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromNetherlands,
@@ -242,7 +329,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromNetherlandsPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromNetherlands,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromNetherlands).length
@@ -257,10 +344,18 @@ const getKPIs = (docsCW) => {
   );
 
   // Austria
-  let mentionsCategoriesOfInterestIbizaFromAustria = docsCW
+  let mentionsTourismAndBothIbizaFromAustria = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromAustria).length;
+
+  let mentionsCovidIbizaFromAustria = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromAustria).length;
+
+  let mentionsCategoriesOfInterestIbizaFromAustria =
+    mentionsTourismAndBothIbizaFromAustria + mentionsCovidIbizaFromAustria;
 
   let mentionsTourismIbizaFromAustriaPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromAustria,
@@ -272,7 +367,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromAustriaPercent = utils.getPercent(
     mentionsCategoriesOfInterestIbizaFromAustria,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromAustria).length
@@ -286,7 +381,7 @@ const getKPIs = (docsCW) => {
       .filter(utils.mentionFromAustria).length
   );
 
-  // ===== MENTIONS OF CATEGORIES OF INTEREST (IBIZA)  ========
+  // ===== MENTIONS OF CATEGORIES OF INTEREST (Ibiza)  ========
   // Categories of Interest = tourism, covid and covid + tourism
 
   // Ibiza
@@ -297,7 +392,8 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaPercent = utils.getPercent(
     categoriesOfInterestIbizaMentions,
-    docsCW.filter(utils.ibizaIslandMention).filter(utils.covidCategory).length
+    allDocsCW.filter(utils.ibizaIslandMention).filter(utils.covidCategory)
+      .length
   );
 
   let mentionsBothIbizaPercent = utils.getPercent(
@@ -305,7 +401,7 @@ const getKPIs = (docsCW) => {
     docsCW.filter(utils.ibizaIslandMention).filter(utils.bothCategory).length
   );
 
-  // Balearen (Balearic islands + Ibiza, Ibiza + Ibiza + Formentera)
+  // Balearen (Balearic islands + Mallorca, Menorca + Ibiza + Formentera)
   let mentionsTourismBalearenPercent = utils.getPercent(
     categoriesOfInterestBalearenMentions,
     docsCW.filter(utils.balearenMention).filter(utils.tourismCategory).length
@@ -313,7 +409,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidBalearenPercent = utils.getPercent(
     categoriesOfInterestBalearenMentions,
-    docsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
+    allDocsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let mentionsBothBalearenPercent = utils.getPercent(

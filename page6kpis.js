@@ -1,95 +1,131 @@
 // var csv_manager = require("./create-csv.js");
 var utils = require("./utils/utils.js");
 
-const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
-  // Total Mentions (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
-  // let totalMentionsCountCW = docsCW.length;
-  let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+const getKPIs = (
+  docsCW,
+  docsWA,
+  docsTWA,
+  discardedDocsCW,
+  discardedDocsWA,
+  discardedDocsTWA,
+  datesCW,
+  datesWA,
+  datesTWA
+) => {
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsCW = allDocsCW.filter(utils.balearenMention).length;
+
   let balearenTourismAndBothMentionsCountCW = docsCW
     .filter(utils.balearenMention)
     .filter(utils.tourismAndBothCategories).length;
+
   let balearenTourismAndBothMentionsPercentCW = utils.getPercent(
-    balearenMentionsCW,
+    totalMentionsCW,
     balearenTourismAndBothMentionsCountCW
   );
 
   // ============= SOV PER CATEGORY CURRENT WEEK================
   // let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
   let tourismBalearenMentionsCWPercent = utils.getPercent(
-    balearenMentionsCW,
+    totalMentionsCW,
     docsCW.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
+  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
   let covidBalearenMentionsCWPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
+    totalMentionsCW,
+    allDocsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let bothBalearenMentionsCWPercent = utils.getPercent(
-    balearenMentionsCW,
+    totalMentionsCW,
     docsCW.filter(utils.balearenMention).filter(utils.bothCategory).length
   );
 
-  let otherBalearenMentionsCWPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.otherCategory).length
-  );
+  let otherBalearenMentionsCWPercent = (
+    100 -
+    parseFloat(tourismBalearenMentionsCWPercent.replace(",", ".")) -
+    parseFloat(covidBalearenMentionsCWPercent.replace(",", ".")) -
+    parseFloat(bothBalearenMentionsCWPercent.replace(",", "."))
+  ).toFixed(2);
 
   // ============= SOV PER CATEGORY A WEEK AGO (WA) ================
 
-  // Balearic Islands KPIs
-  let balearenMentionsWA = docsWA.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocsWA = docsWA.concat(discardedDocsWA);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsWA = allDocsWA.filter(utils.balearenMention).length;
+
   let tourismBalearenMentionsWAPercent = utils.getPercent(
-    balearenMentionsWA,
+    totalMentionsWA,
     docsWA.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
+  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
   let covidBalearenMentionsWAPercent = utils.getPercent(
-    balearenMentionsWA,
-    docsWA.filter(utils.balearenMention).filter(utils.covidCategory).length
+    totalMentionsWA,
+    allDocsWA.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let bothBalearenMentionsWAPercent = utils.getPercent(
-    balearenMentionsWA,
+    totalMentionsWA,
     docsWA.filter(utils.balearenMention).filter(utils.bothCategory).length
   );
 
-  let otherBalearenMentionsWAPercent = utils.getPercent(
-    balearenMentionsWA,
-    docsWA.filter(utils.balearenMention).filter(utils.otherCategory).length
-  );
+  let otherBalearenMentionsWAPercent = (
+    100 -
+    parseFloat(tourismBalearenMentionsWAPercent.replace(",", ".")) -
+    parseFloat(covidBalearenMentionsWAPercent.replace(",", ".")) -
+    parseFloat(bothBalearenMentionsWAPercent.replace(",", "."))
+  ).toFixed(2);
 
   // ============= SOV PER CATEGORY TWO WEEKS AGO (TWA) ================
 
-  // Balearic Islands KPIs
-  let balearenMentionsTWA = docsTWA.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocsTWA = docsTWA.concat(discardedDocsTWA);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsTWA = allDocsTWA.filter(utils.balearenMention).length;
+
   let tourismBalearenMentionsTWAPercent = utils.getPercent(
-    balearenMentionsTWA,
+    totalMentionsTWA,
     docsTWA.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
+  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
   let covidBalearenMentionsTWAPercent = utils.getPercent(
-    balearenMentionsTWA,
-    docsTWA.filter(utils.balearenMention).filter(utils.covidCategory).length
+    totalMentionsTWA,
+    allDocsTWA.filter(utils.balearenMention).filter(utils.covidCategory).length
   );
 
   let bothBalearenMentionsTWAPercent = utils.getPercent(
-    balearenMentionsTWA,
+    totalMentionsTWA,
     docsTWA.filter(utils.balearenMention).filter(utils.bothCategory).length
   );
 
-  let otherBalearenMentionsTWAPercent = utils.getPercent(
-    balearenMentionsTWA,
-    docsTWA.filter(utils.balearenMention).filter(utils.otherCategory).length
-  );
+  let otherBalearenMentionsTWAPercent = (
+    100 -
+    parseFloat(tourismBalearenMentionsTWAPercent.replace(",", ".")) -
+    parseFloat(covidBalearenMentionsTWAPercent.replace(",", ".")) -
+    parseFloat(bothBalearenMentionsTWAPercent.replace(",", "."))
+  ).toFixed(2);
 
   // ============= Time series Balearen vs Spain (tourism, covid, tourism+covid) ================
   // calculate Balearen time series
   var balearenTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let balearenTimeSeriesDocs = docsCW
+  let balearenTourismAndBothDocs = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.categoriesOfInterest);
+    .filter(utils.tourismAndBothCategories);
+
+  let balearenCovidDocs = allDocsCW
+    .filter(utils.balearenMention)
+    .filter(utils.covidCategory);
+
+  let balearenTimeSeriesDocs = balearenTourismAndBothDocs.concat(
+    balearenCovidDocs
+  );
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
@@ -104,7 +140,7 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
 
   let pageRows = [];
   // Total Mentions and tourism percent
-  pageRows.push(["Mencions a Balears i/o les illes ", balearenMentionsCW]);
+  pageRows.push(["Mencions a Balears i/o les illes ", totalMentionsCW]);
   pageRows.push([
     "Percentatge de mencions de turisme (inclou turisme i turisme + covid)",
     balearenTourismAndBothMentionsPercentCW,
@@ -119,14 +155,14 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   pageRows.push(["SOV PER TEMÀTICA (de Balears)"]);
   pageRows.push(["Periode", "turisme", "covid", "turisme + covid", "reste"]);
   pageRows.push([
-    `De ${datesCW[0]} a ${datesCW[6]} (${balearenMentionsCW})`,
+    `De ${datesCW[0]} a ${datesCW[6]} (${totalMentionsCW})`,
     tourismBalearenMentionsCWPercent,
     covidBalearenMentionsCWPercent,
     bothBalearenMentionsCWPercent,
     otherBalearenMentionsCWPercent,
   ]);
   pageRows.push([
-    `De ${datesWA[0]} a ${datesWA[6]} (${balearenMentionsWA})`,
+    `De ${datesWA[0]} a ${datesWA[6]} (${totalMentionsWA})`,
     tourismBalearenMentionsWAPercent,
     covidBalearenMentionsWAPercent,
     bothBalearenMentionsWAPercent,
@@ -134,7 +170,7 @@ const getKPIs = (docsCW, docsWA, docsTWA, datesCW, datesWA, datesTWA) => {
   ]);
 
   pageRows.push([
-    `De ${datesTWA[0]} a ${datesTWA[6]} (${balearenMentionsTWA})`,
+    `De ${datesTWA[0]} a ${datesTWA[6]} (${totalMentionsTWA})`,
     tourismBalearenMentionsTWAPercent,
     covidBalearenMentionsTWAPercent,
     bothBalearenMentionsTWAPercent,

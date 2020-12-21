@@ -1,14 +1,24 @@
 var utils = require("./utils/utils.js");
 
-const getKPIs = (docsCW) => {
+const getKPIs = (docsCW, discardedDocsCW) => {
   // ===== SWEDISH MENTIONS OF CATEGORIES OF INTEREST FOR BALEAREN  ========
-  // Categories of Interest = tourism, covid and covid + tourism
 
-  // Balearen
-  let categoriesOfInterestBalearenNewsFromSweden = docsCW
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
+
+  let tourismAndBothBalearenNewsFromSweden = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden);
+
+  let covidBalearenNewsFromSweden = allDocsCW
+    .filter(utils.balearenMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden);
+
+  let categoriesOfInterestBalearenNewsFromSweden = tourismAndBothBalearenNewsFromSweden.concat(
+    covidBalearenNewsFromSweden
+  );
 
   let categoriesOfInterestBalearenMentionsFromSweden =
     categoriesOfInterestBalearenNewsFromSweden.length;
@@ -23,7 +33,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidBalearenFromSwedenPercent = utils.getPercent(
     categoriesOfInterestBalearenMentionsFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -41,10 +51,19 @@ const getKPIs = (docsCW) => {
   // Categories of Interest = tourism, covid and covid + tourism
 
   // Mallorca
-  let categoriesOfInterestMallorcaNewsFromSweden = docsCW
+  let tourismAndBothMallorcaNewsFromSweden = docsCW
     .filter(utils.mallorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden);
+
+  let covidMallorcaNewsFromSweden = allDocsCW
+    .filter(utils.mallorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden);
+
+  let categoriesOfInterestMallorcaNewsFromSweden = tourismAndBothMallorcaNewsFromSweden.concat(
+    covidMallorcaNewsFromSweden
+  );
 
   let categoriesOfInterestMallorcaMentionsFromSweden =
     categoriesOfInterestMallorcaNewsFromSweden.length;
@@ -59,7 +78,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMallorcaFromSwedenPercent = utils.getPercent(
     categoriesOfInterestMallorcaMentionsFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.mallorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -74,10 +93,19 @@ const getKPIs = (docsCW) => {
   );
 
   // Menorca
-  let categoriesOfInterestMenorcaNewsFromSweden = docsCW
+  let tourismAndBothMenorcaNewsFromSweden = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden);
+
+  let covidMenorcaNewsFromSweden = allDocsCW
+    .filter(utils.menorcaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden);
+
+  let categoriesOfInterestMenorcaNewsFromSweden = tourismAndBothMenorcaNewsFromSweden.concat(
+    covidMenorcaNewsFromSweden
+  );
 
   let categoriesOfInterestMenorcaMentionsFromSweden =
     categoriesOfInterestMenorcaNewsFromSweden.length;
@@ -92,7 +120,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidMenorcaFromSwedenPercent = utils.getPercent(
     categoriesOfInterestMenorcaMentionsFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.menorcaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -107,10 +135,20 @@ const getKPIs = (docsCW) => {
   );
 
   // Ibiza
-  let categoriesOfInterestIbizaNewsFromSweden = docsCW
+
+  let tourismAndBothIbizaNewsFromSweden = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden);
+
+  let covidIbizaNewsFromSweden = allDocsCW
+    .filter(utils.ibizaIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden);
+
+  let categoriesOfInterestIbizaNewsFromSweden = tourismAndBothIbizaNewsFromSweden.concat(
+    covidIbizaNewsFromSweden
+  );
 
   let categoriesOfInterestIbizaMentionsFromSweden =
     categoriesOfInterestIbizaNewsFromSweden.length;
@@ -125,7 +163,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidIbizaFromSwedenPercent = utils.getPercent(
     categoriesOfInterestIbizaMentionsFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.ibizaIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -140,10 +178,20 @@ const getKPIs = (docsCW) => {
   );
 
   // Formentera
-  let categoriesOfInterestFormenteraNewsFromSweden = docsCW
+
+  let tourismAndBothFormenteraNewsFromSweden = docsCW
     .filter(utils.formenteraIslandMention)
-    .filter(utils.categoriesOfInterest)
+    .filter(utils.tourismAndBothCategories)
     .filter(utils.mentionFromSweden);
+
+  let covidFormenteraNewsFromSweden = allDocsCW
+    .filter(utils.formenteraIslandMention)
+    .filter(utils.covidCategory)
+    .filter(utils.mentionFromSweden);
+
+  let categoriesOfInterestFormenteraNewsFromSweden = tourismAndBothFormenteraNewsFromSweden.concat(
+    covidFormenteraNewsFromSweden
+  );
 
   let categoriesOfInterestFormenteraMentionsFromSweden =
     categoriesOfInterestFormenteraNewsFromSweden.length;
@@ -158,7 +206,7 @@ const getKPIs = (docsCW) => {
 
   let mentionsCovidFormenteraFromSwedenPercent = utils.getPercent(
     categoriesOfInterestFormenteraMentionsFromSweden,
-    docsCW
+    allDocsCW
       .filter(utils.formenteraIslandMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -174,7 +222,7 @@ const getKPIs = (docsCW) => {
 
   // ============= CSV creation ================
   let pageRows = [];
-  // SOV from Sweden by island (Tourism, covid and covid+tourism)
+  // SOV from SWEDEN by island (Tourism, covid and covid+tourism)
 
   pageRows.push([
     "CONVERSA A MITJANS SUECS PER ILLA (Turisme, covid i covid + turisme)",

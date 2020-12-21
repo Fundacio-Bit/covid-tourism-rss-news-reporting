@@ -134,7 +134,7 @@ const mentionFromAustria = (doc) => {
   }
 };
 
-// mentions belonging to a category
+// mentions belonging to a category of interest (tourism, both or covid)
 
 const categoriesOfInterest = (doc) => {
   if (

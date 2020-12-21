@@ -1,55 +1,60 @@
 var utils = require("./utils/utils.js");
 
-const getKPIs = (docsCW, datesCW) => {
+const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
   // ============= SOV PER MARKET (only current week) ================
-  let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocs = docsCW.concat(discardedDocsCW);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsCW = allDocs.filter(utils.balearenMention).length;
 
   let mentionsFromSpainPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromSpain).length
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromSpain).length
   );
 
   let mentionsFromUnitedKingdomPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromUnitedKingdom)
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromUnitedKingdom)
       .length
   );
 
   let mentionsFromGermanyPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromGermany).length
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromGermany)
+      .length
   );
 
   let mentionsFromItalyPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromItaly).length
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromItaly).length
   );
 
   let mentionsFromFrancePercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromFrance).length
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromFrance).length
   );
 
   let mentionsFromSwedenPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromSweden).length
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromSweden).length
   );
 
   let mentionsFromSwitzerlandPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromSwitzerland)
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromSwitzerland)
       .length
   );
 
   let mentionsFromNetherlandsPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromNetherlands)
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromNetherlands)
       .length
   );
 
   let mentionsFromAustriaPercent = utils.getPercent(
-    balearenMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.mentionFromAustria).length
+    totalMentionsCW,
+    allDocs.filter(utils.balearenMention).filter(utils.mentionFromAustria)
+      .length
   );
 
   // ============= Time series Balearen: totals by country ================
@@ -57,7 +62,7 @@ const getKPIs = (docsCW, datesCW) => {
   // calculate total mentions from Spain time series
   var mentionsFromSpainTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let mentionsFromSpain = docsCW
+  let mentionsFromSpain = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromSpain);
 
@@ -72,7 +77,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromUnitedKingdomTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromUnitedKingdom = docsCW
+  let mentionsFromUnitedKingdom = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromUnitedKingdom);
 
@@ -87,7 +92,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromGermanyTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromGermany = docsCW
+  let mentionsFromGermany = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromGermany);
 
@@ -102,7 +107,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromItalyTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromItaly = docsCW
+  let mentionsFromItaly = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromItaly);
 
@@ -117,7 +122,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromFranceTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromFrance = docsCW
+  let mentionsFromFrance = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromFrance);
 
@@ -132,7 +137,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromSwedenTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromSweden = docsCW
+  let mentionsFromSweden = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromSweden);
 
@@ -147,7 +152,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromSwitzerlandTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromSwitzerland = docsCW
+  let mentionsFromSwitzerland = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromSwitzerland);
 
@@ -162,7 +167,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromNetherlandsTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromNetherlands = docsCW
+  let mentionsFromNetherlands = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromNetherlands);
 
@@ -177,7 +182,7 @@ const getKPIs = (docsCW, datesCW) => {
 
   // calculate total mentions from Spain time series
   var mentionsFromAustriaTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
-  let mentionsFromAustria = docsCW
+  let mentionsFromAustria = allDocs
     .filter(utils.balearenMention)
     .filter(utils.mentionFromAustria);
 
@@ -193,7 +198,7 @@ const getKPIs = (docsCW, datesCW) => {
   // ============= CSV creation ================
   let pageRows = [];
   // SOV by country
-  pageRows.push(["Mencions totals de Balears", balearenMentionsCW]);
+  pageRows.push(["Mencions totals de Balears", totalMentionsCW]);
   pageRows.push(["\n"]);
   pageRows.push(["SOV PER PAÏSOS (de Balears)"]);
   pageRows.push([

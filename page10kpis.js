@@ -3,16 +3,20 @@ var utils = require("./utils/utils.js");
 // TODO: balearen total mentionsin CSV
 // TODO: languages time series CSV
 
-const getKPIs = (docsCW) => {
+const getKPIs = (docsCW, discardedDocsCW) => {
   // ============= SOV BY CATEGORY AND MARKET  (country) ================
-  let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  // let balearenMentionsCW = docsCW.filter(utils.balearenMention).length;
+  //discarded and not discarded news
+  let allDocsCW = docsCW.concat(discardedDocsCW);
+  //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
+  let totalMentionsCW = allDocsCW.filter(utils.balearenMention).length;
 
   // Totals (only by category)
   let tourismMentions = docsCW
     .filter(utils.balearenMention)
     .filter(utils.tourismCategory).length;
 
-  let covidMentions = docsCW
+  let covidMentions = allDocsCW
     .filter(utils.balearenMention)
     .filter(utils.covidCategory).length;
 
@@ -21,16 +25,13 @@ const getKPIs = (docsCW) => {
     .filter(utils.bothCategory).length;
 
   let tourismMentionsPercent = utils.getPercent(
-    balearenMentionsCW,
+    totalMentionsCW,
     tourismMentions
   );
 
-  let covidMentionsPercent = utils.getPercent(
-    balearenMentionsCW,
-    covidMentions
-  );
+  let covidMentionsPercent = utils.getPercent(totalMentionsCW, covidMentions);
 
-  let bothMentionsPercent = utils.getPercent(balearenMentionsCW, bothMentions);
+  let bothMentionsPercent = utils.getPercent(totalMentionsCW, bothMentions);
 
   // Spain (by market and category)
   let tourismMentionsFromSpainPercent = utils.getPercent(
@@ -43,7 +44,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromSpainPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSpain).length
@@ -68,7 +69,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromUnitedKingdomPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromUnitedKingdom).length
@@ -93,7 +94,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromGermanyPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromGermany).length
@@ -118,7 +119,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromItalyPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromItaly).length
@@ -143,7 +144,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromFrancePercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromFrance).length
@@ -168,7 +169,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromSwedenPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSweden).length
@@ -193,7 +194,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromSwitzerlandPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromSwitzerland).length
@@ -218,7 +219,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromNetherlandsPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromNetherlands).length
@@ -243,7 +244,7 @@ const getKPIs = (docsCW) => {
 
   let covidMentionsFromAustriaPercent = utils.getPercent(
     covidMentions,
-    docsCW
+    allDocsCW
       .filter(utils.balearenMention)
       .filter(utils.covidCategory)
       .filter(utils.mentionFromAustria).length

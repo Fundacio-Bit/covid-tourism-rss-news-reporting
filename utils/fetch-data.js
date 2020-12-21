@@ -2,7 +2,7 @@ var MongoClient = require("mongodb").MongoClient;
 
 // TODO: query jut one week
 
-const fetchNewsData = (dbName, fromData, toData) => {
+const fetchNewsData = (dbName, collectionName, fromData, toData) => {
   return new Promise((resolve, reject) => {
     MongoClient.connect(
       "mongodb://localhost:27017/",
@@ -33,7 +33,7 @@ const fetchNewsData = (dbName, fromData, toData) => {
             selected: 0,
           },
         };
-        let collection = db.collection("news");
+        let collection = db.collection(collectionName);
 
         collection
           .find(mongoQuery, mongoProjection)
@@ -54,19 +54,21 @@ const fetchNewsData = (dbName, fromData, toData) => {
   });
 };
 
-const getNews = async (fromDate, toDate) => {
+const getNews = async (collection, fromDate, toDate) => {
   let escoltaActivaDBNews = await fetchNewsData(
     "rss_fbit_db",
+    collection,
     fromDate,
     toDate
   );
-  let covidTourismDBNewsNews = await fetchNewsData(
+  let covidTourismDBNews = await fetchNewsData(
     "rss_covid_tourism_db",
+    collection,
     fromDate,
     toDate
   );
   // return all news
-  return escoltaActivaDBNews.concat(covidTourismDBNewsNews);
+  return escoltaActivaDBNews.concat(covidTourismDBNews);
 };
 
 module.exports = { getNews };
