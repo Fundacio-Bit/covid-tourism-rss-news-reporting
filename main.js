@@ -57,7 +57,7 @@ if (argv.date == "lastWeek") {
 }
 
 if (argv.mode == "dev") {
-  var base_path = path.join(__dirname, "output");
+  var base_path = path.resolve(__dirname, '..') + '/files/output/rss_news/covid_tourism'
   var output_path = path.join(base_path, currentWeekFrom);
 } else if (argv.mode == "prod") {
   var base_path = "/data-mongo/files/output/rss_news/covid_tourism";
