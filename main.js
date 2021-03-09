@@ -180,7 +180,6 @@ Promise.all([
       path.join(output_path, "page8_news.csv"),
       page8.getKPIs(
         docsWithCountryAndCategoryAndFormattedDateCW,
-        discardedDocsWithCountryAndCategoryAndFormattedDateCW,
         currentWeekDates
       )
     );
