@@ -49,7 +49,7 @@ const getKPIs = (
     parseFloat(tourismBalearenMentionsCWPercent.replace(",", ".")) -
     parseFloat(covidBalearenMentionsCWPercent.replace(",", ".")) -
     parseFloat(bothBalearenMentionsCWPercent.replace(",", "."))
-  ).toFixed(2);
+  ).toFixed(2).replace(".", ",");
 
   // ============= SOV PER CATEGORY A WEEK AGO (WA) ================
 
@@ -79,7 +79,7 @@ const getKPIs = (
     parseFloat(tourismBalearenMentionsWAPercent.replace(",", ".")) -
     parseFloat(covidBalearenMentionsWAPercent.replace(",", ".")) -
     parseFloat(bothBalearenMentionsWAPercent.replace(",", "."))
-  ).toFixed(2);
+  ).toFixed(2).replace(".", ",");
 
   // ============= SOV PER CATEGORY TWO WEEKS AGO (TWA) ================
 
@@ -109,7 +109,8 @@ const getKPIs = (
     parseFloat(tourismBalearenMentionsTWAPercent.replace(",", ".")) -
     parseFloat(covidBalearenMentionsTWAPercent.replace(",", ".")) -
     parseFloat(bothBalearenMentionsTWAPercent.replace(",", "."))
-  ).toFixed(2);
+  ).toFixed(2).replace(".", ",");
+
 
   // ============= Time series Balearen vs Spain (tourism, covid, tourism+covid) ================
   // calculate Balearen time series
