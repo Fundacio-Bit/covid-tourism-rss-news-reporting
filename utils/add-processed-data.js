@@ -23,7 +23,6 @@ const addCountry = (newsArray) => {
 
 // TODO create an "unknown" category and exclude the docs with that category from the analysis
 const addCategory = (newsArray, categoriesDict) => {
-  console.log("Adding category: ", categoriesDict)
   // assign a category for each document after cheking if any term belonging to that category
   // appears in any content field (title, summary, description, content_value and tags).
   // Category values are: covid, tourism, both and none.
