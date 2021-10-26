@@ -10,6 +10,7 @@ var getUniqueNews = require("./utils/get-unique-news.js");
 var fetchData = require("./utils/fetch-data.js");
 var addData = require("./utils/add-processed-data.js");
 var utils = require("./utils/utils.js");
+var categoriesDict = require("./utils/categories-dictionary");
 
 var page6 = require("./page6kpis.js");
 var page8 = require("./page8kpis.js");
@@ -32,6 +33,8 @@ var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
 const { covidCategory } = require("./utils/utils.js");
+
+const url = 'mongodb://localhost:27017';
 
 // In production this process will be run every week on monday.
 
@@ -93,6 +96,8 @@ console.log("Two weeks ago start date: " + twoWeeksAgoFrom);
 console.log("Two weeks ago end date: " + twoWeeksAgoTo);
 console.log("Two weeks ago dates:" + twoWeeksAgoDates);
 
+var dictionaryTerms = categoriesDict.getTerms();
+
 var dataCurrentWeek = fetchData.getNews("news", currentWeekFrom, currentWeekTo);
 var dataWeekAgo = fetchData.getNews("news", weekAgoFrom, weekAgoTo);
 var dataTwoWeeksAgo = fetchData.getNews("news", twoWeeksAgoFrom, twoWeeksAgoTo);
@@ -117,6 +122,7 @@ var discardedDataTwoWeeksAgo = fetchData.getNews(
 // WA: week ago.
 // TWA: two weeks ago.
 Promise.all([
+  dictionaryTerms,
   dataCurrentWeek,
   dataWeekAgo,
   dataTwoWeeksAgo,
@@ -127,34 +133,34 @@ Promise.all([
   .then((resultsArray) => {
     // *********** docs enrichment *************
     // enrich documents/news adding country and category (results of processing their current content)
-    let docsWithCountryCW = addData.addCountry(resultsArray[0]);
-    let docsWithCountryAndCategoryCW = addData.addCategory(docsWithCountryCW);
+    let docsWithCountryCW = addData.addCountry(resultsArray[1]);
+    let docsWithCountryAndCategoryCW = addData.addCategory(docsWithCountryCW, resultsArray[0]);
     let docsWithCountryAndCategoryAndFormattedDateCW = addData.addFormattedDate(
       docsWithCountryAndCategoryCW
     );
 
-    let docsWithCountryWA = addData.addCountry(resultsArray[1]);
-    let docsWithCountryAndCategoryWA = addData.addCategory(docsWithCountryWA);
+    let docsWithCountryWA = addData.addCountry(resultsArray[2]);
+    let docsWithCountryAndCategoryWA = addData.addCategory(docsWithCountryWA, resultsArray[0]);
 
-    let docsWithCountryTWA = addData.addCountry(resultsArray[2]);
-    let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA);
+    let docsWithCountryTWA = addData.addCountry(resultsArray[3]);
+    let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA, resultsArray[0]);
 
-    let discardedDocsWithCountryCW = addData.addCountry(resultsArray[3]);
+    let discardedDocsWithCountryCW = addData.addCountry(resultsArray[4]);
     let discardedDocsWithCountryAndCategoryCW = addData.addCategory(
-      discardedDocsWithCountryCW
+      discardedDocsWithCountryCW, resultsArray[0]
     );
     let discardedDocsWithCountryAndCategoryAndFormattedDateCW = addData.addFormattedDate(
       discardedDocsWithCountryAndCategoryCW
     );
 
-    let discardedDocsWithCountryWA = addData.addCountry(resultsArray[4]);
+    let discardedDocsWithCountryWA = addData.addCountry(resultsArray[5]);
     let discardedDocsWithCountryAndCategoryWA = addData.addCategory(
-      discardedDocsWithCountryWA
+      discardedDocsWithCountryWA, resultsArray[0]
     );
 
-    let discardedDocsWithCountryTWA = addData.addCountry(resultsArray[5]);
+    let discardedDocsWithCountryTWA = addData.addCountry(resultsArray[6]);
     let discardedDocsWithCountryAndCategoryTWA = addData.addCategory(
-      discardedDocsWithCountryTWA
+      discardedDocsWithCountryTWA, resultsArray[0]
     );
 
     // ************* Page 6 KPIs.**************
