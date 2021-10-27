@@ -1,5 +1,7 @@
 // var categoriesDict = require("./categories-dictionary.js");
 var moment = require("moment");
+var newsContent = require("../utils/getNewsContent")
+var deburr = require("lodash")
 
 const addCountry = (newsArray) => {
   // get country from source_id
@@ -21,95 +23,63 @@ const addCountry = (newsArray) => {
   return newsArray;
 };
 
+const hasCategoryTerm = (text, category_terms) => {
+  for (i = 0; i < category_terms.length; i++) {
+    // Check for exact match (search_mode should be "exacte")
+    if (category_terms[i].search_mode === "exacte" &&
+      new RegExp(
+        "(\\W+|^)" + category_terms[i].term + "(\\W+|$)",
+        "g"
+      ).test(text.toLowerCase())) {
+      return true;
+    }
+
+    // Check for partial match (search_mode should be "subcadena")
+    else if (category_terms[i].search_mode === "subcadena" &&
+      text.toLowerCase().includes(category_terms[i].term)) {
+      return true;
+    }
+  }
+  return false;
+};
+
 // TODO create an "unknown" category and exclude the docs with that category from the analysis
-const addCategory = (newsArray, categoriesDict) => {
+const addCategory = (newsArray, categoriesDict, exclusionTerms) => {
   // assign a category for each document after cheking if any term belonging to that category
   // appears in any content field (title, summary, description, content_value and tags).
   // Category values are: covid, tourism, both and none.
-  newsArray.map((doc) => {
-    const title =
-      "title" in doc && doc.title !== undefined && typeof doc.title === "string"
-        ? doc.title
-        : "";
-
-    const summary =
-      "summary" in doc &&
-      doc.summary !== undefined &&
-      typeof doc.summary === "string"
-        ? doc.summary
-        : "";
-
-    const description =
-      "description" in doc &&
-      doc.description !== undefined &&
-      typeof doc.description === "string"
-        ? doc.description
-        : "";
-
-    const content_value =
-      "content_value" in doc &&
-      doc.content_value !== undefined &&
-      typeof doc.content_value === "string"
-        ? doc.content_value
-        : "";
-
-    const tags =
-      "tags" in doc && doc.tags !== undefined && typeof doc.tags === "string"
-        ? doc.tags
-        : "";
-
-    let concatenatedTexts =
-      title +
-      " " +
-      summary +
-      " " +
-      description +
-      " " +
-      content_value +
-      " " +
-      tags;
-
-    const hasCategoryTerm = (text, category_terms) => {
-      for (i = 0; i < category_terms.length; i++) {
-        // Check for exact match (search_mode should be "exact")
-        if (
-          category_terms[i].search_mode === "exact" &&
-          new RegExp(
-            "(\\W+|^)" + category_terms[i].term + "(\\W+|$)",
-            "g"
-          ).test(text.toLowerCase())
-        ) {
-          return true;
-        }
-        // Check for partial match (search_mode should be "substring")
-        else if (
-          category_terms[i].search_mode === "substring" &&
-          text.toLowerCase().includes(category_terms[i].term)
-        ) {
-          return true;
-        }
-      }
-      return false;
-    };
-
-    if (
-      hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
-      hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
-    ) {
-      doc.category = "both";
-      return doc;
-    } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])) {
-      doc.category = "covid";
-      return doc;
-    } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])) {
-      doc.category = "tourism";
-      return doc;
-    } else {
-      doc.category = "none";
-      return doc;
-    }
+  var exclusion_terms_list = exclusionTerms.map(function(obj) {
+    return obj.term;
   });
-  return newsArray;
+  
+  var newsFiltered = exclusion_terms_list.length > 0 
+  ? newsArray.filter(obj => {
+     const concatenatedTexts = deburr(newsContent.getText(obj));
+     // Regexp to replace multiple spaces, tabs, newlines, etc with a single space.
+     const has_exclusion_term = exclusion_terms_list.some( exclusion_term => concatenatedTexts.includes(deburr(exclusion_term.replace(/\s\s+/g, ' '))));
+     return !has_exclusion_term
+  })
+  : doc
+  newsFiltered.map((doc) => {
+    const concatenatedTexts = newsContent.getText(doc);
+    if (
+        hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
+        hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
+      ) {
+        doc.category = "both";
+        return doc;
+      } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])) {
+        doc.category = "covid";
+        return doc;
+      } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])) {
+        doc.category = "tourism";
+        return doc;
+      } else {
+        doc.category = "none";
+        return doc;
+      }
+  });
+  return newsFiltered;
 };
 
 // TODO control KPIs calculation for docs without publishedFormatted date
