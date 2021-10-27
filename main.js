@@ -97,6 +97,7 @@ console.log("Two weeks ago end date: " + twoWeeksAgoTo);
 console.log("Two weeks ago dates:" + twoWeeksAgoDates);
 
 var dictionaryTerms = categoriesDict.getTerms();
+var exclusionTerms = categoriesDict.getExclusionTerms();
 
 var dataCurrentWeek = fetchData.getNews("news", currentWeekFrom, currentWeekTo);
 var dataWeekAgo = fetchData.getNews("news", weekAgoFrom, weekAgoTo);
@@ -129,25 +130,26 @@ Promise.all([
   discardedDataCurrentWeek,
   discardedDataWeekAgo,
   discardedDataTwoWeeksAgo,
+  exclusionTerms
 ])
   .then((resultsArray) => {
     // *********** docs enrichment *************
     // enrich documents/news adding country and category (results of processing their current content)
     let docsWithCountryCW = addData.addCountry(resultsArray[1]);
-    let docsWithCountryAndCategoryCW = addData.addCategory(docsWithCountryCW, resultsArray[0]);
+    let docsWithCountryAndCategoryCW = addData.addCategory(docsWithCountryCW, resultsArray[0], resultsArray[7]);
     let docsWithCountryAndCategoryAndFormattedDateCW = addData.addFormattedDate(
       docsWithCountryAndCategoryCW
     );
 
     let docsWithCountryWA = addData.addCountry(resultsArray[2]);
-    let docsWithCountryAndCategoryWA = addData.addCategory(docsWithCountryWA, resultsArray[0]);
+    let docsWithCountryAndCategoryWA = addData.addCategory(docsWithCountryWA, resultsArray[0], resultsArray[7]);
 
     let docsWithCountryTWA = addData.addCountry(resultsArray[3]);
-    let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA, resultsArray[0]);
+    let docsWithCountryAndCategoryTWA = addData.addCategory(docsWithCountryTWA, resultsArray[0], resultsArray[7]);
 
     let discardedDocsWithCountryCW = addData.addCountry(resultsArray[4]);
     let discardedDocsWithCountryAndCategoryCW = addData.addCategory(
-      discardedDocsWithCountryCW, resultsArray[0]
+      discardedDocsWithCountryCW, resultsArray[0], resultsArray[7]
     );
     let discardedDocsWithCountryAndCategoryAndFormattedDateCW = addData.addFormattedDate(
       discardedDocsWithCountryAndCategoryCW
@@ -155,12 +157,12 @@ Promise.all([
 
     let discardedDocsWithCountryWA = addData.addCountry(resultsArray[5]);
     let discardedDocsWithCountryAndCategoryWA = addData.addCategory(
-      discardedDocsWithCountryWA, resultsArray[0]
+      discardedDocsWithCountryWA, resultsArray[0], resultsArray[7]
     );
 
     let discardedDocsWithCountryTWA = addData.addCountry(resultsArray[6]);
     let discardedDocsWithCountryAndCategoryTWA = addData.addCategory(
-      discardedDocsWithCountryTWA, resultsArray[0]
+      discardedDocsWithCountryTWA, resultsArray[0], resultsArray[7]
     );
 
     // ************* Page 6 KPIs.**************
