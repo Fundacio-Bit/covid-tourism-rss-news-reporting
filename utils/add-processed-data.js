@@ -59,7 +59,8 @@ const addCategory = (newsArray, categoriesDict, exclusionTerms) => {
      const has_exclusion_term = exclusion_terms_list.some( exclusion_term => concatenatedTexts.includes(deburr(exclusion_term.replace(/\s\s+/g, ' '))));
      return !has_exclusion_term
   })
-  : doc
+  : newsArray
+  
   newsFiltered.map((doc) => {
     const concatenatedTexts = newsContent.getText(doc);
     if (
