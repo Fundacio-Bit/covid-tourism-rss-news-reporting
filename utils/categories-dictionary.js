@@ -50,9 +50,16 @@ const getTerms = async () => {
     "dictionary_covid",
   );
   categoriesDict["covid"] = covidTerms;
-  // return all news
-  // console.log("categoriesDict: ", categoriesDict)
   return categoriesDict;
 };
 
-module.exports = { getTerms };
+const getExclusionTerms = async () => {
+  let exclusionTerms = await fetchData(
+    "rss_fbit_db",
+    "dictionary_exclusion_terms",
+  );
+
+  return exclusionTerms;
+};
+
+module.exports = { getTerms, getExclusionTerms };
