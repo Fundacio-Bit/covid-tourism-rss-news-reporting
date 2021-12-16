@@ -45,11 +45,6 @@ const getTerms = async () => {
     "dictionary"
   );
   categoriesDict["tourism"] = terms;
-  let covidTerms = await fetchData(
-    "rss_fbit_db",
-    "dictionary_covid",
-  );
-  categoriesDict["covid"] = covidTerms;
   return categoriesDict;
 };
 

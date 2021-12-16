@@ -731,51 +731,49 @@ test("If a document (dictionary) is not passed should return false", () => {
   expect(utils.categoriesOfInterest([])).toBe(false);
 });
 
-// tourismAndBothCategory filter
+// tourismCategory filter
 
 test("A document with category value equal to 'covid' or 'tourism' should return true", () => {
-  expect(utils.tourismAndBothCategories({ category: "tourism" })).toBe(true);
-  expect(utils.tourismAndBothCategories({ category: "both" })).toBe(true);
+  expect(utils.tourismCategory({ category: "tourism" })).toBe(true);
+  expect(utils.tourismCategory({ category: "both" })).toBe(true);
 });
 
 test("A document with category value with any uppercase character should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: "tOurism" })).toBe(false);
-  expect(utils.tourismAndBothCategories({ category: "BOTH" })).toBe(false);
+  expect(utils.tourismCategory({ category: "tOurism" })).toBe(false);
+  expect(utils.tourismCategory({ category: "BOTH" })).toBe(false);
 });
 
 test("A document with a non-valid string category value should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: "arbitraryString" })).toBe(
-    false
-  );
+  expect(utils.tourismCategory({ category: "arbitraryString" })).toBe(false);
 });
 
 test("A document with category value equal to 'none' or 'covid' should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: "none" })).toBe(false);
-  expect(utils.tourismAndBothCategories({ category: "covid" })).toBe(false);
+  expect(utils.tourismCategory({ category: "none" })).toBe(false);
+  expect(utils.tourismCategory({ category: "covid" })).toBe(false);
 });
 
 test("A document including an empty string as category should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: "" })).toBe(false);
+  expect(utils.tourismCategory({ category: "" })).toBe(false);
 });
 
 test("A document including null as category should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: null })).toBe(false);
+  expect(utils.tourismCategory({ category: null })).toBe(false);
 });
 
 test("A document including a Number as category should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: 1 })).toBe(false);
+  expect(utils.tourismCategory({ category: 1 })).toBe(false);
 });
 
 test("A document including a Boolean as category should return false", () => {
-  expect(utils.tourismAndBothCategories({ category: true })).toBe(false);
+  expect(utils.tourismCategory({ category: true })).toBe(false);
 });
 
 test("If a document (dictionary) is not passed should return false", () => {
-  expect(utils.tourismAndBothCategories(null)).toBe(false);
-  expect(utils.tourismAndBothCategories("")).toBe(false);
-  expect(utils.tourismAndBothCategories(NaN)).toBe(false);
-  expect(utils.tourismAndBothCategories(1)).toBe(false);
-  expect(utils.tourismAndBothCategories([])).toBe(false);
+  expect(utils.tourismCategory(null)).toBe(false);
+  expect(utils.tourismCategory("")).toBe(false);
+  expect(utils.tourismCategory(NaN)).toBe(false);
+  expect(utils.tourismCategory(1)).toBe(false);
+  expect(utils.tourismCategory([])).toBe(false);
 });
 
 // tourismCategory filter

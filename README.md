@@ -1,4 +1,4 @@
-# COVID TOURISM RSS NEWS REPORTING
+# TOURISM RSS NEWS REPORTING
 
 Project developed and managed by:
 
@@ -6,7 +6,7 @@ Project developed and managed by:
 
     Fundació Balears d'Innovació i Tecnologia (Fundació BIT)
 
-Used to provide media news processed data to the AETIB. They will be included in reports that evaluate how the COVID global sanitary crisis affects the tourism sector in balearic islands.
+Used to provide media news processed data to the AETIB.
 
 Data are retrieved from a database populated by an [RSS news extraction](https://github.com/Fundacio-Bit/escolta-activa-rss-news-etl) procedure.
 

@@ -1,23 +1,17 @@
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
-  // ========= Time series Balearen vs Ibiza (tourism, covid, tourism+covid) ============
+  // ========= Time series Balearen vs Ibiza (tourism) ============
   //discarded and not discarded news
   let allDocsCW = docsCW.concat(discardedDocsCW);
   // calculate Balearen time series
   var balearenTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let balearenTourismAndBothDocs = docsCW
+  let balearenTourismDocs = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.tourismAndBothCategories);
+    .filter(utils.tourismCategory);
 
-  let balearenCovidDocs = allDocsCW
-    .filter(utils.balearenMention)
-    .filter(utils.covidCategory);
-
-  let balearenTimeSeriesDocs = balearenTourismAndBothDocs.concat(
-    balearenCovidDocs
-  );
+  let balearenTimeSeriesDocs = balearenTourismDocs;
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
@@ -31,15 +25,12 @@ const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
   // calculate Ibiza time series
   var ibizaTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let ibizaTourismAndBothDocs = docsCW
+  let ibizaTourismDocs = docsCW
     .filter(utils.ibizaIslandMention)
-    .filter(utils.tourismAndBothCategories);
+    .filter(utils.tourismCategory);
 
-  let ibizaCovidDocs = allDocsCW
-    .filter(utils.ibizaIslandMention)
-    .filter(utils.covidCategory);
 
-  let ibizaTimeSeriesDocs = ibizaTourismAndBothDocs.concat(ibizaCovidDocs);
+  let ibizaTimeSeriesDocs = ibizaTourismDocs;
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < ibizaTimeSeriesDocs.length; i++) {
@@ -54,9 +45,9 @@ const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
 
   let pageRows = [];
 
-  // Balearen and Ibiza Time series (mentions to covid, tourism and both)
+  // Balearen and Ibiza Time series (mentions to tourism)
   pageRows.push([
-    "Evolutiu Baleares vs Ibiza (turisme, covid, turisme + covid)",
+    "Evolutiu Baleares vs Ibiza (turisme)",
   ]);
   pageRows.push([""].concat(datesCW));
   pageRows.push(balearenTimeSeriesArray);

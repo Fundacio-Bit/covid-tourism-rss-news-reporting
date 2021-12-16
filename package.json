@@ -1,7 +1,7 @@
 {
-  "name": "covid-tourism-rss-news-reporting",
+  "name": "tourism-rss-news-reporting",
   "version": "1.1.0",
-  "description": "COVID TOURISM RSS REPORTING",
+  "description": "TOURISM RSS REPORTING",
   "scripts": {
     "start": "node server.js",
     "test": "jest"

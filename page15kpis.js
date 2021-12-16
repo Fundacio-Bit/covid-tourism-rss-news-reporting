@@ -1,23 +1,17 @@
 var utils = require("./utils/utils.js");
 
 const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
-  // ========= Time series Balearen vs Menorca (tourism, covid, tourism+covid) ============
+  // ========= Time series Balearen vs Menorca (tourism) ============
   //discarded and not discarded news
   let allDocsCW = docsCW.concat(discardedDocsCW);
   // calculate Balearen time series
   var balearenTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let balearenTourismAndBothDocs = docsCW
+  let balearenTourismDocs = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.tourismAndBothCategories);
+    .filter(utils.tourismCategory);
 
-  let balearenCovidDocs = allDocsCW
-    .filter(utils.balearenMention)
-    .filter(utils.covidCategory);
-
-  let balearenTimeSeriesDocs = balearenTourismAndBothDocs.concat(
-    balearenCovidDocs
-  );
+  let balearenTimeSeriesDocs = balearenTourismDocs;
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
@@ -31,17 +25,11 @@ const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
   // calculate Menorca time series
   var menorcaTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let menorcaTourismAndBothDocs = docsCW
+  let menorcaTourismDocs = docsCW
     .filter(utils.menorcaIslandMention)
-    .filter(utils.tourismAndBothCategories);
+    .filter(utils.tourismCategory);
 
-  let menorcaCovidDocs = allDocsCW
-    .filter(utils.menorcaIslandMention)
-    .filter(utils.covidCategory);
-
-  let menorcaTimeSeriesDocs = menorcaTourismAndBothDocs.concat(
-    menorcaCovidDocs
-  );
+  let menorcaTimeSeriesDocs = menorcaTourismDocs;
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < menorcaTimeSeriesDocs.length; i++) {
@@ -56,10 +44,8 @@ const getKPIs = (docsCW, discardedDocsCW, datesCW) => {
 
   let pageRows = [];
 
-  // Balearen and Menorca Time series (mentions to covid, tourism and both)
-  pageRows.push([
-    "Evolutiu Baleares vs Menorca (turisme, covid, turisme + covid)",
-  ]);
+  // Balearen and Menorca Time series (mentions to tourism)
+  pageRows.push(["Evolutiu Baleares vs Menorca (turisme)"]);
   pageRows.push([""].concat(datesCW));
   pageRows.push(balearenTimeSeriesArray);
   pageRows.push(menorcaTimeSeriesArray);

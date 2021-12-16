@@ -2,7 +2,7 @@ const get_unique_news = (newsArray) => {
   let linksSoFar = [];
   let processedNews = [];
   newsArray.forEach((entry) => {
-    if ((entry.category === "tourism") | (entry.category === "both")) {
+    if (entry.category === "tourism") {
       if (!linksSoFar.includes(entry.link)) {
         linksSoFar.push(entry.link);
         processedNews.push(entry);
