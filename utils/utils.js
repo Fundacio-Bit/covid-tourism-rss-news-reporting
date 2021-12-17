@@ -134,7 +134,7 @@ const mentionFromAustria = (doc) => {
   }
 };
 
-// mentions belonging to a category of interest (tourism, both or covid)
+// mentions belonging to a category of interest (tourism)
 
 const categoriesOfInterest = (doc) => {
   if (
@@ -143,9 +143,7 @@ const categoriesOfInterest = (doc) => {
     typeof doc.category === "string"
   ) {
     if (
-      (doc.category == "tourism") |
-      (doc.category == "both") |
-      (doc.category == "covid")
+      (doc.category == "tourism")
     ) {
       return true;
     } else {
@@ -156,21 +154,21 @@ const categoriesOfInterest = (doc) => {
   }
 };
 
-const tourismAndBothCategories = (doc) => {
-  if (
-    doc &&
-    doc.hasOwnProperty("category") &&
-    typeof doc.category === "string"
-  ) {
-    if ((doc.category == "tourism") | (doc.category == "both")) {
-      return true;
-    } else {
-      return false;
-    }
-  } else {
-    return false;
-  }
-};
+// const tourismCategory = (doc) => {
+//   if (
+//     doc &&
+//     doc.hasOwnProperty("category") &&
+//     typeof doc.category === "string"
+//   ) {
+//     if ((doc.category == "tourism") | (doc.category == "both")) {
+//       return true;
+//     } else {
+//       return false;
+//     }
+//   } else {
+//     return false;
+//   }
+// };
 
 const tourismCategory = (doc) => {
   if (
@@ -179,30 +177,6 @@ const tourismCategory = (doc) => {
     typeof doc.category === "string"
   ) {
     return doc.category == "tourism";
-  } else {
-    return false;
-  }
-};
-
-const bothCategory = (doc) => {
-  if (
-    doc &&
-    doc.hasOwnProperty("category") &&
-    typeof doc.category === "string"
-  ) {
-    return doc.category == "both";
-  } else {
-    return false;
-  }
-};
-
-const covidCategory = (doc) => {
-  if (
-    doc &&
-    doc.hasOwnProperty("category") &&
-    typeof doc.category === "string"
-  ) {
-    return doc.category == "covid";
   } else {
     return false;
   }
@@ -257,10 +231,8 @@ module.exports = {
   ibizaIslandMention,
   formenteraIslandMention,
   categoriesOfInterest,
-  tourismAndBothCategories,
   tourismCategory,
-  bothCategory,
-  covidCategory,
+  tourismCategory,
   otherCategory,
   mentionFromSpain,
   mentionFromUnitedKingdom,

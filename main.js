@@ -32,7 +32,6 @@ var page30 = require("./page30kpis.js");
 var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
-const { covidCategory } = require("./utils/utils.js");
 
 const url = 'mongodb://localhost:27017';
 
@@ -60,10 +59,10 @@ if (argv.date == "lastWeek") {
 }
 
 if (argv.mode == "dev") {
-  var base_path = path.resolve(__dirname, '..') + '/files/output/rss_news/covid_tourism'
+  var base_path = path.resolve(__dirname, '..') + '/files/output/rss_news/tourism'
   var output_path = path.join(base_path, currentWeekFrom);
 } else if (argv.mode == "prod") {
-  var base_path = "/data-mongo/files/output/rss_news/covid_tourism";
+  var base_path = "/data-mongo/files/output/rss_news/tourism";
   var output_path = path.join(base_path, currentWeekFrom);
 } else {
   console.log(
@@ -397,7 +396,7 @@ Promise.all([
 
 var zip =
   base_path +
-  "/escolta_activa_rss_news_covid_tourism_" +
+  "/escolta_activa_rss_news_tourism_" +
   currentWeekFrom +
   ".zip";
 

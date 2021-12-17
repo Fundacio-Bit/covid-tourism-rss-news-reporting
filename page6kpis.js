@@ -14,16 +14,17 @@ const getKPIs = (
 ) => {
   //discarded and not discarded news
   let allDocsCW = docsCW.concat(discardedDocsCW);
+
   //Total Balearen Mentions (discarded and not discarded news) (Balearic Islands + Mallorca + Menorca + Ibiza + Formentera)
   let totalMentionsCW = allDocsCW.filter(utils.balearenMention).length;
 
-  let balearenTourismAndBothMentionsCountCW = docsCW
+  let balearenTourismMentionsCountCW = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.tourismAndBothCategories).length;
+    .filter(utils.tourismCategory).length;
 
-  let balearenTourismAndBothMentionsPercentCW = utils.getPercent(
+  let balearenTourismMentionsPercentCW = utils.getPercent(
     totalMentionsCW,
-    balearenTourismAndBothMentionsCountCW
+    balearenTourismMentionsCountCW
   );
 
   // ============= SOV PER CATEGORY CURRENT WEEK================
@@ -33,23 +34,12 @@ const getKPIs = (
     docsCW.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
-  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
-  let covidBalearenMentionsCWPercent = utils.getPercent(
-    totalMentionsCW,
-    allDocsCW.filter(utils.balearenMention).filter(utils.covidCategory).length
-  );
-
-  let bothBalearenMentionsCWPercent = utils.getPercent(
-    totalMentionsCW,
-    docsCW.filter(utils.balearenMention).filter(utils.bothCategory).length
-  );
 
   let otherBalearenMentionsCWPercent = (
-    100 -
-    parseFloat(tourismBalearenMentionsCWPercent.replace(",", ".")) -
-    parseFloat(covidBalearenMentionsCWPercent.replace(",", ".")) -
-    parseFloat(bothBalearenMentionsCWPercent.replace(",", "."))
-  ).toFixed(2).replace(".", ",");
+    100 - parseFloat(tourismBalearenMentionsCWPercent.replace(",", "."))
+  )
+    .toFixed(2)
+    .replace(".", ",");
 
   // ============= SOV PER CATEGORY A WEEK AGO (WA) ================
 
@@ -63,23 +53,12 @@ const getKPIs = (
     docsWA.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
-  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
-  let covidBalearenMentionsWAPercent = utils.getPercent(
-    totalMentionsWA,
-    allDocsWA.filter(utils.balearenMention).filter(utils.covidCategory).length
-  );
-
-  let bothBalearenMentionsWAPercent = utils.getPercent(
-    totalMentionsWA,
-    docsWA.filter(utils.balearenMention).filter(utils.bothCategory).length
-  );
-
   let otherBalearenMentionsWAPercent = (
     100 -
-    parseFloat(tourismBalearenMentionsWAPercent.replace(",", ".")) -
-    parseFloat(covidBalearenMentionsWAPercent.replace(",", ".")) -
-    parseFloat(bothBalearenMentionsWAPercent.replace(",", "."))
-  ).toFixed(2).replace(".", ",");
+    parseFloat(tourismBalearenMentionsWAPercent.replace(",", "."))
+  )
+    .toFixed(2)
+    .replace(".", ",");
 
   // ============= SOV PER CATEGORY TWO WEEKS AGO (TWA) ================
 
@@ -93,40 +72,22 @@ const getKPIs = (
     docsTWA.filter(utils.balearenMention).filter(utils.tourismCategory).length
   );
 
-  // TODO: decide if they should be only counted from discarded (all news should be revised in that case)
-  let covidBalearenMentionsTWAPercent = utils.getPercent(
-    totalMentionsTWA,
-    allDocsTWA.filter(utils.balearenMention).filter(utils.covidCategory).length
-  );
-
-  let bothBalearenMentionsTWAPercent = utils.getPercent(
-    totalMentionsTWA,
-    docsTWA.filter(utils.balearenMention).filter(utils.bothCategory).length
-  );
-
   let otherBalearenMentionsTWAPercent = (
     100 -
-    parseFloat(tourismBalearenMentionsTWAPercent.replace(",", ".")) -
-    parseFloat(covidBalearenMentionsTWAPercent.replace(",", ".")) -
-    parseFloat(bothBalearenMentionsTWAPercent.replace(",", "."))
-  ).toFixed(2).replace(".", ",");
+    parseFloat(tourismBalearenMentionsTWAPercent.replace(",", "."))
+  )
+    .toFixed(2)
+    .replace(".", ",");
 
-
-  // ============= Time series Balearen vs Spain (tourism, covid, tourism+covid) ================
+  // ============= Time series Balearen vs Spain (tourism) ================
   // calculate Balearen time series
   var balearenTimeSeriesArray = [0, 0, 0, 0, 0, 0, 0];
 
-  let balearenTourismAndBothDocs = docsCW
+  let balearenTourismDocs = docsCW
     .filter(utils.balearenMention)
-    .filter(utils.tourismAndBothCategories);
+    .filter(utils.tourismCategory);
 
-  let balearenCovidDocs = allDocsCW
-    .filter(utils.balearenMention)
-    .filter(utils.covidCategory);
-
-  let balearenTimeSeriesDocs = balearenTourismAndBothDocs.concat(
-    balearenCovidDocs
-  );
+  let balearenTimeSeriesDocs = balearenTourismDocs;
 
   // Add 1 per document to the corresponding timesSeriesArray position
   for (i = 0; i < balearenTimeSeriesDocs.length; i++) {
@@ -143,44 +104,38 @@ const getKPIs = (
   // Total Mentions and tourism percent
   pageRows.push(["Mencions a Balears i/o les illes ", totalMentionsCW]);
   pageRows.push([
-    "Percentatge de mencions de turisme (inclou turisme i turisme + covid)",
-    balearenTourismAndBothMentionsPercentCW,
+    "Percentatge de mencions de turisme",
+    balearenTourismMentionsPercentCW,
   ]);
   pageRows.push([
-    "Total de mencions de turisme (inclou turisme i turisme + covid)",
-    balearenTourismAndBothMentionsCountCW,
+    "Total de mencions de turisme",
+    balearenTourismMentionsCountCW,
   ]);
 
   // SOV by categories
   pageRows.push(["\n"]);
   pageRows.push(["SOV PER TEMÀTICA (de Balears)"]);
-  pageRows.push(["Periode", "turisme", "covid", "turisme + covid", "reste"]);
+  pageRows.push(["Periode", "turisme", "reste"]);
   pageRows.push([
     `De ${datesCW[0]} a ${datesCW[6]} (${totalMentionsCW})`,
     tourismBalearenMentionsCWPercent,
-    covidBalearenMentionsCWPercent,
-    bothBalearenMentionsCWPercent,
     otherBalearenMentionsCWPercent,
   ]);
   pageRows.push([
     `De ${datesWA[0]} a ${datesWA[6]} (${totalMentionsWA})`,
     tourismBalearenMentionsWAPercent,
-    covidBalearenMentionsWAPercent,
-    bothBalearenMentionsWAPercent,
     otherBalearenMentionsWAPercent,
   ]);
 
   pageRows.push([
     `De ${datesTWA[0]} a ${datesTWA[6]} (${totalMentionsTWA})`,
     tourismBalearenMentionsTWAPercent,
-    covidBalearenMentionsTWAPercent,
-    bothBalearenMentionsTWAPercent,
     otherBalearenMentionsTWAPercent,
   ]);
 
-  // Balearen Time series (mentions to covid, tourism and both)
+  // Balearen Time series (mentions to tourism)
   pageRows.push(["\n"]);
-  pageRows.push(["Evolutiu Balears (turisme, covid, turisme + covid)"]);
+  pageRows.push(["Evolutiu Balears (turisme)"]);
   pageRows.push([""].concat(datesCW));
   pageRows.push(balearenTimeSeriesArray);
 

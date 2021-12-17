@@ -47,7 +47,7 @@ const hasCategoryTerm = (text, category_terms) => {
 const addCategory = (newsArray, categoriesDict, exclusionTerms) => {
   // assign a category for each document after cheking if any term belonging to that category
   // appears in any content field (title, summary, description, content_value and tags).
-  // Category values are: covid, tourism, both and none.
+  // Category values are: tourism.
   var exclusion_terms_list = exclusionTerms.map(function(obj) {
     return obj.term;
   });
@@ -60,19 +60,10 @@ const addCategory = (newsArray, categoriesDict, exclusionTerms) => {
      return !has_exclusion_term
   })
   : newsArray
-  
+
   newsFiltered.map((doc) => {
     const concatenatedTexts = newsContent.getText(doc);
-    if (
-        hasCategoryTerm(concatenatedTexts, categoriesDict["covid"]) &&
-        hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])
-      ) {
-        doc.category = "both";
-        return doc;
-      } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["covid"])) {
-        doc.category = "covid";
-        return doc;
-      } else if (hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])) {
+    if (hasCategoryTerm(concatenatedTexts, categoriesDict["tourism"])) {
         doc.category = "tourism";
         return doc;
       } else {

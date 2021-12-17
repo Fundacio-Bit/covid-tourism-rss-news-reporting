@@ -61,14 +61,8 @@ const getNews = async (collection, fromDate, toDate) => {
     fromDate,
     toDate
   );
-  let covidTourismDBNews = await fetchNewsData(
-    "rss_covid_tourism_db",
-    collection,
-    fromDate,
-    toDate
-  );
   // return all news
-  return escoltaActivaDBNews.concat(covidTourismDBNews);
+  return escoltaActivaDBNews;
 };
 
 module.exports = { getNews };
