@@ -87,4 +87,18 @@ const addFormattedDate = (newsArray) => {
   return newsArray;
 };
 
-module.exports = { addCountry, addCategory, addFormattedDate };
+const addShortFormattedDate = (newsArray) => {
+  // format date in catalan
+  moment.locale("ca");
+  newsArray.map((doc) => {
+    if ("published" in doc && doc.published !== undefined) {
+      // console.log('Semana-->', moment(doc.published).format("GGGG-WW"), moment(doc.published).format("L"))
+      doc.publishedFormatted = moment(doc.published).format("L");
+      doc.week = moment(doc.published).format("GGGG-WW")
+    }
+    return doc;
+  });
+  return newsArray;
+};
+
+module.exports = { addCountry, addCategory, addFormattedDate, addShortFormattedDate };

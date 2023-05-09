@@ -196,6 +196,16 @@ const otherCategory = (doc) => {
 
 // Dates management
 
+// Get the first day of the week from current date
+const getMonday = (d) => {
+  d = new Date(d);
+  var day = d.getDay(),
+      diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+  const resultDate = new Date(d.setDate(diff));
+  return moment(resultDate).format("YYYY-MM-DD");
+
+}
+
 const getWeekDates = (startDate) => {
   if (startDate === undefined || typeof startDate !== "string") {
     throw new Error("Start date should be a string");
@@ -243,7 +253,8 @@ module.exports = {
   mentionFromSwitzerland,
   mentionFromNetherlands,
   mentionFromAustria,
+  getMonday,
   getWeekDates,
   getWeekAgoDate,
-  getLastWeekDay,
+  getLastWeekDay
 };

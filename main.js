@@ -32,6 +32,7 @@ var page30 = require("./page30kpis.js");
 var page31 = require("./page31kpis.js");
 var page32 = require("./page32kpis.js");
 var page33 = require("./page33kpis.js");
+var page_news_per_week_from_date = require("./page_news_per_week.js");
 
 const url = 'mongodb://localhost:27017';
 
@@ -117,6 +118,10 @@ var discardedDataTwoWeeksAgo = fetchData.getNews(
   twoWeeksAgoTo
 );
 
+// TODO: 
+const initDate = utils.getMonday('2022-01-01')
+var dataSinceDate = fetchData.getNews("news", initDate, currentWeekTo); // all news since init date
+
 // Get data from the las three weeks. Variable names will refer to them using the following codes:
 // CW: current week.
 // WA: week ago.
@@ -129,9 +134,10 @@ Promise.all([
   discardedDataCurrentWeek,
   discardedDataWeekAgo,
   discardedDataTwoWeeksAgo,
-  exclusionTerms
+  exclusionTerms,
+  dataSinceDate
 ])
-  .then((resultsArray) => {
+  .then((resultsArray) => {    
     // *********** docs enrichment *************
     // enrich documents/news adding country and category (results of processing their current content)
     let docsWithCountryCW = addData.addCountry(resultsArray[1]);
@@ -164,6 +170,12 @@ Promise.all([
       discardedDocsWithCountryTWA, resultsArray[0], resultsArray[7]
     );
 
+    let docsWithCountry = addData.addCountry(resultsArray[8]);
+    let docsWithCountryAndCategory = addData.addCategory(docsWithCountry, resultsArray[0], resultsArray[7]);
+    let docsWithCountryAndCategoryAndFormattedDate = addData.addShortFormattedDate(
+      docsWithCountryAndCategory
+    );
+
     // ************* Page 6 KPIs.**************
     // create the page 6 CSV
     csvManager.create_csv(
@@ -178,6 +190,15 @@ Promise.all([
         currentWeekDates,
         weekAgoDates,
         twoWeeksAgoDates
+      )
+    );
+
+    // ************* Page News per week KPIs from date**************
+
+    csvManager.create_csv(
+      path.join(output_path, "weekly_news_from.csv"),
+      page_news_per_week_from_date.getKPIs(
+        docsWithCountryAndCategoryAndFormattedDate
       )
     );
 
