@@ -127,8 +127,10 @@ const getKPIs = (docs) => {
   })
   pageRows.push(header);
 
-  const properties = [...new Set(totalMentionsPerWeek.map(e => Object.keys(e)).flat())]
-  const result = totalMentionsPerWeek.map(e => (properties.forEach(f => !e.hasOwnProperty(f) ? e[f] = 0 : ''), e))
+  // const flatten = [...new Set(totalMentionsPerWeek.map(e => Object.keys(e)).flat())]
+  var merged = [].concat.apply([], totalMentionsPerWeek.map(e => Object.keys(e).reduce((acc, val) => acc.concat(val), [])))
+  const flatten = [...new Set(merged)]
+  const result = totalMentionsPerWeek.map(e => (flatten.forEach(f => !e.hasOwnProperty(f) ? e[f] = 0 : ''), e))
 
   result.forEach(item => {
     let country = item['country'] 
