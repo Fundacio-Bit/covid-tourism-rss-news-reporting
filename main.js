@@ -194,7 +194,6 @@ Promise.all([
     );
 
     // ************* Page News per week KPIs from date**************
-
     csvManager.create_csv(
       path.join(output_path, "weekly_news_from.csv"),
       page_news_per_week_from_date.getKPIs(

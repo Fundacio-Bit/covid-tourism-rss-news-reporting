@@ -119,23 +119,36 @@ const getKPIs = (docs) => {
   pageRows.push(["Mencions de Balears"]);
   pageRows.push(["\n"]);
   pageRows.push(["SOV PER PAÏSOS"]);
+
+  // const weekList = [...new Set(totalMentionsPerWeek.map(e => Object.keys(e)).flat())]
+  var merged = [].concat.apply([], totalMentionsPerWeek.map(e => Object.keys(e).reduce((acc, val) => acc.concat(val), [])))
+  const weekList = [...new Set(merged)] // List of weeks with format 'YYYY-WW' since start date
   let header =  ['']
-  Object.keys(mentionsFromSpainGroupBy).forEach(item => {
+  weekList.forEach(item => {
     const year = item.substring(0, item.indexOf("-"))
     const  weekNumber =  item.substring(item.indexOf("-") + 1)
     header.push(getDateOfISOWeek(weekNumber, year))
   })
   pageRows.push(header);
 
-  // const flatten = [...new Set(totalMentionsPerWeek.map(e => Object.keys(e)).flat())]
-  var merged = [].concat.apply([], totalMentionsPerWeek.map(e => Object.keys(e).reduce((acc, val) => acc.concat(val), [])))
-  const flatten = [...new Set(merged)]
-  const result = totalMentionsPerWeek.map(e => (flatten.forEach(f => !e.hasOwnProperty(f) ? e[f] = 0 : ''), e))
-
-  result.forEach(item => {
+  totalMentionsPerWeek.map(e => (weekList.forEach(f => !e.hasOwnProperty(f) ? e[f] = 0 : ''), e))
+  
+  totalMentionsPerWeek.forEach(item => {
     let country = item['country'] 
     delete item.country
-    let newRow = [country].concat(Object.values(item))
+    const ordered = Object.keys(item).sort(function(a, b){
+      if(a > b) { return -1; }
+      if(a < b) { return 1; }
+      return 0;
+    }).reduce(
+      (obj, key) => { 
+        obj[key] = item[key]; 
+        return obj;
+      }, 
+      {}
+    );
+   
+    let newRow = [country].concat(Object.values(ordered))
     pageRows.push(newRow);
   })
   return pageRows;
